@@ -3,30 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- ══ SEO: FIX #4 ══ -->
   <title>Quest — Achieve Your Goals and Level Up | KeyGoals, Inc.</title>
   <meta name="description" content="Quest turns real-life goals into achievements. 6,307 quests across finance, health, travel, relationships, entertainment, and more. Verified automatically. Start your Quest today — free beta." />
   <meta name="keywords" content="goal tracking app, life achievements, financial goals, quest app, gamified goals, real life achievements, KeyGoals" />
   <meta name="author" content="KeyGoals, Inc." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.questgoals.com/" />
-
-  <!-- Open Graph (Facebook, LinkedIn sharing) -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.questgoals.com/" />
   <meta property="og:title" content="Quest — Real Life Has 6,307 Achievements Waiting for You" />
   <meta property="og:description" content="Quest turns real-life goals into verified achievements — just like a video game, except the XP you earn builds an actual life. Free beta now open." />
   <meta property="og:image" content="https://www.questgoals.com/Quest_Logo.png" />
   <meta property="og:site_name" content="Quest by KeyGoals, Inc." />
-
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Quest — Real Life Has 6,307 Achievements Waiting for You" />
   <meta name="twitter:description" content="Quest turns real-life goals into verified achievements. Free beta now open." />
   <meta name="twitter:image" content="https://www.questgoals.com/Quest_Logo.png" />
-
-  <!-- Structured Data for Google -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -39,10 +31,8 @@
     "author": { "@type": "Organization", "name": "KeyGoals, Inc.", "url": "https://www.questgoals.com" }
   }
   </script>
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -59,9 +49,27 @@
       --gray:        #6B7280;
     }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--dark); line-height: 1.6; }
+    body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--dark); line-height: 1.6; overflow-x: hidden; }
 
-    /* ── NAV ── */
+    /* ══ WATERMARK ══ */
+    .watermark {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: min(600px, 80vw);
+      height: min(600px, 80vw);
+      background-image: url('Quest_Logo.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      opacity: 0.12;
+      pointer-events: none;
+      z-index: 0;
+      mix-blend-mode: multiply;
+    }
+
+    /* ══ NAV ══ */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       background: rgba(26,74,74,0.97); backdrop-filter: blur(8px);
@@ -69,8 +77,13 @@
       justify-content: space-between; height: 70px;
       border-bottom: 1px solid rgba(201,168,76,0.3);
     }
-    .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-    .nav-logo img { height: 42px; width: 42px; object-fit: contain; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    /* Clean logo — mix-blend-mode screens out the cream background */
+    .nav-logo img {
+      height: 40px; width: 40px; object-fit: contain;
+      mix-blend-mode: screen; filter: brightness(1.8) saturate(0.6);
+      border-radius: 4px;
+    }
     .nav-logo-text { font-family: 'Cinzel', serif; font-size: 1.35rem; font-weight: 700; color: var(--cream); letter-spacing: 0.08em; }
     .nav-links { display: flex; align-items: center; gap: 1.75rem; }
     .nav-links a { color: var(--sage-light); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: color 0.2s; }
@@ -78,24 +91,22 @@
     .nav-cta { background: var(--gold); color: var(--teal) !important; font-weight: 600 !important; padding: 0.45rem 1.15rem; border-radius: 6px; transition: background 0.2s !important; }
     .nav-cta:hover { background: var(--gold-light) !important; }
     .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
-    .nav-hamburger span { width: 22px; height: 2px; background: var(--cream); border-radius: 2px; transition: all 0.3s; }
+    .nav-hamburger span { width: 22px; height: 2px; background: var(--cream); border-radius: 2px; }
     .mobile-menu { display: none; position: fixed; top: 70px; left: 0; right: 0; background: var(--teal); z-index: 99; padding: 1.5rem 2rem; flex-direction: column; gap: 1.25rem; border-bottom: 1px solid rgba(201,168,76,0.3); }
     .mobile-menu a { color: var(--sage-light); text-decoration: none; font-size: 1rem; font-weight: 500; }
-    .mobile-menu a:hover { color: var(--gold-light); }
     .mobile-menu.open { display: flex; }
 
-    /* ── HERO ── */
+    /* ══ ALL SECTIONS need z-index: 1 so they sit above watermark ══ */
+    section, nav, footer { position: relative; z-index: 1; }
+
+    /* ══ HERO ══ */
     .hero {
       min-height: 100vh;
-      background: linear-gradient(160deg, var(--teal) 0%, var(--teal-mid) 60%, #0a3040 100%);
+      background: linear-gradient(160deg, rgba(26,74,74,0.97) 0%, rgba(13,79,92,0.97) 60%, rgba(10,48,64,0.97) 100%);
       display: flex; align-items: center; justify-content: center;
-      padding: 100px 2rem 4rem; position: relative; overflow: hidden;
+      padding: 100px 2rem 4rem;
     }
-    .hero::before {
-      content: ''; position: absolute; inset: 0;
-      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");
-    }
-    .hero-inner { max-width: 1100px; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; position: relative; z-index: 1; }
+    .hero-inner { max-width: 1100px; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
     .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.4); color: var(--gold-light); padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1.5rem; }
     h1.hero-title { font-family: 'Cinzel', serif; font-size: clamp(2.2rem, 4.5vw, 3.6rem); font-weight: 700; color: var(--cream); line-height: 1.15; margin-bottom: 1.5rem; }
     h1.hero-title span { color: var(--gold); }
@@ -109,12 +120,11 @@
     .hero-stat-num { font-family: 'Cinzel', serif; font-size: 1.6rem; font-weight: 700; color: var(--gold); }
     .hero-stat-label { font-size: 0.8rem; color: var(--sage-light); margin-top: 2px; }
     .hero-logo-wrap { display: flex; align-items: center; justify-content: center; }
-    .hero-logo-wrap img { width: 100%; max-width: 420px; filter: drop-shadow(0 20px 60px rgba(0,0,0,0.4)); }
+    .hero-logo-wrap img { width: 100%; max-width: 420px; filter: drop-shadow(0 20px 60px rgba(0,0,0,0.5)); }
 
-    /* ── ORIGIN STORY ── */
-    .origin-section { background: var(--teal); padding: 5rem 2rem; }
+    /* ══ ORIGIN ══ */
+    .origin-section { background: rgba(26,74,74,0.97); padding: 5rem 2rem; }
     .origin-inner { max-width: 800px; margin: 0 auto; text-align: center; }
-    .origin-section .section-label { color: var(--sage-light); }
     .origin-section h2 { font-family: 'Cinzel', serif; font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 700; color: var(--cream); margin-bottom: 1.5rem; }
     .origin-body { font-size: 1.05rem; color: var(--sage-light); line-height: 1.8; margin-bottom: 1.5rem; }
     .origin-quote { border-left: 3px solid var(--gold); padding: 1rem 1.5rem; margin: 2rem 0; text-align: left; }
@@ -126,8 +136,8 @@
     .contrast-label { font-size: 0.95rem; font-weight: 600; color: var(--cream); margin-bottom: 0.25rem; }
     .contrast-sub { font-size: 0.8rem; color: var(--sage-light); }
 
-    /* ── HOW IT WORKS ── */
-    .how-section { background: var(--cream-dark); padding: 5rem 2rem; }
+    /* ══ HOW IT WORKS ══ */
+    .how-section { background: rgba(228,224,216,0.97); padding: 5rem 2rem; }
     .section-inner { max-width: 1100px; margin: 0 auto; }
     .section-label { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sage); margin-bottom: 0.75rem; }
     h2.section-title { font-family: 'Cinzel', serif; font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 700; color: var(--teal); margin-bottom: 1rem; }
@@ -138,8 +148,8 @@
     .step-title { font-size: 1rem; font-weight: 600; color: var(--teal); }
     .step-desc { font-size: 0.9rem; color: var(--gray); line-height: 1.6; }
 
-    /* ── QUEST SCORE: FIX #3 ── */
-    .score-section { background: #fff; padding: 5rem 2rem; }
+    /* ══ QUEST SCORE ══ */
+    .score-section { background: rgba(255,255,255,0.97); padding: 5rem 2rem; }
     .score-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
     .score-checklist { display: flex; flex-direction: column; gap: 0.85rem; }
     .score-item { display: flex; align-items: center; gap: 14px; background: var(--cream); border: 1.5px solid var(--cream-dark); border-radius: 10px; padding: 1rem 1.25rem; cursor: pointer; transition: all 0.2s; user-select: none; }
@@ -153,21 +163,21 @@
     .score-pct { font-size: 2rem; color: var(--gold); font-family: 'Cinzel', serif; }
     .score-bar-track { width: 100%; height: 10px; background: rgba(255,255,255,0.12); border-radius: 5px; overflow: hidden; margin: 1.25rem 0; }
     .score-bar-fill { height: 100%; background: var(--gold); border-radius: 5px; transition: width 0.5s ease; width: 0%; }
-    .score-level { font-size: 1.1rem; color: var(--cream); margin-bottom: 0.5rem; font-weight: 600; transition: all 0.3s; }
+    .score-level { font-size: 1.1rem; color: var(--cream); margin-bottom: 0.5rem; font-weight: 600; }
     .score-desc { font-size: 0.88rem; color: var(--sage-light); line-height: 1.6; margin-bottom: 1.5rem; min-height: 60px; }
 
-    /* ── CATEGORIES ── */
-    .categories-section { background: var(--cream); padding: 5rem 2rem; }
+    /* ══ CATEGORIES ══ */
+    .categories-section { background: rgba(240,237,230,0.97); padding: 5rem 2rem; }
     .cat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; margin-top: 2.5rem; }
-    .cat-card { background: #fff; border-radius: 12px; padding: 1.5rem; border: 1px solid var(--cream-dark); transition: all 0.25s; }
+    .cat-card { background: rgba(255,255,255,0.95); border-radius: 12px; padding: 1.5rem; border: 1px solid var(--cream-dark); transition: all 0.25s; }
     .cat-card:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(26,74,74,0.1); border-color: var(--sage); }
     .cat-icon { font-size: 1.75rem; margin-bottom: 0.6rem; }
     .cat-name { font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 600; color: var(--teal); margin-bottom: 0.25rem; }
     .cat-verify { font-size: 0.78rem; color: var(--sage); margin-bottom: 0.5rem; font-weight: 500; }
     .cat-examples { font-size: 0.82rem; color: var(--gray); line-height: 1.5; }
 
-    /* ── BETA SIGNUP: FIX #1 ── */
-    .beta-section { background: linear-gradient(135deg, var(--teal-mid) 0%, var(--teal) 100%); padding: 5rem 2rem; text-align: center; }
+    /* ══ BETA ══ */
+    .beta-section { background: rgba(13,79,92,0.97); padding: 5rem 2rem; text-align: center; }
     .beta-section h2 { font-family: 'Cinzel', serif; font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 700; color: var(--cream); margin-bottom: 1rem; }
     .beta-section .section-label { color: var(--sage-light); }
     .beta-section p { font-size: 1rem; color: var(--sage-light); max-width: 540px; margin: 0 auto 2.5rem; line-height: 1.7; }
@@ -178,14 +188,14 @@
     .beta-note { font-size: 0.78rem; color: var(--sage-light); margin-top: 1rem; }
     .beta-success { display: none; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.4); color: var(--gold-light); padding: 1rem 2rem; border-radius: 10px; margin-top: 1.5rem; font-size: 0.95rem; max-width: 540px; margin-left: auto; margin-right: auto; }
 
-    /* ── ADVERTISER: FIX #2 ── */
-    .advertiser-section { background: var(--cream-dark); padding: 5rem 2rem; }
+    /* ══ ADVERTISER ══ */
+    .advertiser-section { background: rgba(228,224,216,0.97); padding: 5rem 2rem; }
     .advertiser-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
     .adv-features { display: flex; flex-direction: column; gap: 1.1rem; margin-top: 1.75rem; }
     .adv-feature { display: flex; align-items: flex-start; gap: 12px; }
     .adv-dot { width: 7px; height: 7px; background: var(--gold); border-radius: 50%; flex-shrink: 0; margin-top: 8px; }
     .adv-text { font-size: 0.93rem; color: var(--dark); line-height: 1.6; }
-    .adv-box { background: #fff; border-radius: 16px; padding: 2rem; border: 1.5px solid var(--cream-dark); }
+    .adv-box { background: rgba(255,255,255,0.97); border-radius: 16px; padding: 2rem; border: 1.5px solid var(--cream-dark); }
     .adv-box-title { font-family: 'Cinzel', serif; font-size: 1.05rem; color: var(--teal); margin-bottom: 1.25rem; font-weight: 600; }
     .adv-rate { display: flex; justify-content: space-between; align-items: center; padding: 1rem; border-radius: 8px; margin-bottom: 0.75rem; }
     .adv-rate.beta { background: #fdf6e3; border: 1px solid #e8c96a; }
@@ -198,16 +208,13 @@
     .adv-note { font-size: 0.78rem; color: var(--gray); margin-top: 0.5rem; line-height: 1.5; }
     .adv-divider { border: none; border-top: 1px solid var(--cream-dark); margin: 1.25rem 0; }
     .adv-includes-title { font-size: 0.83rem; font-weight: 600; color: var(--teal); margin-bottom: 0.6rem; }
-    .adv-includes { font-size: 0.82rem; color: var(--gray); line-height: 1.7; }
-
-    /* Advertiser contact form */
     .adv-contact-form { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.25rem; }
     .adv-contact-form input, .adv-contact-form textarea { padding: 0.75rem 1rem; border-radius: 8px; border: 1px solid var(--cream-dark); background: var(--cream); font-size: 0.9rem; font-family: 'Inter', sans-serif; color: var(--dark); outline: none; transition: border-color 0.2s; width: 100%; }
     .adv-contact-form input:focus, .adv-contact-form textarea:focus { border-color: var(--sage); }
     .adv-contact-form textarea { resize: vertical; min-height: 80px; }
     .adv-success { display: none; background: #eaf4f0; border: 1px solid var(--sage); color: var(--teal); padding: 0.85rem 1rem; border-radius: 8px; font-size: 0.88rem; margin-top: 0.5rem; }
 
-    /* ── FOOTER ── */
+    /* ══ FOOTER ══ */
     footer { background: var(--dark); padding: 3rem 2rem; text-align: center; }
     .footer-logo { font-family: 'Cinzel', serif; font-size: 1.35rem; color: var(--cream); margin-bottom: 0.4rem; }
     .footer-tagline { font-size: 0.82rem; color: var(--gray); margin-bottom: 1.25rem; }
@@ -216,11 +223,11 @@
     .footer-links a:hover { color: var(--sage-light); }
     .footer-copy { font-size: 0.75rem; color: #444; }
 
-    /* ── TOAST ── */
+    /* ══ TOAST ══ */
     .toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(120px); background: var(--teal); color: var(--cream); padding: 1rem 2rem; border-radius: 10px; font-weight: 600; font-size: 0.92rem; transition: transform 0.4s ease; z-index: 9999; border: 1px solid var(--gold); }
     .toast.show { transform: translateX(-50%) translateY(0); }
 
-    /* ── MOBILE: FIX #5 ── */
+    /* ══ MOBILE ══ */
     @media (max-width: 768px) {
       .hero-inner { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
       .hero-logo-wrap { order: -1; }
@@ -234,9 +241,9 @@
       .contrast-row { grid-template-columns: repeat(2, 1fr); }
       .nav-links { display: none; }
       .nav-hamburger { display: flex; }
-      h1.hero-title { font-size: clamp(1.9rem, 7vw, 2.8rem); }
       .steps-grid { grid-template-columns: 1fr; gap: 1.5rem; }
       .cat-grid { grid-template-columns: repeat(2, 1fr); }
+      .watermark { width: 80vw; height: 80vw; }
     }
     @media (max-width: 420px) {
       nav { padding: 0 1.25rem; }
@@ -249,6 +256,9 @@
   </style>
 </head>
 <body id="hero">
+
+<!-- ══ WATERMARK — fixed center, scrolls behind all content ══ -->
+<div class="watermark" aria-hidden="true"></div>
 
 <!-- ══ NAV ══ -->
 <nav>
@@ -298,7 +308,7 @@
   </div>
 </section>
 
-<!-- ══ ORIGIN STORY ══ -->
+<!-- ══ ORIGIN ══ -->
 <section class="origin-section">
   <div class="origin-inner">
     <p class="section-label" style="color:var(--sage-light)">Our Origin Story</p>
@@ -349,7 +359,7 @@
   </div>
 </section>
 
-<!-- ══ QUEST SCORE ══ -->
+<!-- ══ QUEST SCORE — FIX: inline onchange handlers, no external JS dependency ══ -->
 <section class="score-section" id="score">
   <div class="section-inner">
     <div class="score-grid">
@@ -359,19 +369,24 @@
         <p class="section-sub">Check your financial foundation score right now. Every box you can't check yet is a quest waiting to be completed.</p>
         <div class="score-checklist">
           <label class="score-item">
-            <input type="checkbox" value="20" onchange="updateScore()" /> <span class="score-item-text">I have a bank account</span>
+            <input type="checkbox" value="20" onchange="updateScore(this)" />
+            <span class="score-item-text">I have a bank account</span>
           </label>
           <label class="score-item">
-            <input type="checkbox" value="20" onchange="updateScore()" /> <span class="score-item-text">I have 3 months of cash saved in an emergency fund</span>
+            <input type="checkbox" value="20" onchange="updateScore(this)" />
+            <span class="score-item-text">I have 3 months of cash saved in an emergency fund</span>
           </label>
           <label class="score-item">
-            <input type="checkbox" value="20" onchange="updateScore()" /> <span class="score-item-text">I contribute to an employer retirement account (401k / 403b)</span>
+            <input type="checkbox" value="20" onchange="updateScore(this)" />
+            <span class="score-item-text">I contribute to an employer retirement account (401k / 403b)</span>
           </label>
           <label class="score-item">
-            <input type="checkbox" value="20" onchange="updateScore()" /> <span class="score-item-text">I have a personal retirement account (IRA or Roth IRA)</span>
+            <input type="checkbox" value="20" onchange="updateScore(this)" />
+            <span class="score-item-text">I have a personal retirement account (IRA or Roth IRA)</span>
           </label>
           <label class="score-item">
-            <input type="checkbox" value="20" onchange="updateScore()" /> <span class="score-item-text">I have a plan to pay off consumer debt</span>
+            <input type="checkbox" value="20" onchange="updateScore(this)" />
+            <span class="score-item-text">I have a plan to pay off consumer debt</span>
           </label>
         </div>
       </div>
@@ -409,14 +424,12 @@
   </div>
 </section>
 
-<!-- ══ BETA SIGNUP: FIX #1 — Netlify Forms ══ -->
+<!-- ══ BETA ══ -->
 <section class="beta-section" id="beta">
   <div class="section-inner" style="text-align:center;">
     <p class="section-label">Early Access</p>
     <h2>Join the Quest Beta — Free</h2>
     <p>Be among the first to build your real-life achievement scorecard. Beta is free, and Founding Members get early access to every new feature as we build toward launch.</p>
-
-    <!-- Netlify Forms: data-netlify="true" captures every submission automatically in your Netlify dashboard -->
     <form class="beta-form" name="beta-signup" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handleBeta(event)">
       <input type="hidden" name="form-name" value="beta-signup" />
       <input type="hidden" name="bot-field" style="display:none" />
@@ -429,7 +442,7 @@
   </div>
 </section>
 
-<!-- ══ ADVERTISER: FIX #2 — contact form emails you directly ══ -->
+<!-- ══ ADVERTISER ══ -->
 <section class="advertiser-section" id="advertise">
   <div class="advertiser-inner">
     <div>
@@ -456,8 +469,6 @@
       <p class="adv-note">Per quest · Per ZIP code · Per month. Founding Advertisers receive a 90-day grace period before rate increase.</p>
       <hr class="adv-divider" />
       <p class="adv-includes-title">Request advertiser info:</p>
-
-      <!-- Netlify Forms: advertiser contact goes straight to your Netlify dashboard + email -->
       <form class="adv-contact-form" name="advertiser-inquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handleAdv(event)">
         <input type="hidden" name="form-name" value="advertiser-inquiry" />
         <input type="hidden" name="bot-field" style="display:none" />
@@ -482,7 +493,7 @@
     <a href="#categories">Categories</a>
     <a href="#beta">Join Beta</a>
     <a href="#advertise">Advertise</a>
-    <a href="/cdn-cgi/l/email-protection#e68e838a8a89a697938395928189878a95c885898b">Contact</a>
+    <a href="/cdn-cgi/l/email-protection#bfd7dad3d3d0ffcecadacccbd8d0ded3cc91dcd0d2">Contact</a>
   </div>
   <p class="footer-copy">© 2025 KeyGoals, Inc. · Incorporated in Delaware · All Rights Reserved · www.questgoals.com</p>
 </footer>
@@ -490,60 +501,80 @@
 <div class="toast" id="toast"></div>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  /* ══ MOBILE MENU ══ */
   function toggleMenu() {
     document.getElementById('mobileMenu').classList.toggle('open');
   }
 
-  function updateScore() {
-    const checks = document.querySelectorAll('.score-checklist input[type="checkbox"]');
-    let score = 0;
-    checks.forEach(c => {
-      const item = c.closest('.score-item');
-      if (c.checked) { score += parseInt(c.value); item.classList.add('checked'); }
-      else { item.classList.remove('checked'); }
+  /* ══ QUEST SCORE — fixed, self-contained, no external dependency ══ */
+  function updateScore(checkbox) {
+    var checks = document.querySelectorAll('.score-checklist input[type="checkbox"]');
+    var score = 0;
+    checks.forEach(function(c) {
+      var item = c.closest('.score-item');
+      if (c.checked) {
+        score += parseInt(c.value);
+        item.classList.add('checked');
+      } else {
+        item.classList.remove('checked');
+      }
     });
+
     document.getElementById('scoreNum').textContent = score;
     document.getElementById('scoreBar').style.width = score + '%';
-    const levels = [
-      { min: 0,   label: 'Recruit',     desc: 'Check the boxes above to reveal your Quest Score. Every box you cannot check is a quest waiting to be completed.' },
-      { min: 20,  label: 'Novice',      desc: 'You have taken the first step. Your financial foundation is beginning to take shape — keep going.' },
-      { min: 40,  label: 'Apprentice',  desc: 'Good progress. You have some key pillars in place. A few more quests and your foundation will be solid.' },
-      { min: 60,  label: 'Journeyman',  desc: 'Solid foundation. You are ahead of most people your age. Keep completing quests to reach Expert.' },
-      { min: 80,  label: 'Expert',      desc: 'Strong financial health. You have built something real. One more pillar and you reach Master.' },
-      { min: 100, label: 'Master',      desc: 'Maximum Quest Score. Your financial foundation is complete. Time to conquer the next category.' },
+
+    var levels = [
+      { min: 0,   label: 'Recruit',    desc: 'Check the boxes above to reveal your Quest Score. Every box you cannot check yet is a quest waiting to be completed.' },
+      { min: 20,  label: 'Novice',     desc: 'You have taken the first step. Your financial foundation is beginning to take shape — keep going.' },
+      { min: 40,  label: 'Apprentice', desc: 'Good progress. You have some key pillars in place. A few more quests and your foundation will be solid.' },
+      { min: 60,  label: 'Journeyman', desc: 'Solid foundation. You are ahead of most people your age. Keep completing quests to reach Expert.' },
+      { min: 80,  label: 'Expert',     desc: 'Strong financial health. You have built something real. One more pillar and you reach Master.' },
+      { min: 100, label: 'Master',     desc: 'Maximum Quest Score. Your financial foundation is complete. Time to conquer the next category.' }
     ];
-    const level = [...levels].reverse().find(l => score >= l.min) || levels[0];
+
+    var level = levels[0];
+    for (var i = levels.length - 1; i >= 0; i--) {
+      if (score >= levels[i].min) { level = levels[i]; break; }
+    }
+
     document.getElementById('scoreLevel').textContent = level.label;
     document.getElementById('scoreDesc').textContent = level.desc;
   }
 
+  /* ══ BETA FORM ══ */
   function handleBeta(e) {
     e.preventDefault();
-    const form = e.target;
-    fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    var form = e.target;
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams(new FormData(form)).toString()
-    }).then(() => {
+    }).then(function() {
       document.getElementById('betaSuccess').style.display = 'block';
       form.reset();
       showToast('⚔ Welcome to Quest! Check your inbox.');
-    }).catch(() => {
+    }).catch(function() {
       showToast('Something went wrong — please email hello@questgoals.com');
     });
   }
 
+  /* ══ ADVERTISER FORM ══ */
   function handleAdv(e) {
     e.preventDefault();
-    const form = e.target;
-    fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    var form = e.target;
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams(new FormData(form)).toString()
-    }).then(() => {
+    }).then(function() {
       document.getElementById('advSuccess').style.display = 'block';
       form.reset();
       showToast('⚔ Inquiry sent! We will be in touch within 24 hours.');
-    }).catch(() => {
+    }).catch(function() {
       showToast('Something went wrong — please email hello@questgoals.com');
     });
   }
 
+  /* ══ TOAST ══ */
   function showToast(msg) {
-    const t = document.getElementById
+    var t = document.getElementById('toast');
