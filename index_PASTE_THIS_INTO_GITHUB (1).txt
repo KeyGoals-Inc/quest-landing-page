@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ══ SEO: FIX #4 ══ -->
+  <title>Quest — Achieve Your Goals and Level Up | KeyGoals, Inc.</title>
+  <meta name="description" content="Quest turns real-life goals into achievements. 6,307 quests across finance, health, travel, relationships, entertainment, and more. Verified automatically. Start your Quest today — free beta." />
+  <meta name="keywords" content="goal tracking app, life achievements, financial goals, quest app, gamified goals, real life achievements, KeyGoals" />
+  <meta name="author" content="KeyGoals, Inc." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.questgoals.com/" />
+
+  <!-- Open Graph (Facebook, LinkedIn sharing) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.questgoals.com/" />
+  <meta property="og:title" content="Quest — Real Life Has 6,307 Achievements Waiting for You" />
+  <meta property="og:description" content="Quest turns real-life goals into verified achievements — just like a video game, except the XP you earn builds an actual life. Free beta now open." />
+  <meta property="og:image" content="https://www.questgoals.com/Quest_Logo.png" />
+  <meta property="og:site_name" content="Quest by KeyGoals, Inc." />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Quest — Real Life Has 6,307 Achievements Waiting for You" />
+  <meta name="twitter:description" content="Quest turns real-life goals into verified achievements. Free beta now open." />
+  <meta name="twitter:image" content="https://www.questgoals.com/Quest_Logo.png" />
+
+  <!-- Structured Data for Google -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    "name": "Quest",
+    "description": "Quest turns real-life goals into verified achievements across finance, health, travel, relationships, and more.",
+    "applicationCategory": "LifestyleApplication",
+    "operatingSystem": "iOS, Android",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "author": { "@type": "Organization", "name": "KeyGoals, Inc.", "url": "https://www.questgoals.com" }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --teal:        #1A4A4A;
+      --teal-mid:    #0D4F5C;
+      --teal-light:  #2A7A6A;
+      --sage:        #7A9E7E;
+      --sage-light:  #A8C4A8;
+      --cream:       #F0EDE6;
+      --cream-dark:  #E4E0D8;
+      --gold:        #C9A84C;
+      --gold-light:  #E8C96A;
+      --dark:        #111814;
+      --gray:        #6B7280;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--dark); line-height: 1.6; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(26,74,74,0.97); backdrop-filter: blur(8px);
+      padding: 0 2rem; display: flex; align-items: center;
+      justify-content: space-between; height: 70px;
+      border-bottom: 1px solid rgba(201,168,76,0.3);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .nav-logo img { height: 42px; width: 42px; object-fit: contain; }
+    .nav-logo-text { font-family: 'Cinzel', serif; font-size: 1.35rem; font-weight: 700; color: var(--cream); letter-spacing: 0.08em; }
+    .nav-links { display: flex; align-items: center; gap: 1.75rem; }
+    .nav-links a { color: var(--sage-light); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--gold-light); }
+    .nav-cta { background: var(--gold); color: var(--teal) !important; font-weight: 600 !important; padding: 0.45rem 1.15rem; border-radius: 6px; transition: background 0.2s !important; }
+    .nav-cta:hover { background: var(--gold-light) !important; }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .nav-hamburger span { width: 22px; height: 2px; background: var(--cream); border-radius: 2px; transition: all 0.3s; }
+    .mobile-menu { display: none; position: fixed; top: 70px; left: 0; right: 0; background: var(--teal); z-index: 99; padding: 1.5rem 2rem; flex-direction: column; gap: 1.25rem; border-bottom: 1px solid rgba(201,168,76,0.3); }
+    .mobile-menu a { color: var(--sage-light); text-decoration: none; font-size: 1rem; font-weight: 500; }
+    .mobile-menu a:hover { color: var(--gold-light); }
+    .mobile-menu.open { display: flex; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(160deg, var(--teal) 0%, var(--teal-mid) 60%, #0a3040 100%);
+      display: flex; align-items: center; justify-content: center;
+      padding: 100px 2rem 4rem; position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-inner { max-width: 1100px; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; position: relative; z-index: 1; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.4); color: var(--gold-light); padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1.5rem; }
+    h1.hero-title { font-family: 'Cinzel', serif; font-size: clamp(2.2rem, 4.5vw, 3.6rem); font-weight: 700; color: var(--cream); line-height: 1.15; margin-bottom: 1.5rem; }
+    h1.hero-title span { color: var(--gold); }
+    .hero-subtitle { font-size: 1.05rem; color: var(--sage-light); line-height: 1.7; margin-bottom: 2rem; max-width: 480px; }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary { background: var(--gold); color: var(--teal); padding: 0.85rem 2rem; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 1rem; transition: all 0.2s; border: none; cursor: pointer; font-family: 'Inter', sans-serif; display: inline-block; }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .btn-secondary { background: transparent; color: var(--cream); padding: 0.85rem 2rem; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 1rem; transition: all 0.2s; border: 1px solid rgba(240,237,230,0.3); cursor: pointer; font-family: 'Inter', sans-serif; display: inline-block; }
+    .btn-secondary:hover { border-color: var(--sage-light); color: var(--sage-light); }
+    .hero-stats { display: flex; gap: 2rem; margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); flex-wrap: wrap; }
+    .hero-stat-num { font-family: 'Cinzel', serif; font-size: 1.6rem; font-weight: 700; color: var(--gold); }
+    .hero-stat-label { font-size: 0.8rem; color: var(--sage-light); margin-top: 2px; }
+    .hero-logo-wrap { display: flex; align-items: center; justify-content: center; }
+    .hero-logo-wrap img { width: 100%; max-width: 420px; filter: drop-shadow(0 20px 60px rgba(0,0,0,0.4)); }
+
+    /* ── ORIGIN STORY ── */
+    .origin-section { background: var(--teal); padding: 5rem 2rem; }
+    .origin-inner { max-width: 800px; margin: 0 auto; text-align: center; }
+    .origin-section .section-label { color: var(--sage-light); }
+    .origin-section h2 { font-family: 'Cinzel', serif; font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 700; color: var(--cream); margin-bottom: 1.5rem; }
+    .origin-body { font-size: 1.05rem; color: var(--sage-light); line-height: 1.8; margin-bottom: 1.5rem; }
+    .origin-quote { border-left: 3px solid var(--gold); padding: 1rem 1.5rem; margin: 2rem 0; text-align: left; }
+    .origin-quote p { font-size: 1.1rem; color: var(--cream); line-height: 1.7; font-style: italic; margin-bottom: 0.5rem; }
+    .origin-quote cite { font-size: 0.85rem; color: var(--sage-light); font-style: normal; }
+    .contrast-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 2.5rem; }
+    .contrast-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 1.25rem 1rem; text-align: center; }
+    .contrast-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+    .contrast-label { font-size: 0.95rem; font-weight: 600; color: var(--cream); margin-bottom: 0.25rem; }
+    .contrast-sub { font-size: 0.8rem; color: var(--sage-light); }
+
+    /* ── HOW IT WORKS ── */
+    .how-section { background: var(--cream-dark); padding: 5rem 2rem; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sage); margin-bottom: 0.75rem; }
+    h2.section-title { font-family: 'Cinzel', serif; font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 700; color: var(--teal); margin-bottom: 1rem; }
+    .section-sub { font-size: 1rem; color: var(--gray); max-width: 560px; line-height: 1.7; margin-bottom: 2.5rem; }
+    .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; }
+    .step-card { display: flex; flex-direction: column; gap: 0.85rem; }
+    .step-num { width: 46px; height: 46px; border-radius: 50%; background: rgba(26,74,74,0.08); border: 2px solid var(--teal); display: flex; align-items: center; justify-content: center; font-family: 'Cinzel', serif; font-size: 1.1rem; font-weight: 700; color: var(--teal); }
+    .step-title { font-size: 1rem; font-weight: 600; color: var(--teal); }
+    .step-desc { font-size: 0.9rem; color: var(--gray); line-height: 1.6; }
+
+    /* ── QUEST SCORE: FIX #3 ── */
+    .score-section { background: #fff; padding: 5rem 2rem; }
+    .score-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+    .score-checklist { display: flex; flex-direction: column; gap: 0.85rem; }
+    .score-item { display: flex; align-items: center; gap: 14px; background: var(--cream); border: 1.5px solid var(--cream-dark); border-radius: 10px; padding: 1rem 1.25rem; cursor: pointer; transition: all 0.2s; user-select: none; }
+    .score-item:hover { border-color: var(--sage); background: #eaf4f0; }
+    .score-item.checked { background: #eaf4f0; border-color: var(--sage); }
+    .score-item input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--teal-light); cursor: pointer; flex-shrink: 0; }
+    .score-item-text { font-size: 0.95rem; color: var(--dark); font-weight: 500; }
+    .score-result { background: var(--teal); border-radius: 16px; padding: 2.5rem; display: flex; flex-direction: column; align-items: center; text-align: center; position: sticky; top: 88px; }
+    .score-lbl { font-size: 0.8rem; color: var(--sage-light); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .score-number { font-family: 'Cinzel', serif; font-size: 5rem; font-weight: 700; color: var(--gold); line-height: 1; transition: all 0.4s; }
+    .score-pct { font-size: 2rem; color: var(--gold); font-family: 'Cinzel', serif; }
+    .score-bar-track { width: 100%; height: 10px; background: rgba(255,255,255,0.12); border-radius: 5px; overflow: hidden; margin: 1.25rem 0; }
+    .score-bar-fill { height: 100%; background: var(--gold); border-radius: 5px; transition: width 0.5s ease; width: 0%; }
+    .score-level { font-size: 1.1rem; color: var(--cream); margin-bottom: 0.5rem; font-weight: 600; transition: all 0.3s; }
+    .score-desc { font-size: 0.88rem; color: var(--sage-light); line-height: 1.6; margin-bottom: 1.5rem; min-height: 60px; }
+
+    /* ── CATEGORIES ── */
+    .categories-section { background: var(--cream); padding: 5rem 2rem; }
+    .cat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; margin-top: 2.5rem; }
+    .cat-card { background: #fff; border-radius: 12px; padding: 1.5rem; border: 1px solid var(--cream-dark); transition: all 0.25s; }
+    .cat-card:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(26,74,74,0.1); border-color: var(--sage); }
+    .cat-icon { font-size: 1.75rem; margin-bottom: 0.6rem; }
+    .cat-name { font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 600; color: var(--teal); margin-bottom: 0.25rem; }
+    .cat-verify { font-size: 0.78rem; color: var(--sage); margin-bottom: 0.5rem; font-weight: 500; }
+    .cat-examples { font-size: 0.82rem; color: var(--gray); line-height: 1.5; }
+
+    /* ── BETA SIGNUP: FIX #1 ── */
+    .beta-section { background: linear-gradient(135deg, var(--teal-mid) 0%, var(--teal) 100%); padding: 5rem 2rem; text-align: center; }
+    .beta-section h2 { font-family: 'Cinzel', serif; font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 700; color: var(--cream); margin-bottom: 1rem; }
+    .beta-section .section-label { color: var(--sage-light); }
+    .beta-section p { font-size: 1rem; color: var(--sage-light); max-width: 540px; margin: 0 auto 2.5rem; line-height: 1.7; }
+    .beta-form { display: flex; gap: 0.85rem; max-width: 540px; margin: 0 auto; flex-wrap: wrap; justify-content: center; }
+    .beta-form input { flex: 1; min-width: 200px; padding: 0.85rem 1.25rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.1); color: var(--cream); font-size: 0.95rem; font-family: 'Inter', sans-serif; outline: none; transition: border-color 0.2s; }
+    .beta-form input::placeholder { color: var(--sage-light); }
+    .beta-form input:focus { border-color: var(--gold); }
+    .beta-note { font-size: 0.78rem; color: var(--sage-light); margin-top: 1rem; }
+    .beta-success { display: none; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.4); color: var(--gold-light); padding: 1rem 2rem; border-radius: 10px; margin-top: 1.5rem; font-size: 0.95rem; max-width: 540px; margin-left: auto; margin-right: auto; }
+
+    /* ── ADVERTISER: FIX #2 ── */
+    .advertiser-section { background: var(--cream-dark); padding: 5rem 2rem; }
+    .advertiser-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .adv-features { display: flex; flex-direction: column; gap: 1.1rem; margin-top: 1.75rem; }
+    .adv-feature { display: flex; align-items: flex-start; gap: 12px; }
+    .adv-dot { width: 7px; height: 7px; background: var(--gold); border-radius: 50%; flex-shrink: 0; margin-top: 8px; }
+    .adv-text { font-size: 0.93rem; color: var(--dark); line-height: 1.6; }
+    .adv-box { background: #fff; border-radius: 16px; padding: 2rem; border: 1.5px solid var(--cream-dark); }
+    .adv-box-title { font-family: 'Cinzel', serif; font-size: 1.05rem; color: var(--teal); margin-bottom: 1.25rem; font-weight: 600; }
+    .adv-rate { display: flex; justify-content: space-between; align-items: center; padding: 1rem; border-radius: 8px; margin-bottom: 0.75rem; }
+    .adv-rate.beta { background: #fdf6e3; border: 1px solid #e8c96a; }
+    .adv-rate.live { background: #eaf4f0; border: 1px solid var(--sage); }
+    .adv-rate-label { font-size: 0.83rem; font-weight: 600; color: var(--teal); }
+    .adv-rate-sub { font-size: 0.72rem; color: #888; margin-top: 2px; }
+    .adv-rate-price { font-family: 'Cinzel', serif; font-size: 1.3rem; font-weight: 700; }
+    .adv-rate.beta .adv-rate-price { color: var(--gold); }
+    .adv-rate.live .adv-rate-price { color: var(--teal-light); }
+    .adv-note { font-size: 0.78rem; color: var(--gray); margin-top: 0.5rem; line-height: 1.5; }
+    .adv-divider { border: none; border-top: 1px solid var(--cream-dark); margin: 1.25rem 0; }
+    .adv-includes-title { font-size: 0.83rem; font-weight: 600; color: var(--teal); margin-bottom: 0.6rem; }
+    .adv-includes { font-size: 0.82rem; color: var(--gray); line-height: 1.7; }
+
+    /* Advertiser contact form */
+    .adv-contact-form { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.25rem; }
+    .adv-contact-form input, .adv-contact-form textarea { padding: 0.75rem 1rem; border-radius: 8px; border: 1px solid var(--cream-dark); background: var(--cream); font-size: 0.9rem; font-family: 'Inter', sans-serif; color: var(--dark); outline: none; transition: border-color 0.2s; width: 100%; }
+    .adv-contact-form input:focus, .adv-contact-form textarea:focus { border-color: var(--sage); }
+    .adv-contact-form textarea { resize: vertical; min-height: 80px; }
+    .adv-success { display: none; background: #eaf4f0; border: 1px solid var(--sage); color: var(--teal); padding: 0.85rem 1rem; border-radius: 8px; font-size: 0.88rem; margin-top: 0.5rem; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--dark); padding: 3rem 2rem; text-align: center; }
+    .footer-logo { font-family: 'Cinzel', serif; font-size: 1.35rem; color: var(--cream); margin-bottom: 0.4rem; }
+    .footer-tagline { font-size: 0.82rem; color: var(--gray); margin-bottom: 1.25rem; }
+    .footer-links { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.25rem; }
+    .footer-links a { font-size: 0.82rem; color: var(--gray); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--sage-light); }
+    .footer-copy { font-size: 0.75rem; color: #444; }
+
+    /* ── TOAST ── */
+    .toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(120px); background: var(--teal); color: var(--cream); padding: 1rem 2rem; border-radius: 10px; font-weight: 600; font-size: 0.92rem; transition: transform 0.4s ease; z-index: 9999; border: 1px solid var(--gold); }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    /* ── MOBILE: FIX #5 ── */
+    @media (max-width: 768px) {
+      .hero-inner { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
+      .hero-logo-wrap { order: -1; }
+      .hero-logo-wrap img { max-width: 220px; }
+      .hero-actions { justify-content: center; }
+      .hero-stats { justify-content: center; gap: 1.25rem; }
+      .hero-subtitle { margin: 0 auto 2rem; }
+      .score-grid { grid-template-columns: 1fr; }
+      .score-result { position: static; margin-top: 1.5rem; }
+      .advertiser-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .contrast-row { grid-template-columns: repeat(2, 1fr); }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      h1.hero-title { font-size: clamp(1.9rem, 7vw, 2.8rem); }
+      .steps-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .cat-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 420px) {
+      nav { padding: 0 1.25rem; }
+      .hero { padding: 90px 1.25rem 3rem; }
+      .cat-grid { grid-template-columns: 1fr; }
+      .beta-form { flex-direction: column; }
+      .beta-form input { min-width: unset; width: 100%; }
+      .contrast-row { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+    }
+  </style>
+</head>
+<body id="hero">
+
+<!-- ══ NAV ══ -->
+<nav>
+  <a href="#hero" class="nav-logo">
+    <img src="Quest_Logo.png" alt="Quest Logo" />
+    <span class="nav-logo-text">QUEST</span>
+  </a>
+  <div class="nav-links">
+    <a href="#how">How It Works</a>
+    <a href="#score">Quest Score</a>
+    <a href="#categories">Categories</a>
+    <a href="#advertise">Advertise</a>
+    <a href="#beta" class="nav-cta">Join Beta</a>
+  </div>
+  <div class="nav-hamburger" onclick="toggleMenu()" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#how" onclick="toggleMenu()">How It Works</a>
+  <a href="#score" onclick="toggleMenu()">Quest Score</a>
+  <a href="#categories" onclick="toggleMenu()">Categories</a>
+  <a href="#advertise" onclick="toggleMenu()">Advertise</a>
+  <a href="#beta" onclick="toggleMenu()">Join Beta — Free</a>
+</div>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-badge">Beta now open — founding members welcome</div>
+      <h1 class="hero-title">Real Life Has <span>6,307 Achievements</span> Waiting for You</h1>
+      <p class="hero-subtitle">Quest turns your real-life goals into verified achievements — just like a video game, except the XP you earn builds an actual life. Finance, health, travel, relationships, and more.</p>
+      <div class="hero-actions">
+        <a href="#beta" class="btn-primary">Join the Beta — Free ⚔</a>
+        <a href="#how" class="btn-secondary">See How It Works</a>
+      </div>
+      <div class="hero-stats">
+        <div><div class="hero-stat-num">6,307</div><div class="hero-stat-label">Real-life quests</div></div>
+        <div><div class="hero-stat-num">8</div><div class="hero-stat-label">Life categories</div></div>
+        <div><div class="hero-stat-num">100%</div><div class="hero-stat-label">Verified achievements</div></div>
+      </div>
+    </div>
+    <div class="hero-logo-wrap">
+      <img src="Quest_Logo.png" alt="Quest — Achieve Your Goals and Level Up" />
+    </div>
+  </div>
+</section>
+
+<!-- ══ ORIGIN STORY ══ -->
+<section class="origin-section">
+  <div class="origin-inner">
+    <p class="section-label" style="color:var(--sage-light)">Our Origin Story</p>
+    <h2>From World of Warcraft to Real Life</h2>
+    <p class="origin-body">Our founder spent years as a World of Warcraft player — earning millions of gold, unlocking every achievement — while also building a career as a Certified Financial Planner. One day the parallel became impossible to ignore: the same person grinding quests all night couldn't build an emergency fund.</p>
+    <p class="origin-body">Video game achievements vanish the moment you close the app. Real life deserves a better scoreboard.</p>
+    <div class="origin-quote">
+      <p>"What if the same drive that keeps people up all night grinding in a video game could be redirected toward building a real, extraordinary life?"</p>
+      <cite>— Founder, KeyGoals, Inc.</cite>
+    </div>
+    <div class="contrast-row">
+      <div class="contrast-card"><div class="contrast-icon">🎮</div><div class="contrast-label">Video game</div><div class="contrast-sub">Vanishes</div></div>
+      <div class="contrast-card"><div class="contrast-icon">⚔️</div><div class="contrast-label">Quest achievement</div><div class="contrast-sub">Forever</div></div>
+      <div class="contrast-card"><div class="contrast-icon">📈</div><div class="contrast-label">Real net worth</div><div class="contrast-sub">Builds</div></div>
+      <div class="contrast-card"><div class="contrast-icon">🌍</div><div class="contrast-label">Life scorecard</div><div class="contrast-sub">Yours</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ HOW IT WORKS ══ -->
+<section class="how-section" id="how">
+  <div class="section-inner">
+    <p class="section-label">The Journey</p>
+    <h2 class="section-title">Your Life. Gamified.</h2>
+    <p class="section-sub">Quest connects to the tools you already use — your bank, your health device, your GPS — and automatically completes achievements as you hit real milestones.</p>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-title">Browse your quests</div>
+        <div class="step-desc">Explore 6,307 curated real-life quests across finance, health, travel, relationships, entertainment, and more.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-title">Connect your world</div>
+        <div class="step-desc">Link your bank via Plaid, your health device, Ticketmaster, Spotify, and more. Quest verifies achievements automatically.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-title">Achievements unlock</div>
+        <div class="step-desc">Hit a financial threshold? Land in a new city? Attend a concert? Your quest completes automatically — no manual logging.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <div class="step-title">Build your scorecard</div>
+        <div class="step-desc">Watch your life scorecard grow. Every verified achievement is permanent proof of the extraordinary life you are building.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ QUEST SCORE ══ -->
+<section class="score-section" id="score">
+  <div class="section-inner">
+    <div class="score-grid">
+      <div>
+        <p class="section-label">Try It Now</p>
+        <h2 class="section-title">What's Your Quest Score?</h2>
+        <p class="section-sub">Check your financial foundation score right now. Every box you can't check yet is a quest waiting to be completed.</p>
+        <div class="score-checklist">
+          <label class="score-item">
+            <input type="checkbox" value="20" onchange="updateScore()" /> <span class="score-item-text">I have a bank account</span>
+          </label>
+          <label class="score-item">
+            <input type="checkbox" value="20" onchange="updateScore()" /> <span class="score-item-text">I have 3 months of cash saved in an emergency fund</span>
+          </label>
+          <label class="score-item">
+            <input type="checkbox" value="20" onchange="updateScore()" /> <span class="score-item-text">I contribute to an employer retirement account (401k / 403b)</span>
+          </label>
+          <label class="score-item">
+            <input type="checkbox" value="20" onchange="updateScore()" /> <span class="score-item-text">I have a personal retirement account (IRA or Roth IRA)</span>
+          </label>
+          <label class="score-item">
+            <input type="checkbox" value="20" onchange="updateScore()" /> <span class="score-item-text">I have a plan to pay off consumer debt</span>
+          </label>
+        </div>
+      </div>
+      <div class="score-result">
+        <p class="score-lbl">Your Quest Score</p>
+        <div class="score-number" id="scoreNum">0</div>
+        <div class="score-pct">%</div>
+        <div class="score-bar-track">
+          <div class="score-bar-fill" id="scoreBar"></div>
+        </div>
+        <p class="score-level" id="scoreLevel">Recruit</p>
+        <p class="score-desc" id="scoreDesc">Check the boxes above to reveal your financial Quest Score. Every box you cannot check yet is a quest waiting to be completed in the app.</p>
+        <a href="#beta" class="btn-primary" style="width:100%;text-align:center;margin-top:0.5rem;">Start My Financial Quests ⚔</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CATEGORIES ══ -->
+<section class="categories-section" id="categories">
+  <div class="section-inner">
+    <p class="section-label">What's in Quest</p>
+    <h2 class="section-title">8 Categories. 6,307 Quests.</h2>
+    <p class="section-sub">From opening your first brokerage account to visiting all 50 states — every meaningful real-life achievement has a Quest.</p>
+    <div class="cat-grid">
+      <div class="cat-card"><div class="cat-icon">💰</div><div class="cat-name">Financial</div><div class="cat-verify">Verified by Plaid</div><div class="cat-examples">Invest $1 · Pay off debt · Build an emergency fund · Open a Roth IRA</div></div>
+      <div class="cat-card"><div class="cat-icon">❤️</div><div class="cat-name">Health</div><div class="cat-verify">Verified by Apple Health, Whoop & more</div><div class="cat-examples">10,000 steps · Run a 5K · Sleep 8 hours · Log your meals</div></div>
+      <div class="cat-card"><div class="cat-icon">✈️</div><div class="cat-name">Travel</div><div class="cat-verify">Verified by GPS</div><div class="cat-examples">Visit all 50 states · See the Grand Canyon · Travel internationally</div></div>
+      <div class="cat-card"><div class="cat-icon">🎭</div><div class="cat-name">Entertainment</div><div class="cat-verify">Verified by Ticketmaster & Spotify</div><div class="cat-examples">Attend a live concert · See a movie in theaters · Complete a game</div></div>
+      <div class="cat-card"><div class="cat-icon">👥</div><div class="cat-name">Relationships</div><div class="cat-verify">Verified by photo</div><div class="cat-examples">Celebrate your birthday · Get married · Meet a lifelong friend</div></div>
+      <div class="cat-card"><div class="cat-icon">🏛️</div><div class="cat-name">Community</div><div class="cat-verify">Self-reported</div><div class="cat-examples">Volunteer · Register to vote · Join a local organization</div></div>
+      <div class="cat-card"><div class="cat-icon">🌱</div><div class="cat-name">Charity</div><div class="cat-verify">Self-reported</div><div class="cat-examples">Donate to a cause · Give blood · Support a local charity</div></div>
+      <div class="cat-card"><div class="cat-icon">⭐</div><div class="cat-name">Miscellaneous</div><div class="cat-verify">Life's big moments</div><div class="cat-examples">Meet a US President · Graduate college · Learn a new skill</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ BETA SIGNUP: FIX #1 — Netlify Forms ══ -->
+<section class="beta-section" id="beta">
+  <div class="section-inner" style="text-align:center;">
+    <p class="section-label">Early Access</p>
+    <h2>Join the Quest Beta — Free</h2>
+    <p>Be among the first to build your real-life achievement scorecard. Beta is free, and Founding Members get early access to every new feature as we build toward launch.</p>
+
+    <!-- Netlify Forms: data-netlify="true" captures every submission automatically in your Netlify dashboard -->
+    <form class="beta-form" name="beta-signup" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handleBeta(event)">
+      <input type="hidden" name="form-name" value="beta-signup" />
+      <input type="hidden" name="bot-field" style="display:none" />
+      <input type="text" name="firstName" placeholder="Your first name" required autocomplete="given-name" />
+      <input type="email" name="email" placeholder="Your email address" required autocomplete="email" />
+      <button type="submit" class="btn-primary">Start My Quest ⚔</button>
+    </form>
+    <p class="beta-note">No spam. No credit card. Just your Quest.</p>
+    <div class="beta-success" id="betaSuccess">⚔ You're in! Check your inbox — your Quest begins soon.</div>
+  </div>
+</section>
+
+<!-- ══ ADVERTISER: FIX #2 — contact form emails you directly ══ -->
+<section class="advertiser-section" id="advertise">
+  <div class="advertiser-inner">
+    <div>
+      <p class="section-label">For Businesses</p>
+      <h2 class="section-title">Advertise Where Intent Is Highest</h2>
+      <p class="section-sub" style="margin-bottom:0;">Quest users declare their goals before they act. When someone opens "Go to Physical Therapy," they need a PT right now. Your ad appears at the exact moment of highest intent, in their ZIP code.</p>
+      <div class="adv-features">
+        <div class="adv-feature"><div class="adv-dot"></div><div class="adv-text">Your logo, business name, and website appear inside your sponsored quest</div></div>
+        <div class="adv-feature"><div class="adv-dot"></div><div class="adv-text">Target by specific quest and ZIP code — reach your exact local market</div></div>
+        <div class="adv-feature"><div class="adv-dot"></div><div class="adv-text">Month-to-month billing, cancel anytime — no long-term commitment</div></div>
+        <div class="adv-feature"><div class="adv-dot"></div><div class="adv-text">Founding Advertisers lock in the $1/month beta rate with a 90-day grace period at launch</div></div>
+      </div>
+    </div>
+    <div class="adv-box">
+      <p class="adv-box-title">⚔ Founding Advertiser Pricing</p>
+      <div class="adv-rate beta">
+        <div><div class="adv-rate-label">Beta Testing Phase</div><div class="adv-rate-sub">Now through app launch</div></div>
+        <div class="adv-rate-price">$1<span style="font-size:0.85rem;font-family:'Inter',sans-serif;font-weight:500;">/mo</span></div>
+      </div>
+      <div class="adv-rate live">
+        <div><div class="adv-rate-label">Live Launch Phase</div><div class="adv-rate-sub">After public launch</div></div>
+        <div class="adv-rate-price">$20<span style="font-size:0.85rem;font-family:'Inter',sans-serif;font-weight:500;">/mo</span></div>
+      </div>
+      <p class="adv-note">Per quest · Per ZIP code · Per month. Founding Advertisers receive a 90-day grace period before rate increase.</p>
+      <hr class="adv-divider" />
+      <p class="adv-includes-title">Request advertiser info:</p>
+
+      <!-- Netlify Forms: advertiser contact goes straight to your Netlify dashboard + email -->
+      <form class="adv-contact-form" name="advertiser-inquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handleAdv(event)">
+        <input type="hidden" name="form-name" value="advertiser-inquiry" />
+        <input type="hidden" name="bot-field" style="display:none" />
+        <input type="text" name="businessName" placeholder="Business name" required />
+        <input type="email" name="email" placeholder="Your email address" required />
+        <input type="text" name="questInterest" placeholder="Which quest are you interested in? (optional)" />
+        <textarea name="message" placeholder="Any questions for us?"></textarea>
+        <button type="submit" class="btn-primary" style="width:100%;">Send Inquiry ⚔</button>
+      </form>
+      <div class="adv-success" id="advSuccess">Thanks! We'll be in touch within 24 hours with your advertiser agreement.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-logo">⚔ QUEST</div>
+  <p class="footer-tagline">Achieve Your Goals and Level Up · KeyGoals, Inc.</p>
+  <div class="footer-links">
+    <a href="#how">How It Works</a>
+    <a href="#score">Quest Score</a>
+    <a href="#categories">Categories</a>
+    <a href="#beta">Join Beta</a>
+    <a href="#advertise">Advertise</a>
+    <a href="/cdn-cgi/l/email-protection#e68e838a8a89a697938395928189878a95c885898b">Contact</a>
+  </div>
+  <p class="footer-copy">© 2025 KeyGoals, Inc. · Incorporated in Delaware · All Rights Reserved · www.questgoals.com</p>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  function updateScore() {
+    const checks = document.querySelectorAll('.score-checklist input[type="checkbox"]');
+    let score = 0;
+    checks.forEach(c => {
+      const item = c.closest('.score-item');
+      if (c.checked) { score += parseInt(c.value); item.classList.add('checked'); }
+      else { item.classList.remove('checked'); }
+    });
+    document.getElementById('scoreNum').textContent = score;
+    document.getElementById('scoreBar').style.width = score + '%';
+    const levels = [
+      { min: 0,   label: 'Recruit',     desc: 'Check the boxes above to reveal your Quest Score. Every box you cannot check is a quest waiting to be completed.' },
+      { min: 20,  label: 'Novice',      desc: 'You have taken the first step. Your financial foundation is beginning to take shape — keep going.' },
+      { min: 40,  label: 'Apprentice',  desc: 'Good progress. You have some key pillars in place. A few more quests and your foundation will be solid.' },
+      { min: 60,  label: 'Journeyman',  desc: 'Solid foundation. You are ahead of most people your age. Keep completing quests to reach Expert.' },
+      { min: 80,  label: 'Expert',      desc: 'Strong financial health. You have built something real. One more pillar and you reach Master.' },
+      { min: 100, label: 'Master',      desc: 'Maximum Quest Score. Your financial foundation is complete. Time to conquer the next category.' },
+    ];
+    const level = [...levels].reverse().find(l => score >= l.min) || levels[0];
+    document.getElementById('scoreLevel').textContent = level.label;
+    document.getElementById('scoreDesc').textContent = level.desc;
+  }
+
+  function handleBeta(e) {
+    e.preventDefault();
+    const form = e.target;
+    fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(new FormData(form)).toString()
+    }).then(() => {
+      document.getElementById('betaSuccess').style.display = 'block';
+      form.reset();
+      showToast('⚔ Welcome to Quest! Check your inbox.');
+    }).catch(() => {
+      showToast('Something went wrong — please email hello@questgoals.com');
+    });
+  }
+
+  function handleAdv(e) {
+    e.preventDefault();
+    const form = e.target;
+    fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(new FormData(form)).toString()
+    }).then(() => {
+      document.getElementById('advSuccess').style.display = 'block';
+      form.reset();
+      showToast('⚔ Inquiry sent! We will be in touch within 24 hours.');
+    }).catch(() => {
+      showToast('Something went wrong — please email hello@questgoals.com');
+    });
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById
