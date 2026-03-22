@@ -106,7 +106,10 @@
       display: flex; align-items: center; justify-content: center;
       padding: 100px 2rem 4rem;
     }
-    .hero-inner { max-width: 1100px; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .hero-inner { max-width: 1100px; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; text-align: center; }
+    .hero-actions { justify-content: center; }
+    .hero-stats { justify-content: center; }
+    .hero-subtitle { margin: 0 auto 2rem; }
     .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.4); color: var(--gold-light); padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1.5rem; }
     h1.hero-title { font-family: 'Cinzel', serif; font-size: clamp(2.2rem, 4.5vw, 3.6rem); font-weight: 700; color: var(--cream); line-height: 1.15; margin-bottom: 1.5rem; }
     h1.hero-title span { color: var(--gold); }
@@ -312,12 +315,11 @@
 <section class="origin-section">
   <div class="origin-inner">
     <p class="section-label" style="color:var(--sage-light)">Our Origin Story</p>
-    <h2>From World of Warcraft to Real Life</h2>
-    <p class="origin-body">Our founder spent years as a World of Warcraft player — earning millions of gold, unlocking every achievement — while also building a career as a Certified Financial Planner. One day the parallel became impossible to ignore: the same person grinding quests all night couldn't build an emergency fund.</p>
-    <p class="origin-body">Video game achievements vanish the moment you close the app. Real life deserves a better scoreboard.</p>
+    <h2>From Video Games to Real Life</h2>
+    <p class="origin-body">Millions of people spend countless hours in online games — beating the final boss, earning millions of gold, unlocking every achievement — but those accomplishments vanish the moment you close the app. Real life deserves a better scoreboard.</p>
     <div class="origin-quote">
       <p>"What if the same drive that keeps people up all night grinding in a video game could be redirected toward building a real, extraordinary life?"</p>
-      <cite>— Founder, KeyGoals, Inc.</cite>
+      <cite>— Keaton Macut, Founder, KeyGoals, Inc.</cite>
     </div>
     <div class="contrast-row">
       <div class="contrast-card"><div class="contrast-icon">🎮</div><div class="contrast-label">Video game</div><div class="contrast-sub">Vanishes</div></div>
@@ -331,9 +333,9 @@
 <!-- ══ HOW IT WORKS ══ -->
 <section class="how-section" id="how">
   <div class="section-inner">
-    <p class="section-label">The Journey</p>
-    <h2 class="section-title">Your Life. Gamified.</h2>
-    <p class="section-sub">Quest connects to the tools you already use — your bank, your health device, your GPS — and automatically completes achievements as you hit real milestones.</p>
+    <p class="section-label" style="text-align:center;">The Journey</p>
+    <h2 class="section-title" style="text-align:center;">Your Life. Gamified.</h2>
+    <p class="section-sub" style="text-align:center; max-width:600px; margin-left:auto; margin-right:auto;">Quest connects to the tools you already use — your bank, your health device, your GPS — and automatically completes achievements as you hit real milestones.</p>
     <div class="steps-grid">
       <div class="step-card">
         <div class="step-num">1</div>
@@ -408,9 +410,9 @@
 <!-- ══ CATEGORIES ══ -->
 <section class="categories-section" id="categories">
   <div class="section-inner">
-    <p class="section-label">What's in Quest</p>
-    <h2 class="section-title">8 Categories. 6,307 Quests.</h2>
-    <p class="section-sub">From opening your first brokerage account to visiting all 50 states — every meaningful real-life achievement has a Quest.</p>
+    <p class="section-label" style="text-align:center;">What's in Quest</p>
+    <h2 class="section-title" style="text-align:center;">8 Categories. 6,307 Quests.</h2>
+    <p class="section-sub" style="text-align:center; max-width:600px; margin-left:auto; margin-right:auto;">From opening your first brokerage account to visiting all 50 states — every meaningful real-life achievement has a Quest.</p>
     <div class="cat-grid">
       <div class="cat-card"><div class="cat-icon">💰</div><div class="cat-name">Financial</div><div class="cat-verify">Verified by Plaid</div><div class="cat-examples">Invest $1 · Pay off debt · Build an emergency fund · Open a Roth IRA</div></div>
       <div class="cat-card"><div class="cat-icon">❤️</div><div class="cat-name">Health</div><div class="cat-verify">Verified by Apple Health, Whoop & more</div><div class="cat-examples">10,000 steps · Run a 5K · Sleep 8 hours · Log your meals</div></div>
@@ -483,9 +485,28 @@
   </div>
 </section>
 
+<!-- ══ CONTACT ══ -->
+<section style="background:var(--teal);padding:5rem 2rem;text-align:center;" id="contact">
+  <div style="max-width:600px;margin:0 auto;">
+    <p class="section-label" style="color:var(--sage-light);">Get In Touch</p>
+    <h2 style="font-family:'Cinzel',serif;font-size:clamp(1.7rem,3vw,2.4rem);font-weight:700;color:var(--cream);margin-bottom:1rem;">Contact Us</h2>
+    <p style="font-size:1rem;color:var(--sage-light);margin-bottom:2.5rem;line-height:1.7;">Have a question about Quest, want to advertise, or just want to say hello? We'd love to hear from you.</p>
+    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handleContact(event)" style="display:flex;flex-direction:column;gap:0.85rem;">
+      <input type="hidden" name="form-name" value="contact" />
+      <input type="hidden" name="bot-field" style="display:none" />
+      <input type="text" name="name" placeholder="Your name" required style="padding:0.85rem 1.25rem;border-radius:8px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.1);color:var(--cream);font-size:0.95rem;font-family:'Inter',sans-serif;outline:none;" />
+      <input type="email" name="email" placeholder="Your email address" required style="padding:0.85rem 1.25rem;border-radius:8px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.1);color:var(--cream);font-size:0.95rem;font-family:'Inter',sans-serif;outline:none;" />
+      <textarea name="message" placeholder="Your message" required rows="4" style="padding:0.85rem 1.25rem;border-radius:8px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.1);color:var(--cream);font-size:0.95rem;font-family:'Inter',sans-serif;outline:none;resize:vertical;"></textarea>
+      <button type="submit" class="btn-primary">Send Message ⚔</button>
+    </form>
+    <div id="contactSuccess" style="display:none;background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.4);color:var(--gold-light);padding:1rem 2rem;border-radius:10px;margin-top:1.5rem;font-size:0.95rem;">⚔ Message sent! We'll be in touch at admin@questgoals.com shortly.</div>
+    <p style="font-size:0.82rem;color:var(--sage-light);margin-top:1.25rem;">Or email us directly at <a href="mailto:admin@questgoals.com" style="color:var(--gold-light);">admin@questgoals.com</a></p>
+  </div>
+</section>
+
 <!-- ══ FOOTER ══ -->
 <footer>
-  <div class="footer-logo">⚔ QUEST</div>
+  <img src="Quest_Logo.png" alt="Quest Logo" style="height:90px;width:90px;object-fit:contain;margin-bottom:0.75rem;filter:brightness(1.8) saturate(0.4);" />
   <p class="footer-tagline">Achieve Your Goals and Level Up · KeyGoals, Inc.</p>
   <div class="footer-links">
     <a href="#how">How It Works</a>
@@ -493,14 +514,14 @@
     <a href="#categories">Categories</a>
     <a href="#beta">Join Beta</a>
     <a href="#advertise">Advertise</a>
-    <a href="/cdn-cgi/l/email-protection#bfd7dad3d3d0ffcecadacccbd8d0ded3cc91dcd0d2">Contact</a>
+    <a href="mailto:admin@questgoals.com">Contact</a>
   </div>
   <p class="footer-copy">© 2025 KeyGoals, Inc. · Incorporated in Delaware · All Rights Reserved · www.questgoals.com</p>
 </footer>
 
 <div class="toast" id="toast"></div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   /* ══ MOBILE MENU ══ */
   function toggleMenu() {
     document.getElementById('mobileMenu').classList.toggle('open');
@@ -554,7 +575,7 @@
       form.reset();
       showToast('⚔ Welcome to Quest! Check your inbox.');
     }).catch(function() {
-      showToast('Something went wrong — please email hello@questgoals.com');
+      showToast('Something went wrong — please email admin@questgoals.com');
     });
   }
 
@@ -571,10 +592,34 @@
       form.reset();
       showToast('⚔ Inquiry sent! We will be in touch within 24 hours.');
     }).catch(function() {
-      showToast('Something went wrong — please email hello@questgoals.com');
+      showToast('Something went wrong — please email admin@questgoals.com');
+    });
+  }
+
+  /* ══ CONTACT FORM ══ */
+  function handleContact(e) {
+    e.preventDefault();
+    var form = e.target;
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(new FormData(form)).toString()
+    }).then(function() {
+      document.getElementById('contactSuccess').style.display = 'block';
+      form.reset();
+      showToast('⚔ Message sent! We will be in touch soon.');
+    }).catch(function() {
+      showToast('Something went wrong — please email admin@questgoals.com');
     });
   }
 
   /* ══ TOAST ══ */
   function showToast(msg) {
     var t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(function() { t.classList.remove('show'); }, 4500);
+  }
+</script>
+</body>
+</html>
