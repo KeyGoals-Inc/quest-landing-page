@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Advertise on Quest — Reach Goal-Driven Users | KeyGoals, Inc.</title>
+  <meta name="description" content="Reach highly motivated users inside the Quest app. Sponsor a category and put your business in front of people actively working toward goals in your industry." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.questgoals.com/advertise" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:       #1B3A4B;
+      --navy-deep:  #122636;
+      --cream:      #F2E8DC;
+      --cream-dark: #E4D8C8;
+      --gold:       #C4972A;
+      --gold-light: #D4A73A;
+      --teal:       #3B9E8E;
+      --dark:       #0F1E28;
+      --gray:       #6B7280;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--cream);
+      color: var(--dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--navy);
+      padding: 0 1.5rem; display: flex; align-items: center;
+      justify-content: space-between; height: 68px;
+      border-bottom: 1px solid rgba(196,151,42,0.2);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo img { height: 42px; width: 42px; object-fit: contain; border-radius: 6px; }
+    .nav-logo-text { font-family: 'Cinzel', serif; font-size: 1.25rem; font-weight: 700; color: var(--cream); letter-spacing: 0.1em; }
+    .nav-links { display: flex; align-items: center; gap: 2rem; }
+    .nav-links a { color: rgba(242,232,220,0.75); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--gold-light); }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy) 100%);
+      padding: 130px 1.5rem 80px;
+      text-align: center;
+    }
+    .hero-label {
+      display: inline-block;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--gold);
+      background: rgba(196,151,42,0.12);
+      border: 1px solid rgba(196,151,42,0.3);
+      padding: 0.35rem 0.9rem; border-radius: 20px;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      font-weight: 700;
+      color: var(--cream);
+      line-height: 1.15;
+      margin-bottom: 1.25rem;
+      max-width: 780px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero h1 span { color: var(--gold); }
+    .hero p {
+      font-size: 1.05rem;
+      color: rgba(242,232,220,0.75);
+      max-width: 600px;
+      margin: 0 auto 2.5rem;
+    }
+    .hero-cta {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--navy-deep);
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 0.85rem 2.25rem;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .hero-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+    /* STATS ROW */
+    .stats {
+      background: var(--navy);
+      padding: 2.5rem 1.5rem;
+      display: flex;
+      justify-content: center;
+      gap: 4rem;
+      flex-wrap: wrap;
+    }
+    .stat { text-align: center; }
+    .stat-number {
+      font-family: 'Cinzel', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+    .stat-label {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: rgba(242,232,220,0.6);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* HOW IT WORKS */
+    .how-section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 72px 1.5rem 60px;
+      text-align: center;
+    }
+    .section-label {
+      display: inline-block;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.75rem;
+    }
+    .section-sub {
+      font-size: 0.95rem;
+      color: var(--gray);
+      max-width: 560px;
+      margin: 0 auto 3rem;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+    }
+    .step {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem 1.5rem;
+      border: 1px solid var(--cream-dark);
+      text-align: center;
+    }
+    .step-num {
+      width: 40px; height: 40px;
+      background: var(--navy);
+      color: var(--gold);
+      font-family: 'Cinzel', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1rem;
+    }
+    .step h3 { font-size: 0.95rem; font-weight: 700; color: var(--navy); margin-bottom: 0.5rem; }
+    .step p { font-size: 0.85rem; color: var(--gray); line-height: 1.6; }
+
+    /* PRICING */
+    .pricing-section {
+      background: var(--navy-deep);
+      padding: 72px 1.5rem;
+      text-align: center;
+    }
+    .pricing-section .section-title { color: var(--cream); }
+    .pricing-section .section-sub { color: rgba(242,232,220,0.6); }
+
+    .pricing-cards {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-top: 2.5rem;
+    }
+    .pricing-card {
+      background: rgba(242,232,220,0.05);
+      border: 1px solid rgba(196,151,42,0.25);
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      width: 280px;
+      text-align: center;
+      position: relative;
+    }
+    .pricing-card.featured {
+      border-color: var(--gold);
+      background: rgba(196,151,42,0.08);
+    }
+    .badge {
+      position: absolute;
+      top: -12px; left: 50%; transform: translateX(-50%);
+      background: var(--gold);
+      color: var(--navy-deep);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.85rem;
+      border-radius: 20px;
+    }
+    .price-tier { font-size: 0.8rem; font-weight: 700; color: rgba(242,232,220,0.5); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem; }
+    .price-amount {
+      font-family: 'Cinzel', serif;
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .price-period { font-size: 0.85rem; color: rgba(242,232,220,0.5); margin-bottom: 1.5rem; }
+    .price-features { list-style: none; text-align: left; margin-bottom: 2rem; }
+    .price-features li { font-size: 0.85rem; color: rgba(242,232,220,0.75); padding: 0.4rem 0; border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; align-items: flex-start; gap: 0.5rem; }
+    .price-features li::before { content: "✓"; color: var(--teal); font-weight: 700; flex-shrink: 0; }
+    .price-btn {
+      display: block;
+      width: 100%;
+      padding: 0.75rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-decoration: none;
+      text-align: center;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+      font-family: 'Poppins', sans-serif;
+    }
+    .price-btn-primary { background: var(--gold); color: var(--navy-deep); }
+    .price-btn-primary:hover { background: var(--gold-light); }
+    .price-btn-secondary { background: transparent; border: 1px solid rgba(196,151,42,0.4); color: var(--gold); }
+    .price-btn-secondary:hover { background: rgba(196,151,42,0.1); }
+
+    /* SLOTS GRID */
+    .slots-section {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 72px 1.5rem;
+    }
+    .slots-header { text-align: center; margin-bottom: 3rem; }
+
+    .category-block { margin-bottom: 2.5rem; }
+    .category-name {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .category-name::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(27,58,75,0.15);
+    }
+    .slots-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .slot-card {
+      background: white;
+      border: 1px solid var(--cream-dark);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      transition: box-shadow 0.2s;
+    }
+    .slot-card:hover { box-shadow: 0 4px 16px rgba(27,58,75,0.1); }
+    .slot-info {}
+    .slot-label { font-size: 0.8rem; font-weight: 700; color: var(--navy); }
+    .slot-price { font-size: 0.78rem; color: var(--gray); margin-top: 2px; }
+    .slot-available {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--teal);
+      background: rgba(59,158,142,0.1);
+      border-radius: 20px;
+      padding: 0.25rem 0.65rem;
+    }
+    .slot-available::before { content: ''; width: 6px; height: 6px; background: var(--teal); border-radius: 50%; }
+    .slot-taken {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--gray);
+      background: rgba(107,114,128,0.1);
+      border-radius: 20px;
+      padding: 0.25rem 0.65rem;
+    }
+    .slot-taken::before { content: ''; width: 6px; height: 6px; background: var(--gray); border-radius: 50%; }
+    .claim-btn {
+      flex-shrink: 0;
+      background: var(--navy);
+      color: var(--cream);
+      border: none;
+      border-radius: 6px;
+      padding: 0.45rem 1rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      font-family: 'Poppins', sans-serif;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s;
+    }
+    .claim-btn:hover { background: var(--gold); color: var(--navy-deep); }
+    .claim-btn:disabled, .claim-btn.disabled { background: var(--cream-dark); color: var(--gray); cursor: not-allowed; }
+
+    /* SIGN-UP FORM */
+    .form-section {
+      background: var(--navy);
+      padding: 72px 1.5rem;
+    }
+    .form-wrap {
+      max-width: 580px;
+      margin: 0 auto;
+    }
+    .form-section .section-title { color: var(--cream); text-align: center; }
+    .form-section .section-sub { color: rgba(242,232,220,0.6); text-align: center; margin-bottom: 2.5rem; }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-group.full { grid-column: 1 / -1; }
+    label { font-size: 0.8rem; font-weight: 600; color: rgba(242,232,220,0.75); }
+    input, select, textarea {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(196,151,42,0.25);
+      border-radius: 6px;
+      padding: 0.65rem 0.85rem;
+      font-size: 0.88rem;
+      font-family: 'Poppins', sans-serif;
+      color: var(--cream);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    input::placeholder, textarea::placeholder { color: rgba(242,232,220,0.3); }
+    input:focus, select:focus, textarea:focus { border-color: var(--gold); }
+    select option { background: var(--navy-deep); color: var(--cream); }
+    textarea { resize: vertical; min-height: 90px; }
+
+    .form-submit {
+      margin-top: 1.5rem;
+      width: 100%;
+      padding: 0.9rem;
+      background: var(--gold);
+      color: var(--navy-deep);
+      font-size: 1rem;
+      font-weight: 700;
+      font-family: 'Poppins', sans-serif;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .form-submit:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+    .form-note {
+      margin-top: 1rem;
+      font-size: 0.78rem;
+      color: rgba(242,232,220,0.4);
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    /* SUCCESS STATE */
+    .success-msg {
+      display: none;
+      text-align: center;
+      padding: 3rem 2rem;
+    }
+    .success-msg .checkmark { font-size: 3rem; margin-bottom: 1rem; }
+    .success-msg h3 { font-family: 'Cinzel', serif; color: var(--cream); font-size: 1.4rem; margin-bottom: 0.75rem; }
+    .success-msg p { color: rgba(242,232,220,0.65); font-size: 0.9rem; }
+
+    /* FAQ */
+    .faq-section {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 72px 1.5rem 80px;
+    }
+    .faq-section .section-title { text-align: center; margin-bottom: 0.5rem; }
+    .faq-section .section-sub { text-align: center; margin-bottom: 3rem; }
+
+    .faq-item {
+      border-bottom: 1px solid rgba(27,58,75,0.15);
+      padding: 1.25rem 0;
+    }
+    .faq-q {
+      font-weight: 600;
+      font-size: 0.93rem;
+      color: var(--navy);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      list-style: none;
+      user-select: none;
+    }
+    .faq-q::after { content: '+'; font-size: 1.2rem; color: var(--gold); flex-shrink: 0; }
+    details[open] .faq-q::after { content: '−'; }
+    .faq-a {
+      font-size: 0.875rem;
+      color: var(--gray);
+      margin-top: 0.75rem;
+      line-height: 1.7;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--navy-deep);
+      color: rgba(242,232,220,0.5);
+      text-align: center;
+      padding: 2rem 1.5rem;
+      font-size: 0.8rem;
+    }
+    footer a { color: rgba(242,232,220,0.7); text-decoration: none; }
+    footer a:hover { color: var(--gold); }
+
+    @media (max-width: 600px) {
+      .slots-row { grid-template-columns: 1fr; }
+      .form-grid { grid-template-columns: 1fr; }
+      .pricing-cards { flex-direction: column; align-items: center; }
+      .stats { gap: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="/">
+      <img src="/Quest_Logo.png" alt="Quest logo" />
+      <span class="nav-logo-text">QUEST</span>
+    </a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="#claim">Claim a Slot</a>
+      <a href="mailto:admin@questgoals.com">Contact</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-label">Advertise on Quest</div>
+    <h1>Reach People Who Are <span>Actually Trying</span> to Improve Their Lives</h1>
+    <p>Quest users are on a mission — pursuing real goals in health, finance, travel, and more. Put your business in front of them at the exact moment it matters.</p>
+    <a href="#claim" class="hero-cta">Claim Your Ad Slot — $1/mo Beta</a>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-number">6,300+</div>
+      <div class="stat-label">Real-Life Quests</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">8</div>
+      <div class="stat-label">Categories</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">16</div>
+      <div class="stat-label">Total Ad Slots</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">$1</div>
+      <div class="stat-label">Per Month (Beta)</div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-section">
+    <span class="section-label">How It Works</span>
+    <h2 class="section-title">Simple, Targeted, Effective</h2>
+    <p class="section-sub">Your brand lives inside the Quest category that matches what you offer — shown to users who are already motivated to take action.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Choose Your Category</h3>
+        <p>Pick one of 8 quest categories that aligns with your business. 2 sponsor slots per category — first come, first served.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>We Display Your Brand</h3>
+        <p>Your business name, logo, and link appear inside the Quest app for every user browsing that category.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Pay Monthly, Cancel Anytime</h3>
+        <p>$1/month during beta. No contracts, no minimums. We'll notify you before prices change.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h3>Scale as We Grow</h3>
+        <p>Early sponsors lock in beta pricing and get priority renewal rights as Quest's user base expands.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing-section">
+    <span class="section-label" style="color: var(--gold);">Pricing</span>
+    <h2 class="section-title">Transparent, No-Surprise Billing</h2>
+    <p class="section-sub" style="max-width:540px;margin:0 auto 0;">One slot, one category, one flat monthly rate.</p>
+
+    <div class="pricing-cards">
+      <div class="pricing-card featured">
+        <div class="badge">Currently Available</div>
+        <div class="price-tier">Beta Sponsor</div>
+        <div class="price-amount">$1</div>
+        <div class="price-period">per slot / per month</div>
+        <ul class="price-features">
+          <li>1 category sponsorship</li>
+          <li>Brand displayed to all category users</li>
+          <li>Monthly billing via Stripe</li>
+          <li>Cancel anytime</li>
+          <li>Priority renewal rights</li>
+          <li>Lock in beta rate for life</li>
+        </ul>
+        <a href="#claim" class="price-btn price-btn-primary">Claim a Slot</a>
+      </div>
+      <div class="pricing-card">
+        <div class="price-tier">Standard (Coming Soon)</div>
+        <div class="price-amount">$20</div>
+        <div class="price-period">per slot / per month</div>
+        <ul class="price-features">
+          <li>1 category sponsorship</li>
+          <li>Brand displayed to all category users</li>
+          <li>Monthly billing via Stripe</li>
+          <li>Cancel anytime</li>
+          <li>Performance reporting</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="mailto:admin@questgoals.com" class="price-btn price-btn-secondary">Get Notified</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- AVAILABLE SLOTS -->
+  <section class="slots-section" id="claim">
+    <div class="slots-header">
+      <span class="section-label">Ad Inventory</span>
+      <h2 class="section-title">Available Slots</h2>
+      <p class="section-sub">2 sponsor slots per category. Select the one that fits your business and fill out the form below.</p>
+    </div>
+
+    <div class="category-block">
+      <div class="category-name">💰 Financial</div>
+      <div class="slots-row">
+        <div class="slot-card">
+          <div class="slot-info">
+            <div class="slot-label">Financial — Slot 1</div>
+            <div class="slot-price">$1/month beta</div>
+          </div>
+          <span class="slot-available">Available</span>
+          <a href="#signup-form" class="claim-btn" onclick="prefillCategory('Financial')">Claim</a>
+        </div>
+        <div class="slot-card">
+          <div class="slot-info">
+            <div class="slot-label">Financial — Slot 2</div>
+            <div class="slot-price">$1/month beta</div>
+          </div>
+          <span class="slot-available">Available</span>
+          <a href="#signup-form" class="claim-btn" onclick="prefillCategory('Financial')">Claim</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="category-block">
+      <div class="category-name">🏃 Health</div>
+      <div class="slots-row">
+        <div class="slot-card">
+          <div class="slot-info">
+            <div class="slot-label">Health — Slot 1</div>
+            <div class="slot-price">$1/month beta</div>
+          </div>
+          <span class="slot-available">Available</span>
+          <a href="#signup-form" class="claim-btn" onclick="prefillCategory('Health')">Claim</a>
+        </div>
+        <div class="slot-card">
+          <div class="slot-info">
+            <div class="slot-label">Health — Slot 2</div>
+            <div class="slot-price">$1/month beta</div>
+          </div>
+          <span class="slot-available">Available</span>
+          <a href="#signup-form" class="claim-btn" onclick="prefillCategory('Health')">Claim</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="category-block">
+      <div class="category-name">✈️ Travel</div>
+      <div class="slots-row">
+        <div class="slot-card">
+          <div class="slot-info">
+            <div class="slot-label">Travel — Slot 1</div>
+            <div class="slot-price">$1/month beta</div>
+          </div>
+          <span class="slot-available">Available</span>
+          <a href="#signup-form" class="claim-btn" onclick="prefillCategory('Travel')">Claim</a>
+        </div>
+        <div class="slot-card">
+          <div class="slot-info">
+            <div class="slot-label">Travel — Slot 2</div>
+            <div class="slot-price">$1/month beta</div>
+          </div>
+          <span class="slot-available">Available</span>
+          <a href="#signup-form" class="claim-btn" onclick="prefillCategory('Travel')">Claim</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="category-block">
+      <div class="category-name">❤️ Relationships</div>
+      <div class="slots-row">
+        <div class="slot-card">
+          <div class="slot-info">
+            <div class="slot-label">Relationships — Slot 1</div>
+            <div class="slot-price">$1/month beta</div>
+          </div>
+          <span class="slot-available">Available</span>
+          <a href="#signup-form" class="claim-btn" onclick="prefillCategory('Relationships')">Claim</a>
+        </div>
+        <div class="slot-card">
+          <div class="slot-info">
+            <div class="slot-label">Relationships — Slot 2</div>
+            <div class="slot-price">$1/month beta</div>
+          </div>
+          <span class="slot-available">Available</span>
+          <a href="#signup-form" class="claim-btn" onclick="prefillCategory('Relationships')">Claim</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="category-block">
+      <div class="category-name">🎬 Entertainment</div>
+      <div class="slots-row">
+        <div class="slot-card">
+          <div class="slot-info">
+            <div class="slot-label">Entertainment — Slot 1</div>
+            <div class="slot-price">$1/month beta</div>
+          </div>
+          <span class="slot-available">Available</span>
+          <a href="#signup-form" class="claim-btn" onclick="prefillCategory('Entertainment')">Claim</a>
+        </div>
+        <div class="slot-card">
+          <div class="slot-info">
+            <div class="slot-label">Entertainment — Slot 2</div>
+            <div class="slot-price">$1/month beta</div>
+          </div>
+          <span class="slot-available">Available</span>
+          <a href="#signup-form" class="claim-btn" onclick="prefillCategory('Entertainment')">Claim</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="category-block">
+      <div class="category-name">🤝 Community</div>
+      <div class="slots-row">
+        <div class="slot-card">
+          <div class="slot-info">
+            <div class="slot-label">Community — Slot 1</div>
+            <div class="slot-price">$1/month beta</div>
+          </div>
+          <span class="slot-available">Available</span>
+          <a href="#signup-form" class="claim-btn" onclick="prefillCategory('Community')">Claim</a>
+        </div>
+        <div class="slot-card">
+          <div class="slot-info">
+            <div class="slot-label">Community — Slot 2</div>
+            <div class="slot-price">$1/month beta</div>
+          </div>
+          <span class="slot-available">Available</span>
+          <a href="#signup-form" class="claim-btn" onclick="prefillCategory('Community')">Claim</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="category-block">
+      <div class="category-name">🌱 Charity</div>
+      <div class="slots-row">
+        <div class="slot-card">
+          <div class="slot-info">
+            <div class="slot-label">Charity — Slot 1</div>
+            <div class="slot-price">$1/month beta</div>
+          </div>
+          <span class="slot-available">Available</span>
+          <a href="#signup-form" class="claim-btn" onclick="prefillCategory('Charity')">Claim</a>
+        </div>
+        <div class="slot-card">
+          <div class="slot-info">
+            <div class="slot-label">Charity — Slot 2</div>
+            <div class="slot-price">$1/month beta</div>
+          </div>
+          <span class="slot-available">Available</span>
+          <a href="#signup-form" class="claim-btn" onclick="prefillCategory('Charity')">Claim</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="category-block">
+      <div class="category-name">⭐ Miscellaneous</div>
+      <div class="slots-row">
+        <div class="slot-card">
+          <div class="slot-info">
+            <div class="slot-label">Miscellaneous — Slot 1</div>
+            <div class="slot-price">$1/month beta</div>
+          </div>
+          <span class="slot-available">Available</span>
+          <a href="#signup-form" class="claim-btn" onclick="prefillCategory('Miscellaneous')">Claim</a>
+        </div>
+        <div class="slot-card">
+          <div class="slot-info">
+            <div class="slot-label">Miscellaneous — Slot 2</div>
+            <div class="slot-price">$1/month beta</div>
+          </div>
+          <span class="slot-available">Available</span>
+          <a href="#signup-form" class="claim-btn" onclick="prefillCategory('Miscellaneous')">Claim</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIGN-UP FORM -->
+  <section class="form-section" id="signup-form">
+    <div class="form-wrap">
+      <span class="section-label" style="display:block;text-align:center;margin-bottom:0.5rem;">Get Started</span>
+      <h2 class="section-title">Claim Your Slot</h2>
+      <p class="section-sub">Fill out the form and we'll send you a Stripe payment link within 1 business day. You'll be live in the app as soon as payment is confirmed.</p>
+
+      <div id="form-container">
+        <!-- Netlify Form — no backend required -->
+        <form
+          name="advertiser-signup"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          onsubmit="handleSubmit(event)"
+        >
+          <input type="hidden" name="form-name" value="advertiser-signup" />
+          <p style="display:none;"><label>Don't fill this out: <input name="bot-field" /></label></p>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="business-name">Business Name *</label>
+              <input type="text" id="business-name" name="business_name" placeholder="Acme Financial Group" required />
+            </div>
+            <div class="form-group">
+              <label for="contact-name">Your Name *</label>
+              <input type="text" id="contact-name" name="contact_name" placeholder="Jane Smith" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address *</label>
+              <input type="email" id="email" name="email" placeholder="jane@yourbusiness.com" required />
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone (optional)</label>
+              <input type="tel" id="phone" name="phone" placeholder="(555) 555-5555" />
+            </div>
+            <div class="form-group">
+              <label for="website">Business Website *</label>
+              <input type="url" id="website" name="website" placeholder="https://yourbusiness.com" required />
+            </div>
+            <div class="form-group">
+              <label for="category">Quest Category *</label>
+              <select id="category" name="category" required>
+                <option value="" disabled selected>Select a category…</option>
+                <option value="Financial">💰 Financial</option>
+                <option value="Health">🏃 Health</option>
+                <option value="Travel">✈️ Travel</option>
+                <option value="Relationships">❤️ Relationships</option>
+                <option value="Entertainment">🎬 Entertainment</option>
+                <option value="Community">🤝 Community</option>
+                <option value="Charity">🌱 Charity</option>
+                <option value="Miscellaneous">⭐ Miscellaneous</option>
+              </select>
+            </div>
+            <div class="form-group full">
+              <label for="message">Anything else we should know? (optional)</label>
+              <textarea id="message" name="message" placeholder="Tell us about your business and how it relates to the category you're targeting…"></textarea>
+            </div>
+          </div>
+
+          <button type="submit" class="form-submit">Submit — We'll Send Your Payment Link →</button>
+          <p class="form-note">
+            After submitting, you'll receive a $1/month Stripe payment link at your email address within 1 business day.<br />
+            No credit card collected on this form — payment is handled securely via Stripe.
+          </p>
+        </form>
+      </div>
+
+      <div class="success-msg" id="success-msg">
+        <div class="checkmark">✅</div>
+        <h3>You're on the list!</h3>
+        <p>We received your request and will send a Stripe payment link to your email within 1 business day. You'll be live in the Quest app as soon as payment is confirmed.</p>
+        <p style="margin-top:0.75rem;">Questions? Email <a href="mailto:admin@questgoals.com" style="color:var(--gold);">admin@questgoals.com</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <span class="section-label">FAQ</span>
+    <h2 class="section-title">Common Questions</h2>
+    <p class="section-sub">Everything you need to know about advertising on Quest.</p>
+
+    <details class="faq-item">
+      <summary class="faq-q">What does my ad actually look like in the app?</summary>
+      <p class="faq-a">Your business name and logo appear as a sponsored banner inside the Quest app for all users browsing your chosen category. We'll work with you after sign-up to collect your logo and any tagline you'd like included.</p>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-q">How many users will see my ad?</summary>
+      <p class="faq-a">Quest is in active growth with new users joining daily. All users who open a quest in your sponsored category will see your brand. We'll share usage stats as the platform scales.</p>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-q">Can I sponsor more than one category?</summary>
+      <p class="faq-a">Yes — just submit the form once for each category you'd like to sponsor. Each slot is billed separately at $1/month during beta.</p>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-q">What happens when the beta ends?</summary>
+      <p class="faq-a">Standard pricing is $20/slot/month. Early beta sponsors will be notified in advance and given the option to renew at beta pricing or cancel with no penalty. You'll never be charged a higher rate without explicit approval.</p>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-q">How do I cancel?</summary>
+      <p class="faq-a">Email <a href="mailto:admin@questgoals.com">admin@questgoals.com</a> and we'll cancel your subscription immediately. You can also manage your billing directly via the Stripe customer portal link we send with your invoice.</p>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-q">How does payment work?</summary>
+      <p class="faq-a">After you submit this form, we'll send you a secure Stripe payment link. Your card is never stored by us — all billing is handled by Stripe. Monthly invoices are sent automatically.</p>
+    </details>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 KeyGoals, Inc. &nbsp;|&nbsp; <a href="/privacy-policy">Privacy Policy</a> &nbsp;|&nbsp; <a href="mailto:admin@questgoals.com">Contact</a></p>
+  </footer>
+
+  <script>
+    function prefillCategory(cat) {
+      setTimeout(() => {
+        const sel = document.getElementById('category');
+        if (sel) sel.value = cat;
+      }, 100);
+    }
+
+    function handleSubmit(e) {
+      e.preventDefault();
+      const form = e.target;
+      const data = new FormData(form);
+
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(data).toString(),
+      })
+        .then(() => {
+          document.getElementById('form-container').style.display = 'none';
+          document.getElementById('success-msg').style.display = 'block';
+          document.getElementById('success-msg').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        })
+        .catch(() => {
+          alert('Something went wrong. Please email admin@questgoals.com directly.');
+        });
+    }
+  </script>
+
+</body>
+</html>

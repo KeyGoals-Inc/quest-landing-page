@@ -60,33 +60,23 @@
       overflow-x: hidden;
     }
 
-    /* ══ WATERMARK ══ */
-    .watermark {
-      position: fixed; top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: min(700px, 90vw); height: min(700px, 90vw);
-      background: url('Quest_Logo.png') center/contain no-repeat;
-      opacity: 0.06; pointer-events: none; z-index: 0;
-    }
-    section, nav, footer { position: relative; z-index: 1; }
-
     /* ══ NAV ══ */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(27,58,75,0.97); backdrop-filter: blur(10px);
-      padding: 0 2.5rem; display: flex; align-items: center;
+      background: var(--navy); backdrop-filter: blur(10px);
+      padding: 0 1.5rem; display: flex; align-items: center;
       justify-content: space-between; height: 68px;
-      border-bottom: 1px solid rgba(196,151,42,0.25);
+      border-bottom: 1px solid rgba(196,151,42,0.2);
     }
     .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .nav-logo img { height: 38px; width: 38px; object-fit: contain; mix-blend-mode: screen; filter: brightness(1.8) saturate(0.5); border-radius: 4px; }
-    .nav-logo-text { font-family: 'Cinzel', serif; font-size: 1.3rem; font-weight: 700; color: var(--cream); letter-spacing: 0.1em; }
+    .nav-logo img { height: 42px; width: 42px; object-fit: contain; border-radius: 6px; }
+    .nav-logo-text { font-family: 'Cinzel', serif; font-size: 1.25rem; font-weight: 700; color: var(--cream); letter-spacing: 0.1em; }
     .nav-links { display: flex; align-items: center; gap: 2rem; }
     .nav-links a { color: rgba(242,232,220,0.75); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.2s; }
     .nav-links a:hover { color: var(--gold-light); }
-    .nav-cta { background: var(--gold) !important; color: var(--navy) !important; font-weight: 700 !important; padding: 0.5rem 1.25rem !important; border-radius: 6px; transition: background 0.2s !important; color: var(--navy) !important; }
+    .nav-cta { background: var(--gold) !important; color: var(--navy) !important; font-weight: 700 !important; padding: 0.5rem 1.25rem !important; border-radius: 6px; }
     .nav-cta:hover { background: var(--gold-light) !important; }
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
     .hamburger span { width: 24px; height: 2px; background: var(--cream); border-radius: 2px; transition: all 0.3s; }
     .mobile-menu { display: none; position: fixed; top: 68px; left: 0; right: 0; background: var(--navy); z-index: 99; padding: 1.5rem 2rem; flex-direction: column; gap: 1.25rem; border-bottom: 1px solid rgba(196,151,42,0.2); }
     .mobile-menu a { color: rgba(242,232,220,0.85); text-decoration: none; font-size: 1rem; font-weight: 500; }
@@ -100,211 +90,142 @@
     }
     .section-title {
       font-family: 'Cinzel', serif;
-      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-size: clamp(1.75rem, 4vw, 2.75rem);
       font-weight: 700; line-height: 1.2; margin-bottom: 1rem;
     }
-    .section-sub {
-      font-size: 1rem; color: var(--gray);
-      max-width: 560px; line-height: 1.75;
-      margin: 0 auto 2.5rem;
-    }
-    .text-center { text-align: center; }
     .btn-primary {
       display: inline-block; background: var(--gold); color: var(--navy);
-      padding: 0.9rem 2.25rem; border-radius: 8px; font-weight: 700;
+      padding: 1rem 2rem; border-radius: 10px; font-weight: 700;
       text-decoration: none; font-size: 1rem; font-family: 'Poppins', sans-serif;
-      transition: all 0.2s; border: none; cursor: pointer;
+      transition: all 0.2s; border: none; cursor: pointer; text-align: center;
     }
-    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(196,151,42,0.35); }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
     .btn-outline {
       display: inline-block; background: transparent;
-      color: var(--cream); padding: 0.9rem 2.25rem; border-radius: 8px;
+      color: var(--cream); padding: 1rem 2rem; border-radius: 10px;
       font-weight: 600; text-decoration: none; font-size: 1rem;
       font-family: 'Poppins', sans-serif; transition: all 0.2s;
-      border: 1.5px solid rgba(242,232,220,0.3); cursor: pointer;
+      border: 1.5px solid rgba(242,232,220,0.3); cursor: pointer; text-align: center;
     }
     .btn-outline:hover { border-color: var(--teal-light); color: var(--teal-light); }
 
     /* ══ HERO ══ */
     .hero {
       min-height: 100vh;
-      background: linear-gradient(150deg, var(--navy-deep) 0%, var(--navy) 50%, #0F2535 100%);
+      background: linear-gradient(160deg, var(--navy-deep) 0%, var(--navy) 55%, #0F2535 100%);
       display: flex; align-items: center; justify-content: center;
-      padding: 110px 2rem 5rem; text-align: center;
+      padding: 110px 1.75rem 5rem; text-align: center;
     }
-    .hero-inner { max-width: 760px; margin: 0 auto; }
+    .hero-inner { max-width: 680px; margin: 0 auto; width: 100%; }
     .hero-badge {
       display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(196,151,42,0.12); border: 1px solid rgba(196,151,42,0.35);
-      color: var(--gold-light); padding: 0.45rem 1.1rem; border-radius: 20px;
-      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em;
+      background: rgba(196,151,42,0.1); border: 1px solid rgba(196,151,42,0.35);
+      color: var(--gold-light); padding: 0.5rem 1.25rem; border-radius: 30px;
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em;
       text-transform: uppercase; margin-bottom: 2rem;
     }
-    .hero-badge::before { content: '⚔'; font-size: 0.9rem; }
+    .hero-badge::before { content: '⚔'; font-size: 0.85rem; }
     h1.hero-title {
       font-family: 'Cinzel', serif;
-      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-size: clamp(2.2rem, 6vw, 4rem);
       font-weight: 700; color: var(--cream); line-height: 1.12;
       margin-bottom: 1.5rem;
     }
     h1.hero-title span { color: var(--gold); }
     .hero-sub {
-      font-size: 1.1rem; color: rgba(242,232,220,0.75);
-      line-height: 1.75; margin: 0 auto 2.5rem; max-width: 560px;
+      font-size: 1.05rem; color: rgba(242,232,220,0.72);
+      line-height: 1.75; margin: 0 auto 2.5rem;
     }
-    .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3.5rem; }
+    .hero-actions {
+      display: flex; flex-direction: column; gap: 0.85rem;
+      margin-bottom: 3rem; width: 100%;
+    }
+    .hero-actions .btn-primary,
+    .hero-actions .btn-outline { width: 100%; }
+    .hero-divider { border: none; border-top: 1px solid rgba(255,255,255,0.08); margin-bottom: 2.5rem; }
     .hero-stats {
-      display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap;
-      padding-top: 2.5rem; border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex; flex-direction: column;
+      align-items: center; gap: 1.75rem;
     }
-    .hero-stat-num { font-family: 'Cinzel', serif; font-size: 1.8rem; font-weight: 700; color: var(--gold); }
-    .hero-stat-label { font-size: 0.78rem; color: rgba(242,232,220,0.55); margin-top: 3px; letter-spacing: 0.05em; }
+    .hero-stat-num { font-family: 'Cinzel', serif; font-size: 2rem; font-weight: 700; color: var(--gold); line-height: 1; }
+    .hero-stat-label { font-size: 0.8rem; color: rgba(242,232,220,0.5); margin-top: 4px; letter-spacing: 0.04em; }
 
-    /* ══ WHY QUEST ══ */
-    .why-section { background: var(--cream); padding: 6rem 2rem; text-align: center; }
-    .why-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.5rem; max-width: 1100px; margin: 0 auto;
+    /* ══ DOWNLOAD ══ */
+    .download-section {
+      background: #163344;
+      padding: 5rem 1.75rem; text-align: center;
     }
-    .why-card {
-      background: white; border-radius: 16px; padding: 2rem 1.75rem;
-      border: 1.5px solid var(--cream-dark); text-align: left;
-      transition: all 0.25s;
+    .download-section .section-label { color: var(--teal-light); }
+    .download-section .section-title { color: var(--cream); margin-bottom: 1rem; }
+    .download-sub {
+      font-size: 1rem; color: rgba(242,232,220,0.65);
+      line-height: 1.7; margin: 0 auto 2rem; max-width: 400px;
     }
-    .why-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(27,58,75,0.1); border-color: var(--teal); }
-    .why-icon { font-size: 2rem; margin-bottom: 1rem; }
-    .why-title { font-size: 1.05rem; font-weight: 700; color: var(--navy); margin-bottom: 0.5rem; }
-    .why-desc { font-size: 0.9rem; color: var(--gray); line-height: 1.65; }
-
-    /* ══ HOW IT WORKS ══ */
-    .how-section { background: var(--navy); padding: 6rem 2rem; text-align: center; }
-    .how-section .section-title { color: var(--cream); }
-    .how-section .section-sub { color: rgba(242,232,220,0.65); }
-    .steps-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 2rem; max-width: 1000px; margin: 0 auto;
+    .badge-stack { display: flex; flex-direction: column; gap: 0.85rem; max-width: 400px; margin: 0 auto 1.25rem; }
+    .store-badge {
+      display: flex; align-items: center; gap: 12px;
+      background: rgba(255,255,255,0.07); border: 1.5px solid rgba(255,255,255,0.18);
+      border-radius: 12px; padding: 0.9rem 1.5rem; text-decoration: none;
+      transition: all 0.2s; color: var(--cream); width: 100%;
     }
-    .step-card { text-align: center; }
-    .step-num {
-      width: 52px; height: 52px; border-radius: 50%;
-      background: rgba(196,151,42,0.12); border: 2px solid var(--gold);
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Cinzel', serif; font-size: 1.2rem; font-weight: 700;
-      color: var(--gold); margin: 0 auto 1.25rem;
-    }
-    .step-title { font-size: 1rem; font-weight: 700; color: var(--cream); margin-bottom: 0.6rem; }
-    .step-desc { font-size: 0.88rem; color: rgba(242,232,220,0.6); line-height: 1.65; }
-    .step-connector { display: none; }
-
-    /* ══ CATEGORIES ══ */
-    .categories-section { background: var(--cream); padding: 6rem 2rem; text-align: center; }
-    .cat-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 1.25rem; max-width: 1100px; margin: 0 auto;
-    }
-    .cat-card {
-      background: white; border-radius: 14px; padding: 1.75rem 1.5rem;
-      border: 1.5px solid var(--cream-dark); text-align: left;
-      transition: all 0.25s; cursor: default;
-    }
-    .cat-card:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(27,58,75,0.1); border-color: var(--teal); }
-    .cat-header { display: flex; align-items: center; gap: 12px; margin-bottom: 0.85rem; }
-    .cat-icon-wrap {
-      width: 44px; height: 44px; border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.4rem; flex-shrink: 0;
-    }
-    .cat-name { font-size: 1rem; font-weight: 700; color: var(--navy); }
-    .cat-count { font-size: 0.78rem; color: var(--gold); font-weight: 600; margin-bottom: 0.5rem; }
-    .cat-examples { font-size: 0.82rem; color: var(--gray); line-height: 1.55; }
-    .cat-verify {
-      display: inline-flex; align-items: center; gap: 5px;
-      font-size: 0.72rem; font-weight: 600; color: var(--teal);
-      background: rgba(59,158,142,0.1); padding: 0.25rem 0.65rem;
-      border-radius: 20px; margin-top: 0.85rem;
-    }
-
-    /* ══ QUEST SCORE ══ */
-    .score-section { background: white; padding: 6rem 2rem; }
-    .score-inner { max-width: 1000px; margin: 0 auto; }
-    .score-intro { text-align: center; margin-bottom: 3rem; }
-    .score-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
-    .score-checklist { display: flex; flex-direction: column; gap: 0.85rem; }
-    .score-item {
-      display: flex; align-items: center; gap: 14px;
-      background: var(--cream); border: 1.5px solid var(--cream-dark);
-      border-radius: 10px; padding: 1rem 1.25rem; cursor: pointer;
-      transition: all 0.2s; user-select: none;
-    }
-    .score-item:hover { border-color: var(--teal); background: rgba(59,158,142,0.05); }
-    .score-item.checked { background: rgba(59,158,142,0.07); border-color: var(--teal); }
-    .score-item input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--teal); cursor: pointer; flex-shrink: 0; }
-    .score-item-text { font-size: 0.93rem; color: var(--dark); font-weight: 500; }
-    .score-result {
-      background: var(--navy); border-radius: 18px; padding: 2.5rem;
-      display: flex; flex-direction: column; align-items: center;
-      text-align: center; position: sticky; top: 88px;
-    }
-    .score-lbl { font-size: 0.75rem; color: rgba(242,232,220,0.5); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem; }
-    .score-number { font-family: 'Cinzel', serif; font-size: 5rem; font-weight: 700; color: var(--gold); line-height: 1; transition: all 0.4s; }
-    .score-pct { font-size: 2rem; color: var(--gold); font-family: 'Cinzel', serif; }
-    .score-bar-track { width: 100%; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; margin: 1.5rem 0; }
-    .score-bar-fill { height: 100%; background: var(--gold); border-radius: 4px; transition: width 0.5s ease; width: 0%; }
-    .score-level { font-size: 1.05rem; color: var(--cream); margin-bottom: 0.4rem; font-weight: 600; }
-    .score-desc { font-size: 0.85rem; color: rgba(242,232,220,0.6); line-height: 1.65; margin-bottom: 1.5rem; min-height: 60px; }
-
-    /* ══ ORIGIN / FOUNDER ══ */
-    .founder-section { background: var(--navy-deep); padding: 6rem 2rem; text-align: center; }
-    .founder-inner { max-width: 780px; margin: 0 auto; }
-    .founder-section .section-label { color: var(--teal-light); }
-    .founder-section .section-title { color: var(--cream); }
-    .founder-quote {
-      font-size: 1.2rem; color: rgba(242,232,220,0.9); line-height: 1.8;
-      font-style: italic; margin: 2rem auto; max-width: 680px;
-      padding: 2rem; border-top: 2px solid rgba(196,151,42,0.4);
-      border-bottom: 2px solid rgba(196,151,42,0.4);
-    }
-    .founder-cite { font-size: 0.85rem; color: rgba(242,232,220,0.45); font-style: normal; margin-top: 1.25rem; letter-spacing: 0.03em; }
-    .contrast-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: 1.25rem; margin-top: 3rem;
-    }
-    .contrast-card {
-      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 12px; padding: 1.5rem 1rem; text-align: center;
-      transition: all 0.2s;
-    }
-    .contrast-card:hover { background: rgba(255,255,255,0.07); border-color: rgba(196,151,42,0.3); }
-    .contrast-icon { font-size: 1.75rem; margin-bottom: 0.6rem; }
-    .contrast-label { font-size: 0.9rem; font-weight: 600; color: var(--cream); margin-bottom: 0.25rem; }
-    .contrast-sub { font-size: 0.78rem; color: rgba(242,232,220,0.4); }
+    .store-badge:hover { background: rgba(255,255,255,0.13); border-color: var(--gold); }
+    .store-badge.disabled { opacity: 0.45; pointer-events: none; }
+    .store-badge-icon { font-size: 1.75rem; flex-shrink: 0; }
+    .store-badge-text { text-align: left; }
+    .store-badge-sub  { font-size: 0.65rem; color: rgba(242,232,220,0.5); letter-spacing: 0.06em; text-transform: uppercase; }
+    .store-badge-name { font-size: 1rem; font-weight: 700; }
+    .badge-note { font-size: 0.75rem; color: rgba(242,232,220,0.3); max-width: 340px; margin: 0 auto; line-height: 1.6; }
 
     /* ══ ADVERTISER ══ */
-    .advertiser-section { background: var(--cream); padding: 6rem 2rem; }
-    .advertiser-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
-    .adv-text-block .section-title { color: var(--navy); text-align: left; }
-    .adv-text-block .section-label { text-align: left; }
-    .adv-body { font-size: 0.95rem; color: var(--gray); line-height: 1.75; margin-bottom: 1.75rem; text-align: left; }
-    .adv-features { display: flex; flex-direction: column; gap: 1rem; }
+    .advertiser-section { background: var(--cream); padding: 5rem 1.75rem; }
+    .adv-inner { max-width: 600px; margin: 0 auto; }
+    .adv-label { color: var(--gold); }
+    .adv-title { color: var(--navy); text-align: center; }
+    .adv-body {
+      font-size: 0.95rem; color: var(--gray); line-height: 1.75;
+      margin-bottom: 1.75rem; text-align: center;
+    }
+    .adv-features { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
     .adv-feature { display: flex; align-items: flex-start; gap: 12px; }
-    .adv-dot { width: 7px; height: 7px; background: var(--gold); border-radius: 50%; flex-shrink: 0; margin-top: 7px; }
-    .adv-text { font-size: 0.92rem; color: var(--dark); line-height: 1.6; }
-    .adv-box { background: white; border-radius: 16px; padding: 2rem; border: 1.5px solid var(--cream-dark); }
-    .adv-box-title { font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 1.25rem; }
-    .adv-rate { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.25rem; border-radius: 10px; margin-bottom: 0.75rem; }
-    .adv-rate.beta { background: rgba(196,151,42,0.08); border: 1.5px solid rgba(196,151,42,0.35); }
-    .adv-rate.live { background: rgba(59,158,142,0.08); border: 1.5px solid rgba(59,158,142,0.35); }
-    .adv-rate-label { font-size: 0.85rem; font-weight: 600; color: var(--navy); }
-    .adv-rate-sub { font-size: 0.72rem; color: var(--gray); margin-top: 2px; }
-    .adv-rate-price { font-family: 'Cinzel', serif; font-size: 1.3rem; font-weight: 700; }
+    .adv-dot { width: 8px; height: 8px; background: var(--gold); border-radius: 50%; flex-shrink: 0; margin-top: 7px; }
+    .adv-text { font-size: 0.95rem; color: var(--dark); line-height: 1.6; }
+
+    /* Pricing card */
+    .adv-card {
+      background: white; border-radius: 20px; padding: 1.75rem;
+      box-shadow: 0 4px 24px rgba(27,58,75,0.08);
+    }
+    .adv-card-title { font-size: 1.1rem; font-weight: 700; color: var(--navy); margin-bottom: 1.25rem; }
+    .adv-rate {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 1.25rem; border-radius: 12px; margin-bottom: 0.85rem;
+    }
+    .adv-rate.beta { background: rgba(196,151,42,0.07); border: 1.5px solid rgba(196,151,42,0.3); }
+    .adv-rate.live { background: rgba(59,158,142,0.07); border: 1.5px solid rgba(59,158,142,0.3); }
+    .adv-rate-label { font-size: 0.9rem; font-weight: 700; color: var(--navy); }
+    .adv-rate-sub { font-size: 0.75rem; color: var(--gray); margin-top: 2px; }
+    .adv-rate-price { font-family: 'Cinzel', serif; font-size: 1.35rem; font-weight: 700; white-space: nowrap; }
     .adv-rate.beta .adv-rate-price { color: var(--gold); }
     .adv-rate.live .adv-rate-price { color: var(--teal); }
-    .adv-note { font-size: 0.78rem; color: var(--gray); margin-top: 0.5rem; line-height: 1.5; }
-    .adv-divider { border: none; border-top: 1px solid var(--cream-dark); margin: 1.5rem 0; }
-    .adv-contact-form { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.25rem; }
+
+    .adv-zip-wrap {
+      position: relative; margin-bottom: 0.75rem;
+    }
+    .adv-zip-input {
+      width: 100%; padding: 0.85rem 1rem; border-radius: 10px;
+      border: 1.5px solid var(--cream-dark); background: var(--cream);
+      font-size: 0.9rem; font-family: 'Poppins', sans-serif; color: var(--dark);
+      outline: none; transition: border-color 0.2s;
+    }
+    .adv-zip-input:focus { border-color: var(--teal); }
+
+    .adv-note { font-size: 0.78rem; color: var(--gray); margin-bottom: 1.25rem; line-height: 1.55; }
+    .adv-divider { border: none; border-top: 1px solid var(--cream-dark); margin: 1.25rem 0; }
+    .adv-form-title { font-size: 1.1rem; font-weight: 700; color: var(--navy); margin-bottom: 1rem; }
+    .adv-contact-form { display: flex; flex-direction: column; gap: 0.75rem; }
     .adv-contact-form input,
     .adv-contact-form textarea {
-      padding: 0.8rem 1rem; border-radius: 8px;
+      padding: 0.9rem 1rem; border-radius: 10px;
       border: 1.5px solid var(--cream-dark); background: var(--cream);
       font-size: 0.9rem; font-family: 'Poppins', sans-serif; color: var(--dark);
       outline: none; transition: border-color 0.2s; width: 100%;
@@ -312,39 +233,52 @@
     .adv-contact-form input:focus,
     .adv-contact-form textarea:focus { border-color: var(--teal); }
     .adv-contact-form textarea { resize: vertical; min-height: 90px; }
-    .adv-success { display: none; background: rgba(59,158,142,0.1); border: 1px solid var(--teal); color: var(--teal); padding: 0.85rem 1rem; border-radius: 8px; font-size: 0.88rem; margin-top: 0.5rem; }
+    .adv-success {
+      display: none; background: rgba(59,158,142,0.1);
+      border: 1px solid var(--teal); color: var(--teal);
+      padding: 0.85rem 1rem; border-radius: 8px; font-size: 0.88rem; margin-top: 0.5rem;
+    }
 
     /* ══ BETA ══ */
-    .beta-section { background: var(--navy); padding: 7rem 2rem; text-align: center; }
-    .beta-section .section-title { color: var(--cream); }
-    .beta-section .section-sub { color: rgba(242,232,220,0.6); margin-bottom: 2.5rem; }
-    .beta-form { display: flex; gap: 0.75rem; max-width: 500px; margin: 0 auto; flex-wrap: wrap; justify-content: center; }
+    .beta-section {
+      background: var(--navy); padding: 6rem 1.75rem; text-align: center;
+    }
+    .beta-section .section-label { color: var(--teal-light); }
+    .beta-section .section-title { color: var(--cream); margin-bottom: 1rem; }
+    .beta-sub {
+      font-size: 1rem; color: rgba(242,232,220,0.65);
+      line-height: 1.75; margin: 0 auto 2rem; max-width: 420px;
+    }
+    .beta-form { display: flex; flex-direction: column; gap: 0.75rem; max-width: 440px; margin: 0 auto; }
     .beta-form input {
-      flex: 1; min-width: 220px; padding: 0.9rem 1.25rem; border-radius: 8px;
+      width: 100%; padding: 1rem 1.25rem; border-radius: 10px;
       border: 1.5px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.07);
       color: var(--cream); font-size: 0.95rem; font-family: 'Poppins', sans-serif;
       outline: none; transition: border-color 0.2s;
     }
     .beta-form input::placeholder { color: rgba(242,232,220,0.4); }
     .beta-form input:focus { border-color: var(--gold); }
-    .beta-note { font-size: 0.76rem; color: rgba(242,232,220,0.35); margin-top: 1rem; }
+    .beta-form .btn-primary { width: 100%; font-size: 1rem; }
+    .beta-note { font-size: 0.76rem; color: rgba(242,232,220,0.3); margin-top: 0.75rem; }
     .beta-success {
       display: none; background: rgba(196,151,42,0.12);
       border: 1px solid rgba(196,151,42,0.4); color: var(--gold-light);
-      padding: 1rem 2rem; border-radius: 10px; margin-top: 1.5rem;
-      font-size: 0.95rem; max-width: 500px; margin-left: auto; margin-right: auto;
+      padding: 1rem 1.5rem; border-radius: 10px; margin-top: 1rem;
+      font-size: 0.9rem; max-width: 440px; margin-left: auto; margin-right: auto;
     }
 
     /* ══ FOOTER ══ */
-    footer {
-      background: var(--dark); padding: 3rem 2rem; text-align: center;
+    footer { background: var(--dark); padding: 3.5rem 1.75rem; text-align: center; }
+    .footer-logo { font-family: 'Cinzel', serif; font-size: 1.4rem; font-weight: 700; color: var(--cream); margin-bottom: 0.4rem; letter-spacing: 0.1em; }
+    .footer-tagline { font-size: 0.8rem; color: #4A5568; margin-bottom: 1.75rem; }
+    .footer-links {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 0.6rem; margin-bottom: 1.75rem;
     }
-    .footer-logo { font-family: 'Cinzel', serif; font-size: 1.3rem; color: var(--cream); margin-bottom: 0.35rem; letter-spacing: 0.08em; }
-    .footer-tagline { font-size: 0.8rem; color: #555; margin-bottom: 1.5rem; }
-    .footer-links { display: flex; gap: 1.75rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem; }
-    .footer-links a { font-size: 0.8rem; color: #555; text-decoration: none; transition: color 0.2s; }
+    .footer-row { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
+    .footer-links a { font-size: 0.82rem; color: #4A5568; text-decoration: none; transition: color 0.2s; }
     .footer-links a:hover { color: rgba(242,232,220,0.6); }
-    .footer-copy { font-size: 0.72rem; color: #3A3A3A; }
+    .footer-copy { font-size: 0.72rem; color: #2D3748; }
 
     /* ══ TOAST ══ */
     .toast {
@@ -358,38 +292,29 @@
     }
     .toast.show { transform: translateX(-50%) translateY(0); }
 
-    /* ══ MOBILE ══ */
-    @media (max-width: 768px) {
-      nav { padding: 0 1.5rem; }
-      .nav-links { display: none; }
-      .hamburger { display: flex; }
-      .hero { padding: 100px 1.5rem 4rem; }
-      .hero-stats { gap: 1.75rem; }
-      .score-grid { grid-template-columns: 1fr; }
-      .score-result { position: static; margin-top: 2rem; }
-      .advertiser-inner { grid-template-columns: 1fr; gap: 3rem; }
-      .adv-text-block .section-title,
-      .adv-text-block .section-label { text-align: center; }
-      .adv-body { text-align: center; }
-      .adv-feature { justify-content: center; }
-      .contrast-grid { grid-template-columns: repeat(2, 1fr); }
-      .cat-grid { grid-template-columns: repeat(2, 1fr); }
-      .steps-grid { grid-template-columns: 1fr; }
-      .why-grid { grid-template-columns: 1fr; }
+    /* ══ DESKTOP ══ */
+    @media (min-width: 768px) {
+      nav { padding: 0 2.5rem; }
+      .hamburger { display: none; }
+      .nav-links { display: flex; }
+      .hero { padding: 120px 2rem 6rem; }
+      .hero-actions { flex-direction: row; justify-content: center; }
+      .hero-actions .btn-primary,
+      .hero-actions .btn-outline { width: auto; }
+      .hero-stats { flex-direction: row; justify-content: center; gap: 4rem; }
+      .badge-stack { flex-direction: row; }
+      .store-badge { flex: 1; }
+      .adv-inner { text-align: left; }
+      .adv-title { text-align: left; }
+      .adv-body { text-align: left; }
     }
-    @media (max-width: 480px) {
-      h1.hero-title { font-size: 2.1rem; }
-      .cat-grid { grid-template-columns: 1fr; }
-      .hero-stats { flex-direction: column; gap: 1.25rem; align-items: center; }
-      .contrast-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
-      .beta-form { flex-direction: column; }
-      .beta-form input { min-width: unset; }
+    @media (max-width: 767px) {
+      .hamburger { display: flex; }
+      .nav-links { display: none; }
     }
   </style>
 </head>
 <body id="top">
-
-<div class="watermark" aria-hidden="true"></div>
 
 <!-- ══ NAV ══ -->
 <nav>
@@ -398,10 +323,8 @@
     <span class="nav-logo-text">QUEST</span>
   </a>
   <div class="nav-links">
-    <a href="#how">How It Works</a>
-    <a href="#categories">Categories</a>
-    <a href="#score">Quest Score</a>
-    <a href="#advertise">Advertise</a>
+    <a href="#download">Download</a>
+    <a href="/advertise">Advertise</a>
     <a href="#beta" class="nav-cta">Join Beta</a>
   </div>
   <div class="hamburger" onclick="toggleMenu()" aria-label="Open menu">
@@ -409,10 +332,8 @@
   </div>
 </nav>
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#how" onclick="toggleMenu()">How It Works</a>
-  <a href="#categories" onclick="toggleMenu()">Categories</a>
-  <a href="#score" onclick="toggleMenu()">Quest Score</a>
-  <a href="#advertise" onclick="toggleMenu()">Advertise</a>
+  <a href="#download" onclick="toggleMenu()">Download</a>
+  <a href="/advertise" onclick="toggleMenu()">Advertise</a>
   <a href="#beta" onclick="toggleMenu()">Join Beta — Free</a>
 </div>
 
@@ -420,12 +341,13 @@
 <section class="hero">
   <div class="hero-inner">
     <div class="hero-badge">Beta now open — founding members welcome</div>
-    <h1 class="hero-title">Real Life Has <span>6,307 Achievements</span> Waiting for You</h1>
+    <h1 class="hero-title">Real Life Has <span>6,307<br>Achievements</span> Waiting for You</h1>
     <p class="hero-sub">Quest turns your real-life goals into verified achievements — just like a video game, except the XP you earn builds an actual life. Finance, health, travel, relationships, and more.</p>
     <div class="hero-actions">
       <a href="#beta" class="btn-primary">Join the Beta — Free ⚔</a>
-      <a href="#how" class="btn-outline">See How It Works</a>
+      <a href="#download" class="btn-outline">See How It Works</a>
     </div>
+    <hr class="hero-divider" />
     <div class="hero-stats">
       <div>
         <div class="hero-stat-num">6,307</div>
@@ -443,267 +365,45 @@
   </div>
 </section>
 
-<!-- ══ WHY QUEST ══ -->
-<section class="why-section">
-  <div style="max-width:1100px; margin:0 auto; text-align:center;">
-    <span class="section-label">Why Quest</span>
-    <h2 class="section-title" style="color:var(--navy);">Your life deserves a better scoreboard</h2>
-    <p class="section-sub">Millions of people grind for hours in video games — but those achievements vanish when you close the app. Quest makes real life the game worth playing.</p>
-    <div class="why-grid">
-      <div class="why-card">
-        <div class="why-icon">🏦</div>
-        <div class="why-title">Financially Verified</div>
-        <div class="why-desc">Link your bank via Plaid and watch financial quests complete automatically as you hit real milestones — savings targets, debt payoffs, investments.</div>
+<!-- ══ DOWNLOAD ══ -->
+<section class="download-section" id="download">
+  <span class="section-label" style="color:var(--teal-light);">Get the App</span>
+  <h2 class="section-title">Available Now on Android</h2>
+  <p class="download-sub">Download the beta and start building your life scorecard today. iOS coming soon.</p>
+  <div class="badge-stack">
+    <a href="#beta" class="store-badge">
+      <span class="store-badge-icon">🤖</span>
+      <div class="store-badge-text">
+        <div class="store-badge-sub">Get it on</div>
+        <div class="store-badge-name">Android Beta</div>
       </div>
-      <div class="why-card">
-        <div class="why-icon">📍</div>
-        <div class="why-title">GPS-Powered Travel</div>
-        <div class="why-desc">Quest tracks where you go. Visit a new city, landmark, or country and your travel achievements unlock automatically in real time.</div>
+    </a>
+    <a href="#" class="store-badge disabled">
+      <span class="store-badge-icon">🍎</span>
+      <div class="store-badge-text">
+        <div class="store-badge-sub">Coming soon</div>
+        <div class="store-badge-name">App Store</div>
       </div>
-      <div class="why-card">
-        <div class="why-icon">❤️</div>
-        <div class="why-title">Health Integrated</div>
-        <div class="why-desc">Connect your health apps and earn XP for steps walked, workouts completed, sleep goals hit, and marathons finished — automatically.</div>
-      </div>
-      <div class="why-card">
-        <div class="why-icon">🎯</div>
-        <div class="why-title">Every Goal, Tracked</div>
-        <div class="why-desc">From volunteering 100 hours to seeing a Broadway show — if it's a real life achievement, Quest has a quest for it. Over 6,300 and counting.</div>
-      </div>
-    </div>
+    </a>
   </div>
-</section>
-
-<!-- ══ HOW IT WORKS ══ -->
-<section class="how-section" id="how">
-  <div style="max-width:1100px; margin:0 auto; text-align:center;">
-    <span class="section-label">The Journey</span>
-    <h2 class="section-title">Your Life. Gamified.</h2>
-    <p class="section-sub">Quest connects to the tools you already use and automatically completes achievements as you hit real milestones.</p>
-    <div class="steps-grid">
-      <div class="step-card">
-        <div class="step-num">1</div>
-        <div class="step-title">Browse Your Quests</div>
-        <div class="step-desc">Explore 6,307 curated real-life quests across finance, health, travel, relationships, entertainment, and more.</div>
-      </div>
-      <div class="step-card">
-        <div class="step-num">2</div>
-        <div class="step-title">Connect Your World</div>
-        <div class="step-desc">Link your bank via Plaid, your health device, GPS, Ticketmaster, and more. Quest verifies achievements automatically.</div>
-      </div>
-      <div class="step-card">
-        <div class="step-num">3</div>
-        <div class="step-title">Achievements Unlock</div>
-        <div class="step-desc">Hit a milestone in real life and your Quest completes — verified, timestamped, and permanently on your record.</div>
-      </div>
-      <div class="step-card">
-        <div class="step-num">4</div>
-        <div class="step-title">Build Your Legacy</div>
-        <div class="step-desc">Watch your Quest Score grow as you level up across every area of life. Your scorecard is yours forever.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ CATEGORIES ══ -->
-<section class="categories-section" id="categories">
-  <div style="max-width:1100px; margin:0 auto; text-align:center;">
-    <span class="section-label">What's In Quest</span>
-    <h2 class="section-title" style="color:var(--navy);">8 Categories. Every Area of Life.</h2>
-    <p class="section-sub">Every quest is real, specific, and verified. No vague goals — just clear achievements that mean something.</p>
-    <div class="cat-grid">
-      <div class="cat-card">
-        <div class="cat-header">
-          <div class="cat-icon-wrap" style="background:rgba(192,96,128,0.12);">💰</div>
-          <div class="cat-name">Financial</div>
-        </div>
-        <div class="cat-count">637 quests</div>
-        <div class="cat-examples">Save $10,000 · Pay off your mortgage · Reach a $1M net worth · Max out your 401(k) · Build a 6-month emergency fund</div>
-        <div class="cat-verify">⚡ Auto-verified via Plaid</div>
-      </div>
-      <div class="cat-card">
-        <div class="cat-header">
-          <div class="cat-icon-wrap" style="background:rgba(59,158,142,0.12);">🏃</div>
-          <div class="cat-name">Health</div>
-        </div>
-        <div class="cat-count">435 quests</div>
-        <div class="cat-examples">Run a 5K · Complete 100 workouts · Sleep 8 hours for 30 days · Finish a marathon · Lose 50 lbs</div>
-        <div class="cat-verify">⚡ Auto-verified via Health Apps</div>
-      </div>
-      <div class="cat-card">
-        <div class="cat-header">
-          <div class="cat-icon-wrap" style="background:rgba(76,175,130,0.12);">✈️</div>
-          <div class="cat-name">Travel</div>
-        </div>
-        <div class="cat-count">1,607 quests</div>
-        <div class="cat-examples">Visit all 50 states · See the Northern Lights · Walk the Great Wall · Travel to all 7 continents</div>
-        <div class="cat-verify">📍 Auto-verified via GPS</div>
-      </div>
-      <div class="cat-card">
-        <div class="cat-header">
-          <div class="cat-icon-wrap" style="background:rgba(139,158,42,0.12);">🎬</div>
-          <div class="cat-name">Entertainment</div>
-        </div>
-        <div class="cat-count">1,323 quests</div>
-        <div class="cat-examples">Attend a Super Bowl · See your favorite artist live · Go to a Broadway show · Watch a World Cup match</div>
-        <div class="cat-verify">🎟 Auto-verified via Ticketmaster</div>
-      </div>
-      <div class="cat-card">
-        <div class="cat-header">
-          <div class="cat-icon-wrap" style="background:rgba(68,114,196,0.12);">🤝</div>
-          <div class="cat-name">Relationships</div>
-        </div>
-        <div class="cat-count">1,025 quests</div>
-        <div class="cat-examples">Grow your LinkedIn to 500+ · Attend 10 networking events · Learn a second language · Make a new lifelong friend</div>
-        <div class="cat-verify">📸 Verified via photo proof</div>
-      </div>
-      <div class="cat-card">
-        <div class="cat-header">
-          <div class="cat-icon-wrap" style="background:rgba(192,80,77,0.12);">🏛️</div>
-          <div class="cat-name">Community</div>
-        </div>
-        <div class="cat-count">256 quests</div>
-        <div class="cat-examples">Volunteer 1,000 hours · Run for local office · Join a city board · Coach a youth team</div>
-        <div class="cat-verify">📸 Verified via photo proof</div>
-      </div>
-      <div class="cat-card">
-        <div class="cat-header">
-          <div class="cat-icon-wrap" style="background:rgba(181,148,42,0.12);">❤️</div>
-          <div class="cat-name">Charity</div>
-        </div>
-        <div class="cat-count">156 quests</div>
-        <div class="cat-examples">Donate $10,000 in a year · Give blood 10 times · Fundraise $50,000 · Donate to 100 charities</div>
-        <div class="cat-verify">📸 Verified via photo proof</div>
-      </div>
-      <div class="cat-card">
-        <div class="cat-header">
-          <div class="cat-icon-wrap" style="background:rgba(123,110,168,0.12);">⭐</div>
-          <div class="cat-name">Miscellaneous</div>
-        </div>
-        <div class="cat-count">868 quests</div>
-        <div class="cat-examples">Write a book · Start a business · Get a pilot's license · Finish 100 video games · Climb a 14er</div>
-        <div class="cat-verify">📸 Verified via photo proof</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ QUEST SCORE ══ -->
-<section class="score-section" id="score">
-  <div class="score-inner">
-    <div class="score-intro">
-      <span class="section-label">Interactive</span>
-      <h2 class="section-title" style="color:var(--navy);">What's Your Quest Score?</h2>
-      <p class="section-sub">Check off what you've already accomplished. See where you rank.</p>
-    </div>
-    <div class="score-grid">
-      <div class="score-checklist">
-        <label class="score-item" onclick="toggleCheck(this)">
-          <input type="checkbox" onchange="updateScore()" />
-          <span class="score-item-text">I have a 3–6 month emergency fund</span>
-        </label>
-        <label class="score-item" onclick="toggleCheck(this)">
-          <input type="checkbox" onchange="updateScore()" />
-          <span class="score-item-text">I'm contributing to a retirement account</span>
-        </label>
-        <label class="score-item" onclick="toggleCheck(this)">
-          <input type="checkbox" onchange="updateScore()" />
-          <span class="score-item-text">I have a written financial plan</span>
-        </label>
-        <label class="score-item" onclick="toggleCheck(this)">
-          <input type="checkbox" onchange="updateScore()" />
-          <span class="score-item-text">I've visited at least 10 states or countries</span>
-        </label>
-        <label class="score-item" onclick="toggleCheck(this)">
-          <input type="checkbox" onchange="updateScore()" />
-          <span class="score-item-text">I exercise at least 3x per week</span>
-        </label>
-        <label class="score-item" onclick="toggleCheck(this)">
-          <input type="checkbox" onchange="updateScore()" />
-          <span class="score-item-text">I've volunteered in the last year</span>
-        </label>
-        <label class="score-item" onclick="toggleCheck(this)">
-          <input type="checkbox" onchange="updateScore()" />
-          <span class="score-item-text">I've attended a live professional sports game</span>
-        </label>
-        <label class="score-item" onclick="toggleCheck(this)">
-          <input type="checkbox" onchange="updateScore()" />
-          <span class="score-item-text">I have a mentor or business network I actively use</span>
-        </label>
-        <label class="score-item" onclick="toggleCheck(this)">
-          <input type="checkbox" onchange="updateScore()" />
-          <span class="score-item-text">I've donated to charity in the last year</span>
-        </label>
-        <label class="score-item" onclick="toggleCheck(this)">
-          <input type="checkbox" onchange="updateScore()" />
-          <span class="score-item-text">I have zero high-interest debt</span>
-        </label>
-      </div>
-      <div class="score-result">
-        <div class="score-lbl">Your Quest Score</div>
-        <div class="score-number" id="scoreNum">0</div>
-        <div class="score-pct">/ 100</div>
-        <div class="score-bar-track">
-          <div class="score-bar-fill" id="scoreBar"></div>
-        </div>
-        <div class="score-level" id="scoreLevel">Recruit</div>
-        <div class="score-desc" id="scoreDesc">Every legend starts somewhere. Download Quest and begin your journey.</div>
-        <a href="#beta" class="btn-primary" style="width:100%; text-align:center;">Start My Quest ⚔</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ FOUNDER ══ -->
-<section class="founder-section">
-  <div class="founder-inner">
-    <span class="section-label">Our Origin</span>
-    <h2 class="section-title">From Video Games to Real Life</h2>
-    <div class="founder-quote">
-      "What if the same drive that keeps people up all night grinding in a video game could be redirected toward building a real, extraordinary life?"
-    </div>
-    <div class="founder-cite">— Keaton Macut, Founder &amp; CEO, KeyGoals, Inc.</div>
-    <div class="contrast-grid">
-      <div class="contrast-card">
-        <div class="contrast-icon">🎮</div>
-        <div class="contrast-label">Video game XP</div>
-        <div class="contrast-sub">Vanishes when you quit</div>
-      </div>
-      <div class="contrast-card">
-        <div class="contrast-icon">⚔️</div>
-        <div class="contrast-label">Quest achievements</div>
-        <div class="contrast-sub">Yours forever</div>
-      </div>
-      <div class="contrast-card">
-        <div class="contrast-icon">📈</div>
-        <div class="contrast-label">Real net worth</div>
-        <div class="contrast-sub">Builds over time</div>
-      </div>
-      <div class="contrast-card">
-        <div class="contrast-icon">🌍</div>
-        <div class="contrast-label">Your life scorecard</div>
-        <div class="contrast-sub">One of a kind</div>
-      </div>
-    </div>
-  </div>
+  <p class="badge-note">Enter your email below to receive a direct download link for the Android beta.</p>
 </section>
 
 <!-- ══ ADVERTISER ══ -->
 <section class="advertiser-section" id="advertise">
-  <div class="advertiser-inner">
-    <div class="adv-text-block">
-      <span class="section-label">For Businesses</span>
-      <h2 class="section-title">Reach People When They're Achieving</h2>
-      <p class="adv-body">Quest users are actively working toward financial, health, and life goals — making them the most motivated, purchase-ready audience available. Sponsor a quest category and put your brand in front of them at the exact moment of achievement.</p>
-      <div class="adv-features">
-        <div class="adv-feature"><div class="adv-dot"></div><div class="adv-text">Your brand card shown on every quest in your sponsored category</div></div>
-        <div class="adv-feature"><div class="adv-dot"></div><div class="adv-text">Targeted by category — reach fitness, finance, travel audiences specifically</div></div>
-        <div class="adv-feature"><div class="adv-dot"></div><div class="adv-text">Fixed monthly fee — no bidding, no CPM, no surprises</div></div>
-        <div class="adv-feature"><div class="adv-dot"></div><div class="adv-text">Beta pricing locked in for founding sponsors</div></div>
-      </div>
+  <div class="adv-inner">
+    <span class="section-label adv-label">For Businesses</span>
+    <h2 class="section-title adv-title">Reach People When They're Achieving</h2>
+    <p class="adv-body">Quest users are actively working toward financial, health, and life goals — making them the most motivated, purchase-ready audience available. Sponsor a quest category and put your brand in front of them at the exact moment of achievement.</p>
+    <div class="adv-features">
+      <div class="adv-feature"><div class="adv-dot"></div><div class="adv-text">Your brand card shown on every quest in your sponsored category</div></div>
+      <div class="adv-feature"><div class="adv-dot"></div><div class="adv-text">Targeted by category — reach fitness, finance, travel audiences specifically</div></div>
+      <div class="adv-feature"><div class="adv-dot"></div><div class="adv-text">Fixed monthly fee — no bidding, no CPM, no surprises</div></div>
+      <div class="adv-feature"><div class="adv-dot"></div><div class="adv-text">Beta pricing locked in for founding sponsors</div></div>
     </div>
-    <div class="adv-box">
-      <div class="adv-box-title">Sponsorship Pricing</div>
+
+    <div class="adv-card">
+      <div class="adv-card-title">Sponsorship Pricing</div>
       <div class="adv-rate beta">
         <div>
           <div class="adv-rate-label">Beta Sponsor</div>
@@ -718,15 +418,18 @@
         </div>
         <div class="adv-rate-price">$20/mo</div>
       </div>
+      <div class="adv-zip-wrap">
+        <input class="adv-zip-input" type="text" id="advZip" placeholder="ZIP code" maxlength="10" />
+      </div>
       <div class="adv-note">Beta sponsors receive founding-member pricing locked in permanently. Limited availability per category.</div>
       <hr class="adv-divider" />
-      <div class="adv-box-title">Get in Touch</div>
+      <div class="adv-form-title">Get in Touch</div>
       <div class="adv-contact-form">
         <input type="text" id="advName" placeholder="Your name" />
         <input type="text" id="advCompany" placeholder="Company name" />
         <input type="email" id="advEmail" placeholder="Email address" />
         <textarea id="advMessage" placeholder="Which category are you interested in sponsoring?"></textarea>
-        <button class="btn-primary" onclick="submitAdvertiser()" style="width:100%; font-family:'Poppins',sans-serif;">Send Inquiry</button>
+        <button class="btn-primary" onclick="submitAdvertiser()" style="width:100%;">Send Inquiry</button>
         <div class="adv-success" id="advSuccess">✓ Thanks! We'll be in touch within 24 hours.</div>
       </div>
     </div>
@@ -737,7 +440,7 @@
 <section class="beta-section" id="beta">
   <span class="section-label" style="color:var(--teal-light);">Free Beta</span>
   <h2 class="section-title">Ready to Start Your Quest?</h2>
-  <p class="section-sub">Join the beta — free forever for founding members. Be among the first to build your life scorecard.</p>
+  <p class="beta-sub">Join the beta — free forever for founding members. Be among the first to build your life scorecard.</p>
   <form class="beta-form" onsubmit="submitBeta(event)">
     <input type="email" id="betaEmail" placeholder="Enter your email address" required />
     <button type="submit" class="btn-primary">Join Now ⚔</button>
@@ -751,11 +454,16 @@
   <div class="footer-logo">QUEST</div>
   <div class="footer-tagline">Real life has 6,307 achievements waiting for you.</div>
   <div class="footer-links">
-    <a href="#how">How It Works</a>
-    <a href="#categories">Categories</a>
-    <a href="#score">Quest Score</a>
-    <a href="#advertise">Advertise</a>
-    <a href="#beta">Join Beta</a>
+    <div class="footer-row">
+      <a href="#top">How It Works</a>
+      <a href="#top">Categories</a>
+      <a href="#top">Quest Score</a>
+    </div>
+    <div class="footer-row">
+      <a href="#download">Download</a>
+      <a href="/advertise">Advertise</a>
+      <a href="#beta">Join Beta</a>
+    </div>
   </div>
   <div class="footer-copy">© 2026 KeyGoals, Inc. All rights reserved.</div>
 </footer>
@@ -763,7 +471,6 @@
 <div class="toast" id="toast"></div>
 
 <script>
-  // ── Mobile menu ─────────────────────────────────────────────────────────
   function toggleMenu() {
     document.getElementById('mobileMenu').classList.toggle('open');
   }
@@ -775,7 +482,6 @@
     }
   });
 
-  // ── Toast ────────────────────────────────────────────────────────────────
   function showToast(msg) {
     const t = document.getElementById('toast');
     t.textContent = msg;
@@ -783,30 +489,6 @@
     setTimeout(() => t.classList.remove('show'), 3500);
   }
 
-  // ── Score calculator ─────────────────────────────────────────────────────
-  function toggleCheck(label) {
-    label.classList.toggle('checked');
-  }
-
-  function updateScore() {
-    const boxes   = document.querySelectorAll('.score-checklist input[type="checkbox"]');
-    const checked = Array.from(boxes).filter(b => b.checked).length;
-    const score   = Math.round((checked / boxes.length) * 100);
-    const levels  = [
-      { min: 0,  label: 'Recruit',    desc: 'Every legend starts somewhere. Download Quest and begin your journey.' },
-      { min: 20, label: 'Adventurer', desc: "You've got momentum. There's a whole world of quests ahead of you." },
-      { min: 40, label: 'Veteran',    desc: "You've accomplished more than most. Quest will help you track every win." },
-      { min: 60, label: 'Champion',   desc: "You're living an extraordinary life. Quest will capture every achievement." },
-      { min: 80, label: 'Legend',     desc: "Remarkable. You're the reason Quest exists. Share your scorecard." },
-    ];
-    const level = [...levels].reverse().find(l => score >= l.min);
-    document.getElementById('scoreNum').textContent   = score;
-    document.getElementById('scoreBar').style.width   = score + '%';
-    document.getElementById('scoreLevel').textContent = level.label;
-    document.getElementById('scoreDesc').textContent  = level.desc;
-  }
-
-  // ── Beta form ────────────────────────────────────────────────────────────
   function submitBeta(e) {
     e.preventDefault();
     const email = document.getElementById('betaEmail').value.trim();
@@ -816,26 +498,13 @@
     showToast('⚔ Welcome to the Quest beta!');
   }
 
-  // ── Advertiser form ──────────────────────────────────────────────────────
   function submitAdvertiser() {
-    const name    = document.getElementById('advName').value.trim();
-    const company = document.getElementById('advCompany').value.trim();
-    const email   = document.getElementById('advEmail').value.trim();
+    const name  = document.getElementById('advName').value.trim();
+    const email = document.getElementById('advEmail').value.trim();
     if (!name || !email) { showToast('Please fill in your name and email.'); return; }
     document.getElementById('advSuccess').style.display = 'block';
-    showToast('✓ Inquiry sent! We\'ll be in touch within 24 hours.');
+    showToast("✓ Inquiry sent! We'll be in touch within 24 hours.");
   }
-
-  // ── Smooth scroll for anchor links ───────────────────────────────────────
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const target = document.querySelector(a.getAttribute('href'));
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    });
-  });
 </script>
 </body>
 </html>
