@@ -78,7 +78,7 @@ exports.handler = async (event) => {
         body: JSON.stringify({
           status: newStatus,
           // Clear the pending photo fields after decision
-          ...(action === 'approve' ? {} : { photo_url: null, verification_token: null, photo_submitted_at: null }),
+          ...(action === 'approve' ? { completed_at: new Date().toISOString() } : { photo_url: null, verification_token: null, photo_submitted_at: null }),
         }),
       }
     );
@@ -93,7 +93,32 @@ exports.handler = async (event) => {
     return htmlResponse(500, errorPage('Server Error', 'Could not update the quest. Please try again.'));
   }
 
-  // 4. Return confirmation page
+  // 4. Send push notification to the user (non-blocking)
+  try {
+    const tokenRes = await fetch(
+      `${SUPABASE_URL}/rest/v1/user_push_tokens?user_id=eq.${record.user_id}&select=push_token`,
+      { headers: supabaseHeaders }
+    );
+    const tokenData = await tokenRes.json();
+    const pushToken = tokenData?.[0]?.push_token;
+
+    if (pushToken) {
+      const notifTitle = action === 'approve' ? '🏆 Quest Complete!' : '📸 Photo Not Accepted';
+      const notifBody = action === 'approve'
+        ? `Your photo verification was approved. Quest complete!`
+        : `Your photo wasn't accepted. You can submit a new photo to try again.`;
+
+      await fetch('https://exp.host/--/api/v2/push/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ to: pushToken, title: notifTitle, body: notifBody, sound: 'default' }),
+      });
+    }
+  } catch (err) {
+    console.warn('Push notification failed (non-fatal):', err.message);
+  }
+
+  // 5. Return confirmation page
   if (action === 'approve') {
     return htmlResponse(200, successPage(
       'Quest Approved! 🏆',
