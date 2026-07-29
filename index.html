@@ -4,19 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Quest — Achieve Your Goals and Level Up | KeyGoals, Inc.</title>
-  <meta name="description" content="Quest turns real-life goals into verified achievements. 6,307 quests across finance, health, travel, relationships, entertainment, and more. Free beta now open." />
+  <meta name="description" content="Quest turns real-life goals into verified achievements. 10,970 quests across finance, health, travel, relationships, entertainment, and more. Free beta now open." />
   <meta name="keywords" content="goal tracking app, life achievements, financial goals, quest app, gamified goals, real life achievements, KeyGoals" />
   <meta name="author" content="KeyGoals, Inc." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.questgoals.com/" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.questgoals.com/" />
-  <meta property="og:title" content="Quest — Real Life Has 6,307 Achievements Waiting for You" />
+  <meta property="og:title" content="Quest — Real Life Has 10,970 Achievements Waiting for You" />
   <meta property="og:description" content="Quest turns real-life goals into verified achievements — just like a video game, except the XP you earn builds an actual life." />
   <meta property="og:image" content="https://www.questgoals.com/Quest_Logo.png" />
   <meta property="og:site_name" content="Quest by KeyGoals, Inc." />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Quest — Real Life Has 6,307 Achievements Waiting for You" />
+  <meta name="twitter:title" content="Quest — Real Life Has 10,970 Achievements Waiting for You" />
   <meta name="twitter:description" content="Quest turns real-life goals into verified achievements. Free beta now open." />
   <meta name="twitter:image" content="https://www.questgoals.com/Quest_Logo.png" />
   <script type="application/ld+json">
@@ -341,7 +341,7 @@
 <section class="hero">
   <div class="hero-inner">
     <div class="hero-badge">Beta now open — founding members welcome</div>
-    <h1 class="hero-title">Real Life Has <span>6,307<br>Achievements</span> Waiting for You</h1>
+    <h1 class="hero-title">Real Life Has <span>10,970<br>Achievements</span> Waiting for You</h1>
     <p class="hero-sub">Quest turns your real-life goals into verified achievements — just like a video game, except the XP you earn builds an actual life. Finance, health, travel, relationships, and more.</p>
     <div class="hero-actions">
       <a href="#beta" class="btn-primary">Join the Beta — Free ⚔</a>
@@ -350,7 +350,7 @@
     <hr class="hero-divider" />
     <div class="hero-stats">
       <div>
-        <div class="hero-stat-num">6,307</div>
+        <div class="hero-stat-num">10,970</div>
         <div class="hero-stat-label">Real-life quests</div>
       </div>
       <div>
@@ -368,25 +368,25 @@
 <!-- ══ DOWNLOAD ══ -->
 <section class="download-section" id="download">
   <span class="section-label" style="color:var(--teal-light);">Get the App</span>
-  <h2 class="section-title">Available Now on Android</h2>
-  <p class="download-sub">Download the beta and start building your life scorecard today. iOS coming soon.</p>
+  <h2 class="section-title">Now in Beta on Android & iOS</h2>
+  <p class="download-sub">Download the beta and start building your life scorecard today. iOS beta available — request access below.</p>
   <div class="badge-stack">
-    <a href="#beta" class="store-badge">
+    <a href="#beta" class="store-badge" onclick="document.getElementById('betaPlatform').value='Android'">
       <span class="store-badge-icon">🤖</span>
       <div class="store-badge-text">
         <div class="store-badge-sub">Get it on</div>
         <div class="store-badge-name">Android Beta</div>
       </div>
     </a>
-    <a href="#" class="store-badge disabled">
+    <a href="#beta" class="store-badge" onclick="document.getElementById('betaPlatform').value='iOS'">
       <span class="store-badge-icon">🍎</span>
       <div class="store-badge-text">
-        <div class="store-badge-sub">Coming soon</div>
-        <div class="store-badge-name">App Store</div>
+        <div class="store-badge-sub">Request access</div>
+        <div class="store-badge-name">iOS Beta</div>
       </div>
     </a>
   </div>
-  <p class="badge-note">Enter your email below to receive a direct download link for the Android beta.</p>
+  <p class="badge-note">Enter your email below for the Android download link, or to request iOS beta access via TestFlight.</p>
 </section>
 
 <!-- ══ ADVERTISER ══ -->
@@ -424,14 +424,16 @@
       <div class="adv-note">Beta sponsors receive founding-member pricing locked in permanently. Limited availability per category.</div>
       <hr class="adv-divider" />
       <div class="adv-form-title">Get in Touch</div>
-      <div class="adv-contact-form">
-        <input type="text" id="advName" placeholder="Your name" />
-        <input type="text" id="advCompany" placeholder="Company name" />
-        <input type="email" id="advEmail" placeholder="Email address" />
-        <textarea id="advMessage" placeholder="Which category are you interested in sponsoring?"></textarea>
-        <button class="btn-primary" onclick="submitAdvertiser()" style="width:100%;">Send Inquiry</button>
+      <form class="adv-contact-form" name="advertiser-inquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="submitAdvertiser(event)">
+        <input type="hidden" name="form-name" value="advertiser-inquiry" />
+        <p style="display:none;"><label>Don't fill this out: <input name="bot-field" /></label></p>
+        <input type="text" id="advName" name="name" placeholder="Your name" required />
+        <input type="text" id="advCompany" name="company" placeholder="Company name" />
+        <input type="email" id="advEmail" name="email" placeholder="Email address" required />
+        <textarea id="advMessage" name="message" placeholder="Which category are you interested in sponsoring?"></textarea>
+        <button type="submit" class="btn-primary" style="width:100%;">Send Inquiry</button>
         <div class="adv-success" id="advSuccess">✓ Thanks! We'll be in touch within 24 hours.</div>
-      </div>
+      </form>
     </div>
   </div>
 </section>
@@ -441,8 +443,11 @@
   <span class="section-label" style="color:var(--teal-light);">Free Beta</span>
   <h2 class="section-title">Ready to Start Your Quest?</h2>
   <p class="beta-sub">Join the beta — free forever for founding members. Be among the first to build your life scorecard.</p>
-  <form class="beta-form" onsubmit="submitBeta(event)">
-    <input type="email" id="betaEmail" placeholder="Enter your email address" required />
+  <form class="beta-form" name="beta-signup" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="submitBeta(event)">
+    <input type="hidden" name="form-name" value="beta-signup" />
+    <input type="hidden" id="betaPlatform" name="platform" value="Android" />
+    <p style="display:none;"><label>Don't fill this out: <input name="bot-field" /></label></p>
+    <input type="email" id="betaEmail" name="email" placeholder="Enter your email address" required />
     <button type="submit" class="btn-primary">Join Now ⚔</button>
   </form>
   <p class="beta-note">No credit card. No spam. Just your Quest.</p>
@@ -452,7 +457,7 @@
 <!-- ══ FOOTER ══ -->
 <footer>
   <div class="footer-logo">QUEST</div>
-  <div class="footer-tagline">Real life has 6,307 achievements waiting for you.</div>
+  <div class="footer-tagline">Real life has 10,970 achievements waiting for you.</div>
   <div class="footer-links">
     <div class="footer-row">
       <a href="#top">How It Works</a>
@@ -491,19 +496,46 @@
 
   function submitBeta(e) {
     e.preventDefault();
+    const form = e.target;
     const email = document.getElementById('betaEmail').value.trim();
     if (!email) return;
-    document.getElementById('betaSuccess').style.display = 'block';
-    document.getElementById('betaEmail').value = '';
-    showToast('⚔ Welcome to the Quest beta!');
+
+    const data = new FormData(form);
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(data).toString(),
+    })
+      .then(() => {
+        document.getElementById('betaSuccess').style.display = 'block';
+        document.getElementById('betaEmail').value = '';
+        showToast('⚔ Welcome to the Quest beta!');
+      })
+      .catch(() => {
+        showToast('Something went wrong — please email admin@questgoals.com directly.');
+      });
   }
 
-  function submitAdvertiser() {
+  function submitAdvertiser(e) {
+    e.preventDefault();
+    const form  = e.target;
     const name  = document.getElementById('advName').value.trim();
     const email = document.getElementById('advEmail').value.trim();
     if (!name || !email) { showToast('Please fill in your name and email.'); return; }
-    document.getElementById('advSuccess').style.display = 'block';
-    showToast("✓ Inquiry sent! We'll be in touch within 24 hours.");
+
+    const data = new FormData(form);
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(data).toString(),
+    })
+      .then(() => {
+        document.getElementById('advSuccess').style.display = 'block';
+        showToast("✓ Inquiry sent! We'll be in touch within 24 hours.");
+      })
+      .catch(() => {
+        showToast('Something went wrong — please email admin@questgoals.com directly.');
+      });
   }
 </script>
 </body>
