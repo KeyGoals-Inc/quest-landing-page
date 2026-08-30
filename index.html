@@ -46,6 +46,8 @@
       --gold-light: #D4A73A;
       --teal:       #3B9E8E;
       --teal-light: #4DB8A8;
+      --sage:       #8B9A6B;
+      --sage-light: #A3B085;
       --dark:       #0F1E28;
       --gray:       #6B7280;
       --white:      #FFFFFF;
@@ -66,7 +68,7 @@
       background: var(--navy); backdrop-filter: blur(10px);
       padding: 0 1.5rem; display: flex; align-items: center;
       justify-content: space-between; height: 68px;
-      border-bottom: 1px solid rgba(196,151,42,0.2);
+      border-bottom: 1px solid rgba(139,154,107,0.3);
     }
     .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
     .nav-logo img { height: 42px; width: 42px; object-fit: contain; border-radius: 6px; }
@@ -77,7 +79,7 @@
     .nav-cta { background: var(--gold) !important; color: var(--navy) !important; font-weight: 700 !important; padding: 0.5rem 1.25rem !important; border-radius: 6px; }
     .nav-cta:hover { background: var(--gold-light) !important; }
     .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
-    .hamburger span { width: 24px; height: 2px; background: var(--cream); border-radius: 2px; transition: all 0.3s; }
+    .hamburger span { width: 24px; height: 2px; background: var(--sage-light); border-radius: 2px; transition: all 0.3s; }
     .mobile-menu { display: none; position: fixed; top: 68px; left: 0; right: 0; background: var(--navy); z-index: 99; padding: 1.5rem 2rem; flex-direction: column; gap: 1.25rem; border-bottom: 1px solid rgba(196,151,42,0.2); }
     .mobile-menu a { color: rgba(242,232,220,0.85); text-decoration: none; font-size: 1rem; font-weight: 500; }
     .mobile-menu.open { display: flex; }
@@ -149,6 +151,21 @@
     }
     .hero-stat-num { font-family: 'Cinzel', serif; font-size: 2rem; font-weight: 700; color: var(--gold); line-height: 1; }
     .hero-stat-label { font-size: 0.8rem; color: rgba(242,232,220,0.5); margin-top: 4px; letter-spacing: 0.04em; }
+
+    /* ══ SCREENSHOTS ══ */
+    .screens-row {
+      display: flex; gap: 1rem; overflow-x: auto;
+      padding: 0.5rem 1.75rem 2rem; margin: 0 -1.75rem 0.5rem;
+      scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+    }
+    .screens-row::-webkit-scrollbar { display: none; }
+    .screen-frame {
+      flex: 0 0 auto; width: 190px; border-radius: 20px; overflow: hidden;
+      border: 3px solid var(--gold); box-shadow: 0 10px 32px rgba(0,0,0,0.4);
+      scroll-snap-align: center; background: var(--navy-deep); line-height: 0;
+    }
+    .screen-frame.sage { border-color: var(--sage); }
+    .screen-frame img { display: block; width: 100%; height: auto; }
 
     /* ══ DOWNLOAD ══ */
     .download-section {
@@ -269,7 +286,8 @@
 
     /* ══ FOOTER ══ */
     footer { background: var(--dark); padding: 3.5rem 1.75rem; text-align: center; }
-    .footer-logo { font-family: 'Cinzel', serif; font-size: 1.4rem; font-weight: 700; color: var(--cream); margin-bottom: 0.4rem; letter-spacing: 0.1em; }
+    .footer-logo { font-family: 'Cinzel', serif; font-size: 1.4rem; font-weight: 700; color: var(--cream); margin-bottom: 0.75rem; letter-spacing: 0.1em; }
+    .footer-divider { width: 36px; height: 2px; background: var(--sage); border: none; margin: 0 auto 0.75rem; border-radius: 2px; }
     .footer-tagline { font-size: 0.8rem; color: #4A5568; margin-bottom: 1.75rem; }
     .footer-links {
       display: flex; flex-direction: column; align-items: center;
@@ -370,6 +388,15 @@
   <span class="section-label" style="color:var(--teal-light);">Get the App</span>
   <h2 class="section-title">Now in Beta on Android & iOS</h2>
   <p class="download-sub">Download the beta and start building your life scorecard today. iOS beta available — request access below.</p>
+
+  <div class="screens-row">
+    <div class="screen-frame"><img src="screenshots/home.jpg" alt="Quest home screen showing quest categories: Travel, Community, Charity, Entertainment, Relationships, Health, and Financial" loading="lazy" /></div>
+    <div class="screen-frame sage"><img src="screenshots/travel-browse.jpg" alt="Browsing Travel quests by subcategory: US Travel, International Capitals, Landmarks, and more" loading="lazy" /></div>
+    <div class="screen-frame"><img src="screenshots/complete.jpg" alt="Quest complete celebration screen for visiting a national park" loading="lazy" /></div>
+    <div class="screen-frame sage"><img src="screenshots/entertainment-browse.jpg" alt="Browsing Entertainment quests by subcategory: Sports, Music, Books, Festivals, TV Shows" loading="lazy" /></div>
+    <div class="screen-frame"><img src="screenshots/leaders.jpg" alt="Global leaderboard ranking friends by quests completed" loading="lazy" /></div>
+  </div>
+
   <div class="badge-stack">
     <a href="#beta" class="store-badge" onclick="document.getElementById('betaPlatform').value='Android'">
       <span class="store-badge-icon">🤖</span>
@@ -457,6 +484,7 @@
 <!-- ══ FOOTER ══ -->
 <footer>
   <div class="footer-logo">QUEST</div>
+  <hr class="footer-divider" />
   <div class="footer-tagline">Real life has 10,970 achievements waiting for you.</div>
   <div class="footer-links">
     <div class="footer-row">
