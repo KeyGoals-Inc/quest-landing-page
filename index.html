@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Quest — Achieve Your Goals and Level Up | KeyGoals, Inc.</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon-180.png" />
   <meta name="description" content="Quest turns real-life goals into verified achievements. 10,970 quests across finance, health, travel, relationships, entertainment, and more. Free beta now open." />
   <meta name="keywords" content="goal tracking app, life achievements, financial goals, quest app, gamified goals, real life achievements, KeyGoals" />
   <meta name="author" content="KeyGoals, Inc." />
@@ -154,7 +157,7 @@
 
     /* ══ SCREENSHOTS ══ */
     .screens-row {
-      display: flex; gap: 1rem; overflow-x: auto;
+      display: flex; justify-content: center; gap: 1rem; overflow-x: auto;
       padding: 0.5rem 1.75rem 2rem; margin: 0 -1.75rem 0.5rem;
       scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
     }
@@ -169,29 +172,30 @@
 
     /* ══ DOWNLOAD ══ */
     .download-section {
-      background: #163344;
+      background: var(--cream);
       padding: 5rem 1.75rem; text-align: center;
     }
-    .download-section .section-label { color: var(--teal-light); }
-    .download-section .section-title { color: var(--cream); margin-bottom: 1rem; }
+    .download-section .section-label { color: var(--teal); }
+    .download-section .section-title { color: var(--navy); margin-bottom: 1rem; }
     .download-sub {
-      font-size: 1rem; color: rgba(242,232,220,0.65);
+      font-size: 1rem; color: var(--gray);
       line-height: 1.7; margin: 0 auto 2rem; max-width: 400px;
     }
     .badge-stack { display: flex; flex-direction: column; gap: 0.85rem; max-width: 400px; margin: 0 auto 1.25rem; }
     .store-badge {
       display: flex; align-items: center; gap: 12px;
-      background: rgba(255,255,255,0.07); border: 1.5px solid rgba(255,255,255,0.18);
+      background: white; border: 1.5px solid var(--cream-dark);
+      box-shadow: 0 4px 16px rgba(27,58,75,0.06);
       border-radius: 12px; padding: 0.9rem 1.5rem; text-decoration: none;
-      transition: all 0.2s; color: var(--cream); width: 100%;
+      transition: all 0.2s; color: var(--navy); width: 100%;
     }
-    .store-badge:hover { background: rgba(255,255,255,0.13); border-color: var(--gold); }
+    .store-badge:hover { border-color: var(--gold); box-shadow: 0 6px 20px rgba(27,58,75,0.1); }
     .store-badge.disabled { opacity: 0.45; pointer-events: none; }
     .store-badge-icon { font-size: 1.75rem; flex-shrink: 0; }
     .store-badge-text { text-align: left; }
-    .store-badge-sub  { font-size: 0.65rem; color: rgba(242,232,220,0.5); letter-spacing: 0.06em; text-transform: uppercase; }
+    .store-badge-sub  { font-size: 0.65rem; color: var(--gray); letter-spacing: 0.06em; text-transform: uppercase; }
     .store-badge-name { font-size: 1rem; font-weight: 700; }
-    .badge-note { font-size: 0.75rem; color: rgba(242,232,220,0.3); max-width: 340px; margin: 0 auto; line-height: 1.6; }
+    .badge-note { font-size: 0.75rem; color: var(--gray); max-width: 340px; margin: 0 auto; line-height: 1.6; }
 
     /* ══ ADVERTISER ══ */
     .advertiser-section { background: var(--cream); padding: 5rem 1.75rem; }
