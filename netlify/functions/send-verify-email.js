@@ -8,10 +8,15 @@
  *
  * Required env vars (set in Netlify dashboard → Site config → Environment variables):
  *   RESEND_API_KEY          — from resend.com
- *   ADMIN_EMAIL             — admin@questgoals.com
+ *   VERIFY_RECIPIENTS       — comma-separated list of approver emails,
+ *                             e.g. "admin@questgoals.com,marketing@questgoals.com"
+ *                             (falls back to ADMIN_EMAIL, then admin@questgoals.com)
  */
 
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'admin@questgoals.com';
+const VERIFY_RECIPIENTS = (process.env.VERIFY_RECIPIENTS || process.env.ADMIN_EMAIL || 'admin@questgoals.com')
+  .split(',')
+  .map((s) => s.trim())
+  .filter(Boolean);
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const BASE_URL = 'https://questgoals.com';
 
@@ -166,7 +171,7 @@ exports.handler = async (event) => {
       },
       body: JSON.stringify({
         from: 'Quest Verification <verification@questgoals.com>',
-        to: [ADMIN_EMAIL],
+        to: VERIFY_RECIPIENTS,
         subject: `📸 Verify Quest: ${quest_name}`,
         html: emailHtml,
       }),
