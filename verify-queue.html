@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Photo Verification Queue — Quest</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:#1B3A4B; --navy-deep:#122636; --cream:#F2E8DC; --cream-dark:#E4D8C8;
+      --gold:#C4972A; --gold-light:#D4A73A; --teal:#3B9E8E; --dark:#0F1E28; --gray:#6B7280;
+      --green:#16a34a; --red:#dc2626;
+    }
+    body { font-family:'Poppins',sans-serif; background:var(--cream); color:var(--dark); line-height:1.6; }
+
+    nav {
+      position:sticky; top:0; z-index:100; background:var(--navy);
+      padding:0 1.5rem; display:flex; align-items:center; justify-content:space-between;
+      height:64px; border-bottom:1px solid rgba(196,151,42,0.2);
+    }
+    .nav-logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
+    .nav-logo img { height:38px; width:38px; object-fit:contain; border-radius:6px; }
+    .nav-logo-text { font-family:'Cinzel',serif; font-size:1.15rem; font-weight:700; color:var(--cream); letter-spacing:0.1em; }
+    .nav-right { display:flex; align-items:center; gap:1rem; }
+    .nav-right button {
+      font-family:inherit; font-size:0.8rem; font-weight:600; cursor:pointer;
+      background:rgba(242,232,220,0.12); color:var(--cream); border:1px solid rgba(242,232,220,0.25);
+      padding:0.45rem 0.9rem; border-radius:7px;
+    }
+    .nav-right button:hover { background:rgba(242,232,220,0.22); }
+
+    .wrap { max-width:760px; margin:0 auto; padding:1.75rem 1.25rem 5rem; }
+
+    .page-label { display:inline-block; font-size:0.7rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); margin-bottom:0.4rem; }
+    h1 { font-family:'Cinzel',serif; font-size:clamp(1.5rem,4vw,2rem); font-weight:700; color:var(--navy); margin-bottom:0.25rem; }
+    .sub { font-size:0.88rem; color:var(--gray); margin-bottom:1.5rem; }
+    .count-pill { display:inline-block; background:var(--navy); color:var(--cream); font-size:0.8rem; font-weight:600; padding:0.2rem 0.6rem; border-radius:999px; margin-left:0.5rem; }
+
+    /* Gate */
+    .gate { background:#fff; border:1px solid var(--cream-dark); border-radius:12px; padding:1.75rem; max-width:400px; margin-top:1rem; }
+    .gate label { display:block; font-size:0.85rem; font-weight:600; color:var(--navy); margin-bottom:0.5rem; }
+    .gate input {
+      width:100%; font-family:inherit; font-size:0.95rem; padding:0.7rem 0.85rem;
+      border:1px solid var(--cream-dark); border-radius:8px; margin-bottom:0.9rem;
+    }
+    .gate button {
+      width:100%; font-family:inherit; font-size:0.9rem; font-weight:700; cursor:pointer;
+      background:var(--navy); color:var(--cream); border:none; padding:0.75rem; border-radius:8px;
+    }
+    .gate button:hover { background:var(--navy-deep); }
+
+    .msg { font-size:0.9rem; padding:0.85rem 1rem; border-radius:8px; margin-bottom:1rem; }
+    .msg.err { background:#fdecec; border:1px solid #f5c2c2; color:#8a1f1f; }
+    .msg.ok  { background:#eafaf1; border:1px solid #b7e6cd; color:#1f6b45; }
+    .msg.info{ background:#fff; border:1px solid var(--cream-dark); color:#444; }
+
+    .card {
+      background:#fff; border:1px solid var(--cream-dark); border-radius:12px;
+      overflow:hidden; margin-bottom:1.25rem; box-shadow:0 2px 10px rgba(27,58,75,0.06);
+    }
+    .card-head { padding:1rem 1.1rem 0.75rem; }
+    .quest-name { font-size:1.02rem; font-weight:700; color:var(--navy); }
+    .quest-desc { font-size:0.85rem; color:#555; margin-top:0.2rem; }
+    .card-meta { font-size:0.78rem; color:var(--gray); margin-top:0.5rem; display:flex; flex-wrap:wrap; gap:0.15rem 1rem; }
+    .card-photo { display:block; width:100%; max-height:460px; object-fit:contain; background:#0F1E28; border-top:1px solid var(--cream-dark); border-bottom:1px solid var(--cream-dark); }
+    .card-photo-link { font-size:0.78rem; padding:0.5rem 1.1rem; display:block; }
+    .card-actions { display:flex; gap:0.6rem; padding:0.85rem 1.1rem 1.1rem; }
+    .card-actions button {
+      flex:1; font-family:inherit; font-size:0.9rem; font-weight:700; cursor:pointer;
+      border:none; padding:0.7rem; border-radius:8px; color:#fff; transition:filter 0.15s;
+    }
+    .card-actions button:hover { filter:brightness(1.08); }
+    .btn-approve { background:var(--green); }
+    .btn-deny { background:var(--red); }
+    .btn-armed { outline:3px solid rgba(15,30,40,0.25); }
+    .card.done { opacity:0.55; }
+    .card.done .card-actions { display:none; }
+    .done-tag { font-size:0.82rem; font-weight:700; padding:0.7rem 1.1rem 1.1rem; }
+    .done-tag.approved { color:var(--green); }
+    .done-tag.denied { color:var(--red); }
+
+    .empty { text-align:center; color:var(--gray); padding:3rem 1rem; font-size:0.95rem; }
+    footer { text-align:center; color:var(--gray); font-size:0.78rem; padding:2rem 1rem; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a class="nav-logo" href="/"><img src="/Quest_Logo.png" alt="Quest logo" /><span class="nav-logo-text">QUEST</span></a>
+    <div class="nav-right">
+      <button id="refreshBtn" hidden>Refresh</button>
+      <button id="logoutBtn" hidden>Lock</button>
+    </div>
+  </nav>
+
+  <div class="wrap">
+    <span class="page-label">Internal</span>
+    <h1>Photo Verification Queue<span id="countPill" class="count-pill" hidden></span></h1>
+    <p class="sub">Pending photo submissions, oldest first. Approve marks the quest complete; Deny resets it to active so the user can retry. Both send the user a push notification.</p>
+
+    <div id="gate" class="gate" hidden>
+      <label for="keyInput">Queue password</label>
+      <input id="keyInput" type="password" autocomplete="current-password" placeholder="Enter password" />
+      <button id="gateBtn">Unlock</button>
+    </div>
+
+    <div id="messages"></div>
+    <div id="list"></div>
+  </div>
+
+  <footer>Quest by KeyGoals, Inc. &nbsp;·&nbsp; internal tool</footer>
+
+  <script>
+    (function () {
+      var LIST_FN = '/.netlify/functions/list-pending-verifications';
+      var VERIFY_FN = '/.netlify/functions/photo-verify';
+      var STORAGE_KEY = 'quest_verify_queue_key';
+
+      var $ = function (id) { return document.getElementById(id); };
+      var gate = $('gate'), keyInput = $('keyInput'), gateBtn = $('gateBtn');
+      var listEl = $('list'), messages = $('messages'), countPill = $('countPill');
+      var refreshBtn = $('refreshBtn'), logoutBtn = $('logoutBtn');
+
+      var key = '';
+      try { key = sessionStorage.getItem(STORAGE_KEY) || ''; } catch (e) {}
+
+      function msg(text, kind) {
+        messages.innerHTML = '<div class="msg ' + (kind || 'info') + '">' + text + '</div>';
+      }
+      function clearMsg() { messages.innerHTML = ''; }
+
+      function showGate(errText) {
+        gate.hidden = false;
+        refreshBtn.hidden = true;
+        logoutBtn.hidden = true;
+        countPill.hidden = true;
+        listEl.innerHTML = '';
+        if (errText) msg(errText, 'err'); else clearMsg();
+        keyInput.focus();
+      }
+
+      function esc(s) {
+        return String(s == null ? '' : s)
+          .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      }
+      function fmtTime(iso) {
+        if (!iso) return 'unknown time';
+        try {
+          return new Date(iso).toLocaleString('en-US', {
+            timeZone: 'America/New_York', month: 'short', day: 'numeric',
+            hour: 'numeric', minute: '2-digit'
+          }) + ' ET';
+        } catch (e) { return iso; }
+      }
+
+      function load() {
+        clearMsg();
+        listEl.innerHTML = '<div class="empty">Loading&hellip;</div>';
+        fetch(LIST_FN + '?key=' + encodeURIComponent(key))
+          .then(function (r) {
+            if (r.status === 401) { throw { code: 401 }; }
+            return r.json().then(function (b) {
+              if (!r.ok) throw { code: r.status, body: b };
+              return b;
+            });
+          })
+          .then(function (data) {
+            try { sessionStorage.setItem(STORAGE_KEY, key); } catch (e) {}
+            gate.hidden = true;
+            refreshBtn.hidden = false;
+            logoutBtn.hidden = false;
+            render(data.items || []);
+          })
+          .catch(function (err) {
+            if (err && err.code === 401) {
+              key = '';
+              try { sessionStorage.removeItem(STORAGE_KEY); } catch (e) {}
+              showGate('Wrong password.');
+            } else {
+              listEl.innerHTML = '';
+              msg('Could not load the queue' + (err && err.body && err.body.error ? ': ' + esc(err.body.error) : '') + '. Try Refresh.', 'err');
+              refreshBtn.hidden = false;
+              logoutBtn.hidden = false;
+            }
+          });
+      }
+
+      function render(items) {
+        countPill.hidden = false;
+        countPill.textContent = items.length;
+        if (!items.length) {
+          listEl.innerHTML = '<div class="empty">Nothing pending. All caught up. 🎉</div>';
+          return;
+        }
+        listEl.innerHTML = '';
+        items.forEach(function (it) {
+          var who = it.user_name
+            ? esc(it.user_name) + (it.user_email ? ' · ' + esc(it.user_email) : '')
+            : (it.user_email ? esc(it.user_email) : esc(it.user_id));
+
+          var card = document.createElement('div');
+          card.className = 'card';
+          card.innerHTML =
+            '<div class="card-head">' +
+              '<div class="quest-name">' + esc(it.quest_name) + '</div>' +
+              (it.quest_description ? '<div class="quest-desc">' + esc(it.quest_description) + '</div>' : '') +
+              '<div class="card-meta"><span>' + who + '</span><span>' + fmtTime(it.submitted_at) + '</span><span>' + esc(it.quest_id) + '</span></div>' +
+            '</div>' +
+            '<img class="card-photo" src="' + esc(it.photo_url) + '" alt="Submitted photo" loading="lazy" />' +
+            '<a class="card-photo-link" href="' + esc(it.photo_url) + '" target="_blank" rel="noopener">Open full size &#8599;</a>' +
+            '<div class="card-actions">' +
+              '<button class="btn-approve">Approve</button>' +
+              '<button class="btn-deny">Deny</button>' +
+            '</div>';
+
+          var approveBtn = card.querySelector('.btn-approve');
+          var denyBtn = card.querySelector('.btn-deny');
+          armTwoStep(approveBtn, 'Approve', 'Confirm approve', function () { decide(card, it, 'approve'); });
+          armTwoStep(denyBtn, 'Deny', 'Confirm deny', function () { decide(card, it, 'deny'); });
+
+          listEl.appendChild(card);
+        });
+      }
+
+      // Two-tap confirm: first tap arms, second tap within 3.5s commits.
+      function armTwoStep(btn, idle, armed, commit) {
+        var isArmed = false, timer = null;
+        btn.addEventListener('click', function () {
+          if (isArmed) {
+            clearTimeout(timer);
+            commit();
+            return;
+          }
+          isArmed = true;
+          btn.textContent = armed;
+          btn.classList.add('btn-armed');
+          timer = setTimeout(function () {
+            isArmed = false;
+            btn.textContent = idle;
+            btn.classList.remove('btn-armed');
+          }, 3500);
+        });
+      }
+
+      function decide(card, it, action) {
+        var actions = card.querySelector('.card-actions');
+        actions.innerHTML = '<button disabled>Working&hellip;</button>';
+        fetch(VERIFY_FN + '?action=' + action + '&token=' + encodeURIComponent(it.verification_token))
+          .then(function (r) {
+            if (!r.ok) throw new Error('status ' + r.status);
+            card.classList.add('done');
+            var tag = document.createElement('div');
+            tag.className = 'done-tag ' + (action === 'approve' ? 'approved' : 'denied');
+            tag.textContent = action === 'approve' ? '✅ Approved' : '🔄 Denied — user can retry';
+            card.appendChild(tag);
+            var n = parseInt(countPill.textContent, 10);
+            if (!isNaN(n) && n > 0) countPill.textContent = n - 1;
+          })
+          .catch(function () {
+            actions.innerHTML =
+              '<button class="btn-approve">Approve</button><button class="btn-deny">Deny</button>';
+            armTwoStep(actions.querySelector('.btn-approve'), 'Approve', 'Confirm approve', function () { decide(card, it, 'approve'); });
+            armTwoStep(actions.querySelector('.btn-deny'), 'Deny', 'Confirm deny', function () { decide(card, it, 'deny'); });
+            msg('That action failed — try again.', 'err');
+          });
+      }
+
+      gateBtn.addEventListener('click', function () {
+        key = keyInput.value.trim();
+        if (key) load();
+      });
+      keyInput.addEventListener('keydown', function (e) { if (e.key === 'Enter') gateBtn.click(); });
+      refreshBtn.addEventListener('click', load);
+      logoutBtn.addEventListener('click', function () {
+        key = '';
+        try { sessionStorage.removeItem(STORAGE_KEY); } catch (e) {}
+        showGate();
+      });
+
+      if (key) load(); else showGate();
+    })();
+  </script>
+</body>
+</html>
