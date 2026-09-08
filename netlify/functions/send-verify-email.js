@@ -36,6 +36,15 @@ exports.handler = async (event) => {
     return { statusCode: 405, headers, body: 'Method Not Allowed' };
   }
 
+  // Per-submission verification emails are OFF by default. The queue page
+  // (questgoals.com/verify-queue) is the source of truth — every submission
+  // lands there via the user_quests row regardless of this function.
+  // To re-enable one-email-per-submission, set VERIFY_EMAIL_MODE=per-submission
+  // in Netlify. A lighter daily digest is planned as a separate scheduled function.
+  if (process.env.VERIFY_EMAIL_MODE !== 'per-submission') {
+    return { statusCode: 200, headers, body: JSON.stringify({ success: true, skipped: 'per-submission email disabled' }) };
+  }
+
   if (!RESEND_API_KEY) {
     console.error('RESEND_API_KEY not set');
     return { statusCode: 500, headers, body: JSON.stringify({ error: 'Email service not configured' }) };
