@@ -181,10 +181,15 @@
               try { sessionStorage.removeItem(STORAGE_KEY); } catch (e) {}
               showGate('Wrong password.');
             } else {
-              listEl.innerHTML = '';
-              msg('Could not load the queue' + (err && err.body && err.body.error ? ': ' + esc(err.body.error) : '') + '. Try Refresh.', 'err');
+              try { sessionStorage.setItem(STORAGE_KEY, key); } catch (e) {}
+              gate.hidden = true;
               refreshBtn.hidden = false;
               logoutBtn.hidden = false;
+              listEl.innerHTML = '';
+              var b = (err && err.body) || {};
+              var detail = b.where ? (' [' + esc(b.where) + (b.status ? ' ' + b.status : '') + ']' +
+                (b.detail ? ' ' + esc(String(b.detail)) : '')) : '';
+              msg('Could not load the queue' + (b.error ? ': ' + esc(b.error) : '') + detail + ' — try Refresh.', 'err');
             }
           });
       }
