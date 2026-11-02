@@ -42,7 +42,7 @@ exports.handler = async (event) => {
   let record;
   try {
     const lookupRes = await fetch(
-      `${SUPABASE_URL}/rest/v1/user_quests?verification_token=eq.${encodeURIComponent(token)}&select=id,user_id,quest_id,status,photo_url`,
+      `${SUPABASE_URL}/rest/v1/user_quests?verification_token=eq.${encodeURIComponent(token)}&select=id,user_id,quest_id,status,photo_url,completed_at`,
       { headers: supabaseHeaders }
     );
     const records = await lookupRes.json();
@@ -67,7 +67,8 @@ exports.handler = async (event) => {
   }
 
   // 3. Update the status
-  const newStatus = action === 'approve' ? 'completed' : 'active';
+  // A denied photo on an already-completed quest leaves it completed (Unverified)
+  const newStatus = action === 'approve' || record.completed_at ? 'completed' : 'active';
 
   try {
     const updateRes = await fetch(
@@ -79,7 +80,7 @@ exports.handler = async (event) => {
           status: newStatus,
           // Clear the pending photo fields after decision
           ...(action === 'approve'
-            ? { completed_at: new Date().toISOString(), photo_denied_at: null }
+            ? { completed_at: new Date().toISOString(), photo_denied_at: null, verified: true }
             : { photo_url: null, verification_token: null, photo_submitted_at: null, photo_denied_at: new Date().toISOString() }),
         }),
       }
