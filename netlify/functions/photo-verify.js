@@ -78,7 +78,9 @@ exports.handler = async (event) => {
         body: JSON.stringify({
           status: newStatus,
           // Clear the pending photo fields after decision
-          ...(action === 'approve' ? { completed_at: new Date().toISOString() } : { photo_url: null, verification_token: null, photo_submitted_at: null }),
+          ...(action === 'approve'
+            ? { completed_at: new Date().toISOString(), photo_denied_at: null }
+            : { photo_url: null, verification_token: null, photo_submitted_at: null, photo_denied_at: new Date().toISOString() }),
         }),
       }
     );
