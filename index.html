@@ -7,7 +7,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
   <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon-180.png" />
-  <meta name="description" content="Quest turns real-life goals into verified achievements. 10,970 quests across finance, health, travel, relationships, entertainment, and more. Free beta now open." />
+  <meta name="description" content="Quest turns real-life goals into verified achievements. 10,970 quests across finance, health, travel, relationships, entertainment, and more. Free on iPhone and Android." />
   <meta name="keywords" content="goal tracking app, life achievements, financial goals, quest app, gamified goals, real life achievements, KeyGoals" />
   <meta name="author" content="KeyGoals, Inc." />
   <meta name="robots" content="index, follow" />
@@ -20,7 +20,7 @@
   <meta property="og:site_name" content="Quest by KeyGoals, Inc." />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Quest — Real Life Has 10,970 Achievements Waiting for You" />
-  <meta name="twitter:description" content="Quest turns real-life goals into verified achievements. Free beta now open." />
+  <meta name="twitter:description" content="Quest turns real-life goals into verified achievements. Free on iPhone and Android." />
   <meta name="twitter:image" content="https://www.questgoals.com/Quest_Logo.png" />
   <script type="application/ld+json">
   {
@@ -347,7 +347,7 @@
   <div class="nav-links">
     <a href="#download">Download</a>
     <a href="/advertise">Advertise</a>
-    <a href="#beta" class="nav-cta">Join Beta</a>
+    <a href="/download" class="nav-cta" data-store-link>Get the App</a>
   </div>
   <div class="hamburger" onclick="toggleMenu()" aria-label="Open menu">
     <span></span><span></span><span></span>
@@ -356,17 +356,17 @@
 <div class="mobile-menu" id="mobileMenu">
   <a href="#download" onclick="toggleMenu()">Download</a>
   <a href="/advertise" onclick="toggleMenu()">Advertise</a>
-  <a href="#beta" onclick="toggleMenu()">Join Beta — Free</a>
+  <a href="/download" data-store-link>Get the App — Free</a>
 </div>
 
 <!-- ══ HERO ══ -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-badge">Beta now open — founding members welcome</div>
+    <div class="hero-badge">Now live on the App Store and Google Play</div>
     <h1 class="hero-title">Real Life Has <span>10,970<br>Achievements</span> Waiting for You</h1>
     <p class="hero-sub">Quest turns your real-life goals into verified achievements — just like a video game, except the XP you earn builds an actual life. Finance, health, travel, relationships, and more.</p>
     <div class="hero-actions">
-      <a href="#beta" class="btn-primary">Join the Beta — Free ⚔</a>
+      <a href="/download" class="btn-primary" data-store-link>Download Free ⚔</a>
       <a href="#download" class="btn-outline">See How It Works</a>
     </div>
     <hr class="hero-divider" />
@@ -390,8 +390,8 @@
 <!-- ══ DOWNLOAD ══ -->
 <section class="download-section" id="download">
   <span class="section-label" style="color:var(--teal-light);">Get the App</span>
-  <h2 class="section-title">Now in Beta on Android & iOS</h2>
-  <p class="download-sub">Download the beta and start building your life scorecard today. iOS beta available — request access below.</p>
+  <h2 class="section-title">Now on iPhone & Android</h2>
+  <p class="download-sub">Download Quest for free and start building your life scorecard today.</p>
 
   <div class="screens-row">
     <div class="screen-frame"><img src="screenshots/home.jpg" alt="Quest home screen showing quest categories: Travel, Community, Charity, Entertainment, Relationships, Health, and Financial" loading="lazy" /></div>
@@ -402,22 +402,22 @@
   </div>
 
   <div class="badge-stack">
-    <a href="#beta" class="store-badge" onclick="document.getElementById('betaPlatform').value='Android'">
+    <a href="https://apps.apple.com/us/app/quest-achieve-your-goals/id6793369051" class="store-badge">
+      <span class="store-badge-icon">🍎</span>
+      <div class="store-badge-text">
+        <div class="store-badge-sub">Download on the</div>
+        <div class="store-badge-name">App Store</div>
+      </div>
+    </a>
+    <a href="https://play.google.com/store/apps/details?id=com.keygoals.quest" class="store-badge">
       <span class="store-badge-icon">🤖</span>
       <div class="store-badge-text">
         <div class="store-badge-sub">Get it on</div>
-        <div class="store-badge-name">Android Beta</div>
-      </div>
-    </a>
-    <a href="#beta" class="store-badge" onclick="document.getElementById('betaPlatform').value='iOS'">
-      <span class="store-badge-icon">🍎</span>
-      <div class="store-badge-text">
-        <div class="store-badge-sub">Request access</div>
-        <div class="store-badge-name">iOS Beta</div>
+        <div class="store-badge-name">Google Play</div>
       </div>
     </a>
   </div>
-  <p class="badge-note">Enter your email below for the Android download link, or to request iOS beta access via TestFlight.</p>
+  <p class="badge-note">Free to download. No credit card required.</p>
 </section>
 
 <!-- ══ ADVERTISER ══ -->
@@ -471,18 +471,18 @@
 
 <!-- ══ BETA ══ -->
 <section class="beta-section" id="beta">
-  <span class="section-label" style="color:var(--teal-light);">Free Beta</span>
-  <h2 class="section-title">Ready to Start Your Quest?</h2>
-  <p class="beta-sub">Join the beta — free forever for founding members. Be among the first to build your life scorecard.</p>
+  <span class="section-label" style="color:var(--teal-light);">Stay in the Loop</span>
+  <h2 class="section-title">Get Quest News First</h2>
+  <p class="beta-sub">Already downloaded Quest, or not ready yet? Leave your email and we'll share new quests and features as they launch.</p>
   <form class="beta-form" name="beta-signup" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="submitBeta(event)">
     <input type="hidden" name="form-name" value="beta-signup" />
     <input type="hidden" id="betaPlatform" name="platform" value="Android" />
     <p style="display:none;"><label>Don't fill this out: <input name="bot-field" /></label></p>
     <input type="email" id="betaEmail" name="email" placeholder="Enter your email address" required />
-    <button type="submit" class="btn-primary">Join Now ⚔</button>
+    <button type="submit" class="btn-primary">Keep Me Posted ⚔</button>
   </form>
   <p class="beta-note">No credit card. No spam. Just your Quest.</p>
-  <div class="beta-success" id="betaSuccess">⚔ You're in! Welcome to the founding members. We'll be in touch soon.</div>
+  <div class="beta-success" id="betaSuccess">⚔ You're in! We'll be in touch soon.</div>
 </section>
 
 <!-- ══ FOOTER ══ -->
@@ -499,7 +499,7 @@
     <div class="footer-row">
       <a href="#download">Download</a>
       <a href="/advertise">Advertise</a>
-      <a href="#beta">Join Beta</a>
+      <a href="#beta">Stay in the Loop</a>
     </div>
   </div>
   <div class="footer-copy">© 2026 KeyGoals, Inc. All rights reserved.</div>
@@ -508,6 +508,20 @@
 <div class="toast" id="toast"></div>
 
 <script>
+  // Phones go straight to their store; everyone else gets /download, which shows both badges.
+  (function () {
+    const ua = navigator.userAgent;
+    const isIOS = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    const isAndroid = /Android/.test(ua);
+    const store = isIOS
+      ? 'https://apps.apple.com/us/app/quest-achieve-your-goals/id6793369051'
+      : isAndroid
+        ? 'https://play.google.com/store/apps/details?id=com.keygoals.quest'
+        : null;
+    if (!store) return;
+    document.querySelectorAll('[data-store-link]').forEach((a) => { a.href = store; });
+  })();
+
   function toggleMenu() {
     document.getElementById('mobileMenu').classList.toggle('open');
   }
@@ -541,7 +555,7 @@
       .then(() => {
         document.getElementById('betaSuccess').style.display = 'block';
         document.getElementById('betaEmail').value = '';
-        showToast('⚔ Welcome to the Quest beta!');
+        showToast('⚔ Thanks! We\'ll keep you posted.');
       })
       .catch(() => {
         showToast('Something went wrong — please email admin@questgoals.com directly.');

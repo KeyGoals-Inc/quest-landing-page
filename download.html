@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Download Quest | KeyGoals, Inc.</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon-180.png" />
+  <meta name="description" content="Download Quest for free on iPhone and Android and turn your real-life goals into achievements." />
+  <link rel="canonical" href="https://www.questgoals.com/download" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.questgoals.com/download" />
+  <meta property="og:title" content="Download Quest" />
+  <meta property="og:description" content="Turn your real-life goals into achievements. Free on iPhone and Android." />
+  <meta property="og:image" content="https://www.questgoals.com/Quest_Logo.png" />
+  <script>
+    // Sends phones to the right store before the page paints; desktop stays and sees both badges.
+    (function () {
+      const ua = navigator.userAgent;
+      const isIOS = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      const isAndroid = /Android/.test(ua);
+      if (isIOS) location.replace('https://apps.apple.com/us/app/quest-achieve-your-goals/id6793369051');
+      else if (isAndroid) location.replace('https://play.google.com/store/apps/details?id=com.keygoals.quest');
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #1B3A4B;
+      --cream: #F2E8DC;
+      --cream-dark: #E4D8C8;
+      --gold: #C4972A;
+      --gray: #6B7280;
+    }
+    body {
+      min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      background: var(--cream); color: var(--navy); font-family: 'Poppins', sans-serif;
+      padding: 2rem 1.75rem; text-align: center;
+    }
+    img { width: 140px; height: auto; margin-bottom: 1.5rem; }
+    h1 { font-family: 'Cinzel', serif; font-size: 1.75rem; margin-bottom: 0.75rem; }
+    p { color: var(--gray); line-height: 1.7; max-width: 400px; margin-bottom: 2rem; }
+    .badge-stack { display: flex; flex-direction: column; gap: 0.85rem; width: 100%; max-width: 340px; margin-bottom: 1.5rem; }
+    .store-badge {
+      display: flex; align-items: center; gap: 12px;
+      background: white; border: 1.5px solid var(--cream-dark);
+      box-shadow: 0 4px 16px rgba(27,58,75,0.06);
+      border-radius: 12px; padding: 0.9rem 1.5rem; text-decoration: none; color: var(--navy);
+      transition: all 0.2s;
+    }
+    .store-badge:hover { border-color: var(--gold); box-shadow: 0 6px 20px rgba(27,58,75,0.1); }
+    .store-badge-icon { font-size: 1.75rem; }
+    .store-badge-text { text-align: left; }
+    .store-badge-sub { font-size: 0.65rem; color: var(--gray); letter-spacing: 0.06em; text-transform: uppercase; }
+    .store-badge-name { font-size: 1rem; font-weight: 700; }
+    .home-link { font-size: 0.85rem; color: var(--navy); }
+  </style>
+</head>
+<body>
+  <img src="/Quest_Logo.png" alt="Quest logo" />
+  <h1>Download Quest</h1>
+  <p>Turn your real-life goals into achievements. Free on iPhone and Android.</p>
+  <div class="badge-stack">
+    <a href="https://apps.apple.com/us/app/quest-achieve-your-goals/id6793369051" class="store-badge">
+      <span class="store-badge-icon">🍎</span>
+      <div class="store-badge-text">
+        <div class="store-badge-sub">Download on the</div>
+        <div class="store-badge-name">App Store</div>
+      </div>
+    </a>
+    <a href="https://play.google.com/store/apps/details?id=com.keygoals.quest" class="store-badge">
+      <span class="store-badge-icon">🤖</span>
+      <div class="store-badge-text">
+        <div class="store-badge-sub">Get it on</div>
+        <div class="store-badge-name">Google Play</div>
+      </div>
+    </a>
+  </div>
+  <a href="/" class="home-link">Learn more about Quest</a>
+</body>
+</html>
