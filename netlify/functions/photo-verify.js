@@ -96,16 +96,16 @@ exports.handler = async (event) => {
     return htmlResponse(500, errorPage('Server Error', 'Could not update the quest. Please try again.'));
   }
 
-  // 4. Send push notification to the user (non-blocking)
+  // 4. Send push notification to every device the user is signed into (non-blocking)
   try {
     const tokenRes = await fetch(
       `${SUPABASE_URL}/rest/v1/user_push_tokens?user_id=eq.${record.user_id}&select=push_token`,
       { headers: supabaseHeaders }
     );
     const tokenData = await tokenRes.json();
-    const pushToken = tokenData?.[0]?.push_token;
+    const pushTokens = Array.isArray(tokenData) ? tokenData.map(t => t.push_token).filter(Boolean) : [];
 
-    if (pushToken) {
+    if (pushTokens.length > 0) {
       const notifTitle = action === 'approve' ? '🏆 Quest Complete!' : '📸 Photo Not Accepted';
       const notifBody = action === 'approve'
         ? `Your photo verification was approved. Quest complete!`
@@ -114,7 +114,7 @@ exports.handler = async (event) => {
       await fetch('https://exp.host/--/api/v2/push/send', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ to: pushToken, title: notifTitle, body: notifBody, sound: 'default' }),
+        body: JSON.stringify(pushTokens.map(to => ({ to, title: notifTitle, body: notifBody, sound: 'default' }))),
       });
     }
   } catch (err) {
