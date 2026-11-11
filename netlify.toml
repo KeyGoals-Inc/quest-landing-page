@@ -2,5 +2,12 @@
   publish = "."
   functions = "netlify/functions"
 
+# Printed QR codes. Each source gets its own anonymous scan count.
+[[redirects]]
+  from = "/cie"
+  to = "/.netlify/functions/scan?src=cie"
+  status = 200
+  force = true
+
 [build.environment]
   SECRETS_SCAN_OMIT_KEYS = "ADMIN_EMAIL,SUPABASE_URL"
