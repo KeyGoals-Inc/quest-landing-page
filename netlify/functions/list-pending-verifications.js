@@ -103,10 +103,29 @@ exports.handler = async (event) => {
     console.warn('auth users lookup error (non-fatal):', err.message);
   }
 
+  // 4. AI review notes + free cheating-check flags (best-effort; table may not exist yet)
+  const aiMap = {};
+  const tokens = rows.map((r) => r.verification_token).filter(Boolean);
+  if (tokens.length) {
+    try {
+      const inList = tokens.map((t) => '"' + String(t).replace(/"/g, '') + '"').join(',');
+      const res = await fetch(
+        `${SUPABASE_URL}/rest/v1/photo_ai_reviews?verification_token=in.(${encodeURIComponent(inList)})` +
+          `&select=verification_token,decision,reason,flags,model`,
+        { headers: sb }
+      );
+      if (res.ok) (await res.json()).forEach((a) => { aiMap[a.verification_token] = a; });
+    } catch (err) {
+      console.warn('AI notes lookup error (non-fatal):', err.message);
+    }
+  }
+
   const items = rows.map((r) => {
     const q = questMap[r.quest_id] || {};
     const u = userMap[r.user_id] || {};
+    const ai = aiMap[r.verification_token] || null;
     return {
+      ai: ai && { decision: ai.decision, reason: ai.reason, flags: ai.flags || [], model: ai.model },
       id: r.id,
       quest_id: r.quest_id,
       quest_name: q.name || r.quest_id,
@@ -119,6 +138,16 @@ exports.handler = async (event) => {
       user_id: r.user_id,
     };
   });
+
+  // Flagged and suspicious photos first, then unclear, then the rest (oldest first within each)
+  const rank = (it) => {
+    if (!it.ai) return 3;
+    if ((it.ai.flags || []).length || it.ai.decision === 'suspicious') return 0;
+    if (it.ai.decision === 'review') return 1;
+    if (it.ai.decision === 'approve') return 2;
+    return 3;
+  };
+  items.sort((a, b) => rank(a) - rank(b));
 
   return { statusCode: 200, headers, body: JSON.stringify({ count: items.length, items }) };
 };

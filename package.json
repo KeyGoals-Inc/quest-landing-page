@@ -1,0 +1,9 @@
+{
+  "name": "quest-landing-page",
+  "private": true,
+  "description": "questgoals.com static site and Netlify functions",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.8.0",
+    "zod": "^4.6.7"
+  }
+}

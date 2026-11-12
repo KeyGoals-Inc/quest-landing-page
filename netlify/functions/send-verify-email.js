@@ -13,7 +13,9 @@
  *                             (falls back to ADMIN_EMAIL, then admin@questgoals.com)
  */
 
-const VERIFY_RECIPIENTS = (process.env.VERIFY_RECIPIENTS || process.env.ADMIN_EMAIL || 'admin@questgoals.com')
+const { reviewSubmission } = require('../lib/photo-ai');
+
+const VERIFY_RECIPIENTS =(process.env.VERIFY_RECIPIENTS || process.env.ADMIN_EMAIL || 'admin@questgoals.com')
   .split(',')
   .map((s) => s.trim())
   .filter(Boolean);
@@ -36,13 +38,24 @@ exports.handler = async (event) => {
     return { statusCode: 405, headers, body: 'Method Not Allowed' };
   }
 
+  // AI photo review + free cheating checks (see netlify/lib/photo-ai.js).
+  // Off unless switched on at questgoals.com/verify-queue. Never blocks or
+  // fails the submission: on any error the photo simply waits in the queue.
+  let aiResult = null;
+  try {
+    const parsed = JSON.parse(event.body || '{}');
+    aiResult = await reviewSubmission(parsed.verification_token);
+  } catch (err) {
+    console.error('photo AI review error (non-fatal):', err && err.message);
+  }
+
   // Per-submission verification emails are OFF by default. The queue page
   // (questgoals.com/verify-queue) is the source of truth — every submission
   // lands there via the user_quests row regardless of this function.
   // To re-enable one-email-per-submission, set VERIFY_EMAIL_MODE=per-submission
   // in Netlify. A lighter daily digest is planned as a separate scheduled function.
   if (process.env.VERIFY_EMAIL_MODE !== 'per-submission') {
-    return { statusCode: 200, headers, body: JSON.stringify({ success: true, skipped: 'per-submission email disabled' }) };
+    return { statusCode: 200, headers, body: JSON.stringify({ success: true, skipped: 'per-submission email disabled', ai: aiResult }) };
   }
 
   if (!RESEND_API_KEY) {

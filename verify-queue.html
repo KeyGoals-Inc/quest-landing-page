@@ -84,6 +84,34 @@
     .done-tag.approved { color:var(--green); }
     .done-tag.denied { color:var(--red); }
 
+    /* AI controls */
+    .ai-panel { background:#fff; border:1px solid var(--cream-dark); border-radius:12px; padding:1rem 1.1rem; margin-bottom:1.25rem; }
+    .ai-panel h2 { font-size:0.95rem; font-weight:700; color:var(--navy); margin-bottom:0.6rem; display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap; }
+    .ai-status { font-size:0.72rem; font-weight:700; padding:0.15rem 0.55rem; border-radius:999px; letter-spacing:0.04em; text-transform:uppercase; }
+    .ai-status.off { background:#eee; color:#555; }
+    .ai-status.trial { background:#fff4d6; color:#8a6200; }
+    .ai-status.auto { background:#dcfce7; color:#166534; }
+    .seg { display:flex; border:1px solid var(--cream-dark); border-radius:8px; overflow:hidden; margin-bottom:0.75rem; }
+    .seg button { flex:1; font-family:inherit; font-size:0.82rem; font-weight:600; padding:0.55rem 0.4rem; border:none; background:#fff; color:var(--navy); cursor:pointer; line-height:1.25; }
+    .seg button + button { border-left:1px solid var(--cream-dark); }
+    .seg button.on { background:var(--navy); color:var(--cream); }
+    .seg small { display:block; font-weight:500; font-size:0.68rem; opacity:0.75; }
+    .ai-row { display:flex; gap:0.6rem; flex-wrap:wrap; margin-bottom:0.6rem; }
+    .ai-row label { flex:1 1 150px; font-size:0.75rem; font-weight:600; color:var(--gray); }
+    .ai-row select, .ai-row input { display:block; width:100%; margin-top:0.2rem; font-family:inherit; font-size:0.88rem; padding:0.45rem 0.55rem; border:1px solid var(--cream-dark); border-radius:7px; background:#fff; color:var(--dark); }
+    .ai-usage { font-size:0.82rem; color:#444; }
+    .ai-usage b { color:var(--navy); }
+    .ai-save { font-family:inherit; font-size:0.8rem; font-weight:700; cursor:pointer; background:var(--navy); color:var(--cream); border:none; padding:0.45rem 0.9rem; border-radius:7px; margin-top:0.5rem; }
+    .tabs { display:flex; gap:0.4rem; margin-bottom:1rem; }
+    .tabs button { font-family:inherit; font-size:0.85rem; font-weight:600; cursor:pointer; padding:0.45rem 0.9rem; border-radius:999px; border:1px solid var(--cream-dark); background:#fff; color:var(--navy); }
+    .tabs button.on { background:var(--navy); color:var(--cream); border-color:var(--navy); }
+    .ai-note { margin:0.6rem 1.1rem 0; font-size:0.82rem; padding:0.5rem 0.7rem; border-radius:8px; }
+    .ai-note.approve { background:#eafaf1; color:#1f6b45; }
+    .ai-note.review { background:#fff8e6; color:#7a5800; }
+    .ai-note.suspicious, .ai-note.flag { background:#fdecec; color:#8a1f1f; }
+    .ai-note.other { background:#f3f4f6; color:#555; }
+    .btn-reverse { background:var(--red); }
+
     .empty { text-align:center; color:var(--gray); padding:3rem 1rem; font-size:0.95rem; }
     footer { text-align:center; color:var(--gray); font-size:0.78rem; padding:2rem 1rem; }
   </style>
@@ -100,7 +128,7 @@
   <div class="wrap">
     <span class="page-label">Internal</span>
     <h1>Photo Verification Queue<span id="countPill" class="count-pill" hidden></span></h1>
-    <p class="sub">Pending photo submissions, oldest first. Approve marks the quest complete; Deny resets it to active so the user can retry. Both send the user a push notification.</p>
+    <p class="sub">Pending photo submissions: flagged and suspicious first, then oldest first. Approve marks the quest complete and verified; Deny means the photo doesn't count. Both send the user a push notification. The AI never denies; only you can.</p>
 
     <div id="gate" class="gate" hidden>
       <label for="keyInput">Queue password</label>
@@ -109,6 +137,27 @@
     </div>
 
     <div id="messages"></div>
+
+    <div id="aiPanel" class="ai-panel" hidden>
+      <h2>AI photo review <span id="aiStatus" class="ai-status off">Off</span></h2>
+      <div class="seg" id="aiMode">
+        <button data-mode="off">Off<small>All photos by hand</small></button>
+        <button data-mode="trial">Trial<small>AI notes only</small></button>
+        <button data-mode="auto">Auto<small>AI approves clear ones</small></button>
+      </div>
+      <div class="ai-row">
+        <label>Model<select id="aiModel"></select></label>
+        <label>Monthly photo cap<input id="aiPhotoCap" type="number" min="0" step="1" /></label>
+        <label>Monthly $ cap<input id="aiDollarCap" type="number" min="0" step="0.5" /></label>
+      </div>
+      <div class="ai-usage" id="aiUsage"></div>
+      <button class="ai-save" id="aiSave">Save model &amp; caps</button>
+    </div>
+
+    <div class="tabs" id="tabs" hidden>
+      <button data-tab="pending" class="on">Pending</button>
+      <button data-tab="auto">Auto-approved (30 days)</button>
+    </div>
     <div id="list"></div>
   </div>
 
@@ -135,6 +184,8 @@
 
       function showGate(errText) {
         gate.hidden = false;
+        $('aiPanel').hidden = true;
+        $('tabs').hidden = true;
         refreshBtn.hidden = true;
         logoutBtn.hidden = true;
         countPill.hidden = true;
@@ -173,6 +224,9 @@
             gate.hidden = true;
             refreshBtn.hidden = false;
             logoutBtn.hidden = false;
+            $('tabs').hidden = false;
+            setTab('pending');
+            loadAi();
             render(data.items || []);
           })
           .catch(function (err) {
@@ -215,6 +269,7 @@
               (it.quest_description ? '<div class="quest-desc">' + esc(it.quest_description) + '</div>' : '') +
               '<div class="card-meta"><span>' + who + '</span><span>' + fmtTime(it.submitted_at) + '</span><span>' + esc(it.quest_id) + '</span></div>' +
             '</div>' +
+            aiNote(it.ai) +
             '<img class="card-photo" src="' + esc(it.photo_url) + '" alt="Submitted photo" loading="lazy" />' +
             '<a class="card-photo-link" href="' + esc(it.photo_url) + '" target="_blank" rel="noopener">Open full size &#8599;</a>' +
             '<div class="card-actions">' +
@@ -274,12 +329,142 @@
           });
       }
 
+      // ── AI photo review controls ───────────────────────────────────────────
+      var AI_FN = '/.netlify/functions/photo-ai-admin';
+      var MODEL_LABELS = {
+        'claude-haiku-5-5': 'Haiku 5.5 (~$0.50 / 1,000 photos)',
+        'claude-sonnet-5-5': 'Sonnet 5.5 (~$10 / 1,000 photos)',
+        'claude-opus-5-5': 'Opus 5.5 (~$20 / 1,000 photos)'
+      };
+      var FLAG_LABELS = { reused_photo: 'Same photo was used on another quest or account', high_volume: 'Unusually many photos from this user in the last hour' };
+
+      function aiNote(ai) {
+        if (!ai) return '';
+        var html = '';
+        (ai.flags || []).forEach(function (f) {
+          html += '<div class="ai-note flag">⚠️ ' + esc(FLAG_LABELS[f] || f) + '</div>';
+        });
+        var d = ai.decision;
+        if (d === 'approve') html += '<div class="ai-note approve">🤖 AI: looks good. ' + esc(ai.reason) + '</div>';
+        else if (d === 'review') html += '<div class="ai-note review">🤖 AI: unsure. ' + esc(ai.reason) + '</div>';
+        else if (d === 'suspicious') html += '<div class="ai-note suspicious">🤖 AI: suspicious. ' + esc(ai.reason) + '</div>';
+        else if (d === 'cap_reached' || d === 'error') html += '<div class="ai-note other">🤖 ' + esc(ai.reason) + '</div>';
+        return html;
+      }
+
+      function aiCall(method, params) {
+        var opts = { method: method, headers: { 'Content-Type': 'application/json' } };
+        var url = AI_FN;
+        if (method === 'GET') url += '?key=' + encodeURIComponent(key) + '&view=' + params.view;
+        else opts.body = JSON.stringify(Object.assign({ key: key }, params));
+        return fetch(url, opts).then(function (r) {
+          return r.json().then(function (b) { if (!r.ok) throw b; return b; });
+        });
+      }
+
+      function showAi(data) {
+        var s = data.settings, u = data.usage;
+        $('aiPanel').hidden = false;
+        var st = $('aiStatus');
+        st.className = 'ai-status ' + s.mode;
+        st.textContent = s.mode === 'auto' ? 'Auto' : s.mode === 'trial' ? 'Trial' : 'Off';
+        Array.prototype.forEach.call(document.querySelectorAll('#aiMode button'), function (b) {
+          b.classList.toggle('on', b.getAttribute('data-mode') === s.mode);
+        });
+        var sel = $('aiModel');
+        if (data.models) {
+          sel.innerHTML = data.models.map(function (m) {
+            return '<option value="' + m + '">' + esc(MODEL_LABELS[m] || m) + '</option>';
+          }).join('');
+        }
+        sel.value = s.model;
+        $('aiPhotoCap').value = s.monthly_photo_cap;
+        $('aiDollarCap').value = Number(s.monthly_dollar_cap).toFixed(2);
+        $('aiUsage').innerHTML = 'This month: <b>' + u.photos.toLocaleString() + '</b> of ' +
+          Number(s.monthly_photo_cap).toLocaleString() + ' photos reviewed · <b>$' + u.cost.toFixed(2) +
+          '</b> of $' + Number(s.monthly_dollar_cap).toFixed(2) +
+          (data.hasApiKey === false ? '<br><span style="color:#8a1f1f">No Anthropic API key in Netlify yet, so AI can\'t be turned on.</span>' : '');
+      }
+
+      function loadAi() {
+        aiCall('GET', { view: 'status' }).then(showAi).catch(function () {
+          $('aiPanel').hidden = false;
+          $('aiUsage').textContent = 'AI controls unavailable (database setup missing?).';
+        });
+      }
+
+      Array.prototype.forEach.call(document.querySelectorAll('#aiMode button'), function (b) {
+        b.addEventListener('click', function () {
+          var mode = b.getAttribute('data-mode');
+          aiCall('POST', { action: 'settings', mode: mode })
+            .then(function (d) { showAi(d); msg('AI review set to ' + mode + '.', 'ok'); })
+            .catch(function (e) { msg('Could not change mode' + (e && e.error ? ': ' + esc(e.error) : '.'), 'err'); });
+        });
+      });
+
+      $('aiSave').addEventListener('click', function () {
+        aiCall('POST', {
+          action: 'settings',
+          model: $('aiModel').value,
+          monthly_photo_cap: $('aiPhotoCap').value,
+          monthly_dollar_cap: $('aiDollarCap').value
+        })
+          .then(function (d) { showAi(d); msg('Saved.', 'ok'); })
+          .catch(function (e) { msg('Could not save' + (e && e.error ? ': ' + esc(e.error) : '.'), 'err'); });
+      });
+
+      var currentTab = 'pending';
+      function setTab(t) {
+        currentTab = t;
+        Array.prototype.forEach.call(document.querySelectorAll('#tabs button'), function (b) {
+          b.classList.toggle('on', b.getAttribute('data-tab') === t);
+        });
+      }
+      Array.prototype.forEach.call(document.querySelectorAll('#tabs button'), function (b) {
+        b.addEventListener('click', function () {
+          var t = b.getAttribute('data-tab');
+          if (t === 'pending') { load(); } else { setTab('auto'); loadAuto(); }
+        });
+      });
+
+      function loadAuto() {
+        clearMsg();
+        countPill.hidden = true;
+        listEl.innerHTML = '<div class="empty">Loading&hellip;</div>';
+        aiCall('GET', { view: 'auto' }).then(function (d) {
+          var items = d.items || [];
+          if (!items.length) { listEl.innerHTML = '<div class="empty">No auto-approved photos in the last 30 days.</div>'; return; }
+          listEl.innerHTML = '';
+          items.forEach(function (it) {
+            var card = document.createElement('div');
+            card.className = 'card' + (it.reversed_at ? ' done' : '');
+            card.innerHTML =
+              '<div class="card-head"><div class="quest-name">' + esc(it.quest_name) + '</div>' +
+              '<div class="card-meta"><span>' + fmtTime(it.created_at) + '</span><span>' + esc(it.quest_id) + '</span></div></div>' +
+              '<div class="ai-note approve">🤖 ' + esc(it.reason) + '</div>' +
+              (it.photo_url ? '<img class="card-photo" src="' + esc(it.photo_url) + '" alt="Approved photo" loading="lazy" />' : '') +
+              (it.reversed_at
+                ? '<div class="done-tag denied">↩️ Reversed</div>'
+                : '<div class="card-actions"><button class="btn-reverse">Reverse approval</button></div>');
+            var btn = card.querySelector('.btn-reverse');
+            if (btn) armTwoStep(btn, 'Reverse approval', 'Confirm reverse', function () {
+              btn.disabled = true; btn.textContent = 'Working…';
+              aiCall('POST', { action: 'reverse', review_id: it.id }).then(function () {
+                card.classList.add('done');
+                card.querySelector('.card-actions').outerHTML = '<div class="done-tag denied">↩️ Reversed: user notified</div>';
+              }).catch(function () { btn.disabled = false; btn.textContent = 'Reverse approval'; msg('Reverse failed. Try again.', 'err'); });
+            });
+            listEl.appendChild(card);
+          });
+        }).catch(function () { listEl.innerHTML = ''; msg('Could not load auto-approved photos.', 'err'); });
+      }
+
       gateBtn.addEventListener('click', function () {
         key = keyInput.value.trim();
         if (key) load();
       });
       keyInput.addEventListener('keydown', function (e) { if (e.key === 'Enter') gateBtn.click(); });
-      refreshBtn.addEventListener('click', load);
+      refreshBtn.addEventListener('click', function () { if (currentTab === 'auto') { loadAi(); loadAuto(); } else load(); });
       logoutBtn.addEventListener('click', function () {
         key = '';
         try { sessionStorage.removeItem(STORAGE_KEY); } catch (e) {}
