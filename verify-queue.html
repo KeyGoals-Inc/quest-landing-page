@@ -154,6 +154,18 @@
       <button class="ai-save" id="aiSave">Save model &amp; caps</button>
     </div>
 
+    <div id="pushPanel" class="ai-panel" hidden>
+      <h2>Send a notification</h2>
+      <div class="ai-row">
+        <label style="flex-basis:100%">Title <span id="pushTitleCount"></span><input id="pushTitle" maxlength="65" placeholder="Saturday quest time 🏆" /></label>
+      </div>
+      <div class="ai-row">
+        <label style="flex-basis:100%">Message <span id="pushBodyCount"></span><textarea id="pushBody" maxlength="178" rows="3" placeholder="The leaderboard is wide open. Log a quest today and climb the Monthly rankings!" style="display:block;width:100%;margin-top:0.2rem;font-family:inherit;font-size:0.88rem;padding:0.45rem 0.55rem;border:1px solid var(--cream-dark);border-radius:7px;resize:vertical"></textarea></label>
+      </div>
+      <div class="ai-usage" id="pushAudience">Counting recipients…</div>
+      <button class="ai-save" id="pushSend">Send to all</button>
+    </div>
+
     <div class="tabs" id="tabs" hidden>
       <button data-tab="pending" class="on">Pending</button>
       <button data-tab="auto">Auto-approved (30 days)</button>
@@ -185,6 +197,7 @@
       function showGate(errText) {
         gate.hidden = false;
         $('aiPanel').hidden = true;
+        $('pushPanel').hidden = true;
         $('tabs').hidden = true;
         refreshBtn.hidden = true;
         logoutBtn.hidden = true;
@@ -227,6 +240,7 @@
             $('tabs').hidden = false;
             setTab('pending');
             loadAi();
+            loadPushAudience();
             render(data.items || []);
           })
           .catch(function (err) {
@@ -292,6 +306,9 @@
         btn.addEventListener('click', function () {
           if (isArmed) {
             clearTimeout(timer);
+            isArmed = false;
+            btn.textContent = idle;
+            btn.classList.remove('btn-armed');
             commit();
             return;
           }
@@ -328,6 +345,63 @@
             msg('That action failed — try again.', 'err');
           });
       }
+
+      // ── Broadcast notification ─────────────────────────────────────────────
+      var PUSH_FN = '/.netlify/functions/broadcast-push';
+      var pushDevices = 0;
+
+      function pushCounts() {
+        $('pushTitleCount').textContent = '(' + $('pushTitle').value.length + '/65)';
+        $('pushBodyCount').textContent = '(' + $('pushBody').value.length + '/178)';
+      }
+      $('pushTitle').addEventListener('input', pushCounts);
+      $('pushBody').addEventListener('input', pushCounts);
+      pushCounts();
+
+      function loadPushAudience() {
+        $('pushPanel').hidden = false;
+        fetch(PUSH_FN + '?key=' + encodeURIComponent(key))
+          .then(function (r) { return r.json().then(function (b) { if (!r.ok) throw b; return b; }); })
+          .then(function (d) {
+            pushDevices = d.devices;
+            $('pushAudience').innerHTML = 'Will reach <b>' + d.recipients + '</b> users on <b>' + d.devices + '</b> devices' +
+              (d.optedOut ? ' · ' + d.optedOut + ' turned off Competition &amp; Tips' : '') +
+              '. Tip: 1–2 a week at most.';
+          })
+          .catch(function () { $('pushAudience').textContent = 'Could not count recipients.'; });
+      }
+
+      // Two-tap send that fully resets after every attempt, so a later single tap never sends
+      var pushArmed = false, pushTimer = null;
+      function disarmPush() {
+        pushArmed = false; clearTimeout(pushTimer);
+        $('pushSend').textContent = 'Send to all'; $('pushSend').classList.remove('btn-armed');
+      }
+      $('pushSend').addEventListener('click', function () {
+        var btn = $('pushSend');
+        var title = $('pushTitle').value.trim(), body = $('pushBody').value.trim();
+        if (!title || !body) { disarmPush(); msg('Add a title and a message first.', 'err'); return; }
+        if (!pushArmed) {
+          pushArmed = true;
+          btn.textContent = 'Tap again to send to ' + pushDevices + ' devices';
+          btn.classList.add('btn-armed');
+          pushTimer = setTimeout(disarmPush, 4000);
+          return;
+        }
+        disarmPush();
+        btn.disabled = true; btn.textContent = 'Sending…';
+        fetch(PUSH_FN, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ key: key, title: title, body: body, confirm: true })
+        })
+          .then(function (r) { return r.json().then(function (b) { if (!r.ok) throw b; return b; }); })
+          .then(function (d) {
+            msg('Sent to ' + d.sent + ' of ' + d.devices + ' devices.' + (d.errors && d.errors.length ? ' ' + d.errors.length + ' could not be delivered (usually old or uninstalled devices).' : ''), 'ok');
+            $('pushTitle').value = ''; $('pushBody').value = ''; pushCounts();
+          })
+          .catch(function (e) { msg('Send failed' + (e && e.error ? ': ' + esc(e.error) : '.'), 'err'); })
+          .then(function () { btn.disabled = false; disarmPush(); window.scrollTo(0, 0); });
+      });
 
       // ── AI photo review controls ───────────────────────────────────────────
       var AI_FN = '/.netlify/functions/photo-ai-admin';
