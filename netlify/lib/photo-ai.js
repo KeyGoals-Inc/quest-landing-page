@@ -90,6 +90,8 @@ Return one decision:
 - "review": unclear. The photo is relevant but doesn't clearly show completion, it is too dark or blurry to judge, or the quest is hard to prove with any photo.
 - "suspicious": signs of cheating. A stock or professional marketing image, a screenshot of a web page or search result rather than the user's own photo or account, an image of a screen showing someone else's photo, an AI-generated look, or a photo unrelated to the quest.
 
+If the quest names a target number (a distance, time, count or dollar amount) and the photo shows a number that falls short of it, choose "review" even when the photo is genuine, and state both numbers in your reason (for example: "Run log shows 4.90 km; quest requires 5 km"). A number that meets or exceeds the target is fine.
+
 When unsure between approve and review, choose review. Your reason is one short sentence for the human reviewers, naming what you see.`;
 
 async function classify({ imageBase64, mediaType, questName, questDescription, model }) {
