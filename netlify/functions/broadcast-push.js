@@ -4,17 +4,28 @@
  * Sends one push notification to every Quest user who can receive pushes and
  * hasn't turned off "Competition & Tips" in the app's Settings
  * (user_metadata.promo_push_opt_out). Used from questgoals.com/verify-queue.
- * Same password as the queue (VERIFY_QUEUE_KEY).
+ * Same password as the queue (VERIFY_QUEUE_KEY), plus a second send code
+ * (BROADCAST_PIN) that's typed in for every send and never stored in the browser.
+ * If BROADCAST_PIN isn't set, sending is blocked (fail closed).
  *
- *   GET  ?key=...                         → { recipients, devices, optedOut }
- *   POST { key, title, body, confirm }    → sends; { sent, devices, errors }
+ *   GET  ?key=...                              → { recipients, devices, optedOut }
+ *   POST { key, pin, title, body, confirm }    → sends; { sent, devices, errors }
  *
- * Env vars: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, VERIFY_QUEUE_KEY
+ * Env vars: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, VERIFY_QUEUE_KEY, BROADCAST_PIN
  */
+
+const crypto = require('crypto');
 
 const SUPABASE_URL = process.env.SUPABASE_URL || 'https://gxlabrmxzcffefgfpogn.supabase.co';
 const SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
 const QUEUE_KEY = process.env.VERIFY_QUEUE_KEY;
+const BROADCAST_PIN = process.env.BROADCAST_PIN;
+
+/** Constant-time string compare (hash both so lengths match). */
+function safeEqual(a, b) {
+  const h = (s) => crypto.createHash('sha256').update(String(s)).digest();
+  return crypto.timingSafeEqual(h(a), h(b));
+}
 
 const json = (statusCode, body) => ({
   statusCode,
@@ -67,6 +78,15 @@ exports.handler = async (event) => {
     }
 
     if (event.httpMethod !== 'POST') return json(405, { error: 'Method Not Allowed' });
+
+    // Second layer: the send code
+    if (!BROADCAST_PIN) return json(503, { error: 'Sending is locked: the send code has not been set up yet.' });
+    if (!body.pin || !safeEqual(body.pin, BROADCAST_PIN)) {
+      console.warn('broadcast: wrong send code');
+      await new Promise(r => setTimeout(r, 1500)); // slow down guessing
+      return json(403, { error: 'Wrong send code. Nothing was sent.' });
+    }
+
     const title = String(body.title || '').trim();
     const message = String(body.body || '').trim();
     if (!title || !message) return json(400, { error: 'Title and message are both required.' });

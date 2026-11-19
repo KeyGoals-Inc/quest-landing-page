@@ -164,6 +164,9 @@
         <label style="flex-basis:100%">Message <span id="pushBodyCount"></span><textarea id="pushBody" maxlength="178" rows="3" placeholder="The leaderboard is wide open. Log a quest today and climb the Monthly rankings!" style="display:block;width:100%;margin-top:0.2rem;font-family:inherit;font-size:0.88rem;padding:0.45rem 0.55rem;border:1px solid var(--cream-dark);border-radius:7px;resize:vertical"></textarea></label>
       </div>
       <div class="ai-usage" id="pushAudience">Counting recipients…</div>
+      <div class="ai-row">
+        <label>Send code <input id="pushPin" type="password" autocomplete="off" inputmode="text" placeholder="Required to send" /></label>
+      </div>
       <button class="ai-save" id="pushSend">Send to all</button>
     </div>
 
@@ -381,7 +384,9 @@
       $('pushSend').addEventListener('click', function () {
         var btn = $('pushSend');
         var title = $('pushTitle').value.trim(), body = $('pushBody').value.trim();
+        var pin = $('pushPin').value;
         if (!title || !body) { disarmPush(); msg('Add a title and a message first.', 'err'); return; }
+        if (!pin) { disarmPush(); msg('Enter the send code first.', 'err'); return; }
         if (!pushArmed) {
           pushArmed = true;
           btn.textContent = 'Tap again to send to ' + pushDevices + ' devices';
@@ -393,7 +398,7 @@
         btn.disabled = true; btn.textContent = 'Sending…';
         fetch(PUSH_FN, {
           method: 'POST', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ key: key, title: title, body: body, confirm: true })
+          body: JSON.stringify({ key: key, pin: pin, title: title, body: body, confirm: true })
         })
           .then(function (r) { return r.json().then(function (b) { if (!r.ok) throw b; return b; }); })
           .then(function (d) {
@@ -401,7 +406,7 @@
             $('pushTitle').value = ''; $('pushBody').value = ''; pushCounts();
           })
           .catch(function (e) { msg('Send failed' + (e && e.error ? ': ' + esc(e.error) : '.'), 'err'); })
-          .then(function () { btn.disabled = false; disarmPush(); window.scrollTo(0, 0); });
+          .then(function () { $('pushPin').value = ''; btn.disabled = false; disarmPush(); window.scrollTo(0, 0); });
       });
 
       // ── AI photo review controls ───────────────────────────────────────────
