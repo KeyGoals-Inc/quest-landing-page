@@ -170,6 +170,12 @@
       <button class="ai-save" id="pushSend">Send to all</button>
     </div>
 
+    <div id="thumbPanel" class="ai-panel" hidden>
+      <h2>Photo thumbnails</h2>
+      <div class="ai-usage" id="thumbStatus">New photos get a small copy automatically. Run this once to make small copies of older photos (takes a few minutes; keep this tab open).</div>
+      <button class="ai-save" id="thumbRun">Make thumbnails for older photos</button>
+    </div>
+
     <div class="tabs" id="tabs" hidden>
       <button data-tab="pending" class="on">Pending</button>
       <button data-tab="auto">Auto-approved (30 days)</button>
@@ -202,6 +208,7 @@
         gate.hidden = false;
         $('aiPanel').hidden = true;
         $('pushPanel').hidden = true;
+        $('thumbPanel').hidden = true;
         $('tabs').hidden = true;
         refreshBtn.hidden = true;
         logoutBtn.hidden = true;
@@ -362,8 +369,42 @@
       $('pushBody').addEventListener('input', pushCounts);
       pushCounts();
 
+      // ── Thumbnails: one-time backfill for photos from before 2026-11-20 ──
+      function thumbOf(url) { return String(url || '').replace(/(\.jpg)(\?.*)?$/i, '-thumb$1'); }
+
+      $('thumbRun').addEventListener('click', function () {
+        var btn = $('thumbRun');
+        var made = 0, skipped = 0, failed = 0;
+        btn.disabled = true;
+        function step(offset) {
+          fetch('/.netlify/functions/make-thumbs', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ key: key, offset: offset }),
+          })
+            .then(function (r) { return r.json().then(function (b) { if (!r.ok) throw b; return b; }); })
+            .then(function (d) {
+              made += d.made; skipped += d.skipped; failed += d.failed;
+              $('thumbStatus').textContent = 'Working… ' + d.nextOffset + ' of ' + d.total +
+                ' photos checked (' + made + ' made, ' + skipped + ' already done or missing, ' + failed + ' failed)';
+              if (d.done) {
+                $('thumbStatus').textContent = 'Done. ' + made + ' thumbnails made, ' + skipped + ' already done or missing, ' + failed + ' failed.';
+                btn.disabled = false;
+              } else {
+                step(d.nextOffset);
+              }
+            })
+            .catch(function (e) {
+              $('thumbStatus').textContent = 'Stopped' + (e && e.error ? ': ' + e.error : '') + '. Click again to continue (finished photos are skipped).';
+              btn.disabled = false;
+            });
+        }
+        step(0);
+      });
+
       function loadPushAudience() {
         $('pushPanel').hidden = false;
+        $('thumbPanel').hidden = false;
         fetch(PUSH_FN + '?key=' + encodeURIComponent(key))
           .then(function (r) { return r.json().then(function (b) { if (!r.ok) throw b; return b; }); })
           .then(function (d) {
@@ -522,7 +563,8 @@
               '<div class="card-head"><div class="quest-name">' + esc(it.quest_name) + '</div>' +
               '<div class="card-meta"><span>' + fmtTime(it.created_at) + '</span><span>' + esc(it.quest_id) + '</span></div></div>' +
               '<div class="ai-note approve">🤖 ' + esc(it.reason) + '</div>' +
-              (it.photo_url ? '<img class="card-photo" src="' + esc(it.photo_url) + '" alt="Approved photo" loading="lazy" />' : '') +
+              // Small copy to save egress; falls back to the full photo if there's no thumbnail
+              (it.photo_url ? '<img class="card-photo" src="' + esc(thumbOf(it.photo_url)) + '" data-full="' + esc(it.photo_url) + '" onerror="if(this.dataset.full&&this.src!==this.dataset.full){this.src=this.dataset.full}" alt="Approved photo" loading="lazy" />' : '') +
               (it.reversed_at
                 ? '<div class="done-tag denied">↩️ Reversed</div>'
                 : '<div class="card-actions"><button class="btn-reverse">Reverse approval</button></div>');
