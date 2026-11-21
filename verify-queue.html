@@ -170,12 +170,6 @@
       <button class="ai-save" id="pushSend">Send to all</button>
     </div>
 
-    <div id="thumbPanel" class="ai-panel" hidden>
-      <h2>Photo thumbnails</h2>
-      <div class="ai-usage" id="thumbStatus">New photos get a small copy automatically. Run this once to make small copies of older photos (takes a few minutes; keep this tab open).</div>
-      <button class="ai-save" id="thumbRun">Make thumbnails for older photos</button>
-    </div>
-
     <div class="tabs" id="tabs" hidden>
       <button data-tab="pending" class="on">Pending</button>
       <button data-tab="auto">Auto-approved (30 days)</button>
@@ -208,7 +202,6 @@
         gate.hidden = false;
         $('aiPanel').hidden = true;
         $('pushPanel').hidden = true;
-        $('thumbPanel').hidden = true;
         $('tabs').hidden = true;
         refreshBtn.hidden = true;
         logoutBtn.hidden = true;
@@ -369,44 +362,11 @@
       $('pushBody').addEventListener('input', pushCounts);
       pushCounts();
 
-      // ── Thumbnails: one-time backfill for photos from before 2026-11-20 ──
+      // Small copies of quest photos (`<name>-thumb.jpg`); every photo has one since 2026-11-21
       function thumbOf(url) { return String(url || '').replace(/(\.jpg)(\?.*)?$/i, '-thumb$1'); }
-
-      $('thumbRun').addEventListener('click', function () {
-        var btn = $('thumbRun');
-        var made = 0, skipped = 0, failed = 0;
-        btn.disabled = true;
-        btn.textContent = 'Working…';
-        $('thumbStatus').textContent = 'Starting… the first update takes about 10 seconds.';
-        function step(offset) {
-          fetch('/.netlify/functions/make-thumbs', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ key: key, offset: offset }),
-          })
-            .then(function (r) { return r.json().then(function (b) { if (!r.ok) throw b; return b; }); })
-            .then(function (d) {
-              made += d.made; skipped += d.skipped; failed += d.failed;
-              $('thumbStatus').textContent = 'Working… ' + d.nextOffset + ' of ' + d.total +
-                ' photos checked (' + made + ' made, ' + skipped + ' already done or missing, ' + failed + ' failed)';
-              if (d.done) {
-                $('thumbStatus').textContent = 'Done. ' + made + ' thumbnails made, ' + skipped + ' already done or missing, ' + failed + ' failed.';
-                btn.disabled = false; btn.textContent = 'Make thumbnails for older photos';
-              } else {
-                step(d.nextOffset);
-              }
-            })
-            .catch(function (e) {
-              $('thumbStatus').textContent = 'Stopped' + (e && e.error ? ': ' + e.error : '') + '. Click again to continue (finished photos are skipped).';
-              btn.disabled = false; btn.textContent = 'Make thumbnails for older photos';
-            });
-        }
-        step(0);
-      });
 
       function loadPushAudience() {
         $('pushPanel').hidden = false;
-        $('thumbPanel').hidden = false;
         fetch(PUSH_FN + '?key=' + encodeURIComponent(key))
           .then(function (r) { return r.json().then(function (b) { if (!r.ok) throw b; return b; }); })
           .then(function (d) {
