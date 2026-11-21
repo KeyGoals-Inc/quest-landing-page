@@ -376,6 +376,8 @@
         var btn = $('thumbRun');
         var made = 0, skipped = 0, failed = 0;
         btn.disabled = true;
+        btn.textContent = 'Working…';
+        $('thumbStatus').textContent = 'Starting… the first update takes about 10 seconds.';
         function step(offset) {
           fetch('/.netlify/functions/make-thumbs', {
             method: 'POST',
@@ -389,14 +391,14 @@
                 ' photos checked (' + made + ' made, ' + skipped + ' already done or missing, ' + failed + ' failed)';
               if (d.done) {
                 $('thumbStatus').textContent = 'Done. ' + made + ' thumbnails made, ' + skipped + ' already done or missing, ' + failed + ' failed.';
-                btn.disabled = false;
+                btn.disabled = false; btn.textContent = 'Make thumbnails for older photos';
               } else {
                 step(d.nextOffset);
               }
             })
             .catch(function (e) {
               $('thumbStatus').textContent = 'Stopped' + (e && e.error ? ': ' + e.error : '') + '. Click again to continue (finished photos are skipped).';
-              btn.disabled = false;
+              btn.disabled = false; btn.textContent = 'Make thumbnails for older photos';
             });
         }
         step(0);

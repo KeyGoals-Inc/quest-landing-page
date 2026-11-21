@@ -22,7 +22,8 @@ const QUEUE_KEY = process.env.VERIFY_QUEUE_KEY;
 const BUCKET = 'quest-photos';
 const PUBLIC_PREFIX = `${SUPABASE_URL}/storage/v1/object/public/${BUCKET}/`;
 const THUMB_WIDTH = 400;
-const TIME_BUDGET_MS = 7000;
+// Netlify stops functions at 10s; leave room for a cold start and the last photo
+const TIME_BUDGET_MS = 5000;
 const PAGE = 40;
 
 const json = (statusCode, body) => ({
